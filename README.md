@@ -1,2 +1,0 @@
-# deck
-pitchdeck for jiboni
