@@ -1,0 +1,25 @@
+<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Placeholder for app icons - replace with actual icons -->
+  <rect x="10" y="10" width="40" height="40" rx="8" fill="#25D366" />
+  <rect x="60" y="10" width="40" height="40" rx="8" fill="#4A154B" />
+  <rect x="110" y="10" width="40" height="40" rx="8" fill="#1877F2" />
+  <rect x="160" y="10" width="40" height="40" rx="8" fill="#0088CC" />
+  <rect x="210" y="10" width="40" height="40" rx="8" fill="#E60023" />
+  <rect x="10" y="60" width="40" height="40" rx="8" fill="#FF4500" />
+  <rect x="60" y="60" width="40" height="40" rx="8" fill="#0A66C2" />
+  <rect x="110" y="60" width="40" height="40" rx="8" fill="#EA4335" />
+  <rect x="160" y="60" width="40" height="40" rx="8" fill="#1DA1F2" />
+  <rect x="210" y="60" width="40" height="40" rx="8" fill="#7289DA" />
+  
+  <!-- App logos/symbols -->
+  <text x="30" y="35" text-anchor="middle" fill="white" font-size="20">W</text>
+  <text x="80" y="35" text-anchor="middle" fill="white" font-size="20">S</text>
+  <text x="130" y="35" text-anchor="middle" fill="white" font-size="20">F</text>
+  <text x="180" y="35" text-anchor="middle" fill="white" font-size="20">T</text>
+  <text x="230" y="35" text-anchor="middle" fill="white" font-size="20">P</text>
+  <text x="30" y="85" text-anchor="middle" fill="white" font-size="20">R</text>
+  <text x="80" y="85" text-anchor="middle" fill="white" font-size="20">L</text>
+  <text x="130" y="85" text-anchor="middle" fill="white" font-size="20">G</text>
+  <text x="180" y="85" text-anchor="middle" fill="white" font-size="20">X</text>
+  <text x="230" y="85" text-anchor="middle" fill="white" font-size="20">D</text>
+</svg>

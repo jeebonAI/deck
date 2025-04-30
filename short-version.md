@@ -1,8 +1,8 @@
-# **Jiboni: Connect, Communicate, Cherish**
+# **Jiboni: Connect, Communicate, Cherish, Curate**
 
 **(Slide 1: Title Slide)**
 
-* **Jiboni:** Your Unified Hub for Connection, Communication & Legacy  
+* **Jiboni:** Connection, Communication, Curation & Legacy  
 * \[Your Logo\]  
 * *Simplifying digital life, deepening real-world connections.*
 
@@ -19,7 +19,7 @@
   * **Communicate:** Secure, contextual chat/calls within groups.  
   * **Connect (Circles):** *Key Innovation.* Manage diverse groups (family, work, friends) with granular privacy.  
   * **Cherish (Trees):** Collaborative family legacy building.  
-  * **Remember (AI):** Capture memories; AI enhances *real-world* connection & understanding (not just engagement).  
+  * **Curate (AI):** Capture memories; AI enhances *real-world* connection & understanding (not just engagement).  
 * **Core Value:** Requires inviting your network \= built-in growth.
 
 **(Slide 4: Market Opportunity)**

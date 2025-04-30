@@ -1,0 +1,198 @@
+:root {
+  --jiboni-primary: #4568dc;
+  --jiboni-secondary: #b06ab3;
+  --jiboni-dark: #2a3950;
+  --jiboni-light: #f5f7fa;
+  --jiboni-accent: #ff7e5f;
+  --jiboni-gradient: linear-gradient(135deg, var(--jiboni-primary), var(--jiboni-secondary));
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--jiboni-dark);
+  color: var(--jiboni-light);
+  overflow: hidden;
+}
+
+.presentation {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  outline: none;
+  background: radial-gradient(circle at top right, rgba(69, 104, 220, 0.2), transparent 60%),
+              radial-gradient(circle at bottom left, rgba(176, 106, 179, 0.2), transparent 60%);
+}
+
+.slide-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.slide {
+  width: 90%;
+  max-width: 1200px;
+  height: 80%;
+  padding: 2rem;
+  border-radius: 16px;
+  background-color: rgba(42, 57, 80, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navigation {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  z-index: 100;
+}
+
+.navigation button {
+  background-color: var(--jiboni-primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navigation button:hover {
+  background-color: var(--jiboni-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.navigation span {
+  color: var(--jiboni-light);
+  font-size: 16px;
+  background-color: rgba(42, 57, 80, 0.6);
+  padding: 8px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  color: var(--jiboni-light);
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: var(--jiboni-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.8rem;
+  color: var(--jiboni-secondary);
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.gradient-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--jiboni-gradient);
+  opacity: 0.1;
+  border-radius: 16px;
+  z-index: -1;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.highlight {
+  color: var(--jiboni-accent);
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--jiboni-gradient);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}

@@ -1,0 +1,218 @@
+/* Custom styles for Jiboni pitch deck */
+:root {
+  --jiboni-primary: #4568dc;
+  --jiboni-secondary: #b06ab3;
+  --jiboni-dark: #2a3950;
+  --jiboni-light: #f5f7fa;
+}
+
+.reveal {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.reveal h1, .reveal h2 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--jiboni-light);
+}
+
+.reveal h3 {
+  color: var(--jiboni-secondary);
+}
+
+.problem-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 2rem;
+}
+
+.problem-container > div {
+  flex: 1;
+  padding: 1.5rem;
+  margin: 0 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.app-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.icon-grid {
+  width: 80%;
+  max-width: 300px;
+}
+
+/* Solution slide styles */
+.solution-container {
+  text-align: center;
+}
+
+.four-pillars {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.pillar {
+  flex: 1;
+  min-width: 200px;
+  margin: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.pillar:hover {
+  transform: translateY(-5px);
+}
+
+.pillar-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Market opportunity styles */
+.market-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+.market-segment {
+  text-align: center;
+  margin: 0 1rem;
+}
+
+.market-circle {
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--jiboni-primary), var(--jiboni-secondary));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.market-circle p {
+  font-size: 0.8rem;
+  margin: 0.3rem;
+}
+
+.large {
+  width: 220px;
+  height: 220px;
+}
+
+.medium {
+  width: 180px;
+  height: 180px;
+}
+
+.small {
+  width: 140px;
+  height: 140px;
+}
+
+/* Business model styles */
+.business-model {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.tier {
+  flex: 1;
+  max-width: 300px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.free {
+  background: rgba(69, 104, 220, 0.1);
+  border: 1px solid var(--jiboni-primary);
+}
+
+.premium {
+  background: rgba(176, 106, 179, 0.1);
+  border: 1px solid var(--jiboni-secondary);
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+/* Financial chart styles */
+.chart-container {
+  width: 80%;
+  margin: 0 auto;
+  height: 300px;
+}
+
+.financial-highlights {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.financial-highlights p {
+  display: inline-block;
+  margin: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+}
+
+/* Ask slide styles */
+.ask-container {
+  text-align: center;
+}
+
+.amount {
+  margin-bottom: 2rem;
+}
+
+.amount h3 {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.fund-allocation {
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.fund-item {
+  margin: 1rem 0;
+}
+
+.fund-bar {
+  background: linear-gradient(90deg, var(--jiboni-primary), var(--jiboni-secondary));
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  text-align: right;
+  font-weight: bold;
+}
+
+/* Contact slide */
+.contact-info {
+  margin-bottom: 2rem;
+}
+
+.logo img {
+  max-width: 200px;
+}

@@ -1,0 +1,39 @@
+/* Custom styles for Jiboni pitch deck */
+:root {
+  --jiboni-primary: #4568dc;
+  --jiboni-secondary: #b06ab3;
+  --jiboni-dark: #2a3950;
+  --jiboni-light: #f5f7fa;
+}
+
+.reveal {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.reveal h1, .reveal h2 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.problem-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 2rem;
+}
+
+.problem-container > div {
+  flex: 1;
+  padding: 1rem;
+  margin: 0 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.app-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Add more custom styles as needed */
