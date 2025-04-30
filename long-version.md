@@ -170,7 +170,7 @@ Jiboni's financial plan is structured in distinct phases, prioritizing foundatio
 
 **Key Metrics Summary Table (5-Year Outlook \- Reflecting Phased Strategy):**
 
-| Metric | Year 1Development | Year 2Monetization | Year 3Growth | Year 4Hyper Growth | Year 5Hyper Growth |
+| Metric | Year 1<br/>Development | Year 2<br/>Monetization | Year 3<br/>Growth | Year 4<br/>Hyper Growth | Year 5<br/>Hyper Growth |
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Monthly Active Users | 10,000 | 25,000 | 200,000 | 600,000 | 1,500,000 |
 | Paying Users | 0 | 450 | 5,700 | 17,700 | 44,700 |
