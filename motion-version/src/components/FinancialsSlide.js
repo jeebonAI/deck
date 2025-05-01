@@ -506,186 +506,266 @@ function FinancialsSlide() {
           </motion.div>
         </div>
         
-        {/* Bottom row with Key Metrics */}
+        {/* Bottom row with Key Metrics and Notes */}
         <div style={{ 
           display: 'flex', 
-          flex: 1
+          flex: 1,
+          gap: '0.5rem'
         }}>
+          {/* Key Metrics */}
           <motion.div 
             className="card"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
             style={{ 
-              flex: 1
+              flex: 1,
+              maxWidth: '40%'
             }}
           >
             <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Key Metrics</h3>
             
-            {/* Key metrics content - now in 2 columns */}
+            {/* Key metrics content - horizontal layout */}
             <div style={{ 
               display: 'flex',
-              flexDirection: 'row',
+              flexDirection: 'column',
               height: 'calc(100% - 30px)',
-              gap: '15px'
+              justifyContent: 'space-around',
+              gap: '12px'
             }}>
-              {/* Left column */}
-              <div style={{
-                flex: 1,
+              {/* Annual Churn Rate */}
+              <div style={{ 
                 display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between'
+                alignItems: 'center',
+                height: '25px'
               }}>
-                {/* User Growth */}
-                <div>
-                  <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>User Growth</div>
-                  <div style={{ 
-                    display: 'flex',
-                    alignItems: 'center',
-                    height: '16px'
-                  }}>
-                    <div style={{ width: '35px', fontSize: '0.7rem' }}>10K</div>
-                    <div style={{ 
-                      flex: 1,
-                      height: '6px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                      borderRadius: '3px',
-                      overflow: 'hidden'
-                    }}>
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: '100%' }}
-                        transition={{ duration: 1.5, delay: 1 }}
-                        style={{ 
-                          height: '100%',
-                          backgroundColor: 'rgba(111, 116, 217, 0.8)',
-                          borderRadius: '3px'
-                        }}
-                      />
-                    </div>
-                    <div style={{ width: '35px', fontSize: '0.7rem', textAlign: 'right' }}>1.5M</div>
-                  </div>
-                </div>
-                
-                {/* Premium Conversion Rate and ARPPU side by side */}
-                <div style={{
+                <div style={{ width: '120px', fontSize: '0.8rem', whiteSpace: 'nowrap' }}>Annual Churn:</div>
+                <div style={{ 
+                  flex: 1,
                   display: 'flex',
-                  gap: '10px'
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
                 }}>
-                  {/* Premium Conversion */}
-                  <div style={{ flex: 1 }}>
-                    <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>Premium Conversion</div>
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      height: '30px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      borderRadius: '4px',
-                      fontSize: '0.9rem'
-                    }}>
-                      <motion.span
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: 1.2 }}
-                      >
-                        3% <span style={{ fontSize: '0.7rem', opacity: 0.8 }}>(>10k users)</span>
-                      </motion.span>
-                    </div>
-                  </div>
-                  
-                  {/* ARPPU */}
-                  <div style={{ flex: 1 }}>
-                    <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>ARPPU</div>
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      height: '30px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      borderRadius: '4px',
-                      fontSize: '0.9rem',
-                      fontWeight: 'bold'
-                    }}>
-                      <motion.span
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: 1.4 }}
-                      >
-                        $60/year ($5/month)
-                      </motion.span>
-                    </div>
-                  </div>
+                  {[
+                    {year: 'Y1', rate: '0%'},
+                    {year: 'Y2', rate: '5%'},
+                    {year: 'Y3', rate: '10%'},
+                    {year: 'Y4', rate: '15%'},
+                    {year: 'Y5', rate: '15%'}
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 1.2 + index * 0.1 }}
+                      style={{
+                        fontSize: '0.7rem',
+                        textAlign: 'center',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      {`${item.year}: ${item.rate}`}
+                    </motion.div>
+                  ))}
                 </div>
               </div>
               
-              {/* Right column */}
-              <div style={{
-                flex: 1,
+              {/* Premium Conversion */}
+              <div style={{ 
                 display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between'
+                alignItems: 'center',
+                height: '25px'
               }}>
-                {/* Churn Rate Visualization */}
-                <div>
-                  <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>Annual Churn Rate</div>
-                  <div style={{ 
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    height: '30px'
-                  }}>
-                    {[0, 5, 10, 15, 15].map((rate, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                          width: '18%'
-                        }}
-                      >
-                        <div style={{
-                          width: '100%',
-                          height: '6px',
-                          backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                          borderRadius: '3px',
-                          overflow: 'hidden'
-                        }}>
-                          <div style={{
-                            width: `${rate}%`,
-                            height: '100%',
-                            backgroundColor: 'rgba(255, 193, 7, 0.8)',
-                            borderRadius: '3px'
-                          }} />
-                        </div>
-                        <div style={{ fontSize: '0.65rem', marginTop: '2px' }}>
-                          {`Y${index+1}: ${rate}%`}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
+                <div style={{ width: '120px', fontSize: '0.8rem', whiteSpace: 'nowrap' }}>Premium Conversion:</div>
+                <div style={{ 
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 1.2 }}
+                    style={{
+                      fontSize: '0.8rem',
+                      opacity: 0.8,
+                      marginLeft: '25px'
+                    }}
+                  >
+                    3%  (>10k users)
+                  </motion.div>
+                   
+                </div>
+              </div>
+              
+              {/* ARPPU */}
+              <div style={{ 
+                display: 'flex',
+                alignItems: 'center',
+                height: '25px'
+              }}>
+                <div style={{ width: '120px', fontSize: '0.8rem', whiteSpace: 'nowrap' }}>ARPPU:</div>
+                <div style={{ 
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 1.4 }}
+                    style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      borderRadius: '4px',
+                      padding: '3px 10px',
+                      fontSize: '0.8rem'
+                    }}
+                  >
+                    $60/year ($5/month)
+                  </motion.div>
                 </div>
               </div>
             </div>
+          </motion.div>
+          
+          {/* Notes Section */}
+          <motion.div 
+            className="card"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            style={{ 
+              flex: 1
+            }}
+          >
+            <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Strategic Notes</h3>
             
-            {/* Additional note at the bottom */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 2 }}
-              style={{
-                fontSize: '0.7rem',
-                color: 'rgba(255, 255, 255, 0.7)',
-                marginTop: '5px',
-                textAlign: 'center'
-              }}
-            >
-              Costs increase with development, monetization & growth investments
-            </motion.div>
+            <div style={{ 
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
+              height: 'calc(100% - 30px)',
+              overflowY: 'auto'
+            }}>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.0 }}
+                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+              >
+                <div style={{ 
+                  minWidth: '6px', 
+                  height: '6px', 
+                  backgroundColor: 'var(--jiboni-primary)', 
+                  borderRadius: '50%', 
+                  marginTop: '5px',
+                  marginRight: '8px' 
+                }}></div>
+                <div>Y1: Development focus, no monetization</div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.2 }}
+                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+              >
+                <div style={{ 
+                  minWidth: '6px', 
+                  height: '6px', 
+                  backgroundColor: 'var(--jiboni-primary)', 
+                  borderRadius: '50%', 
+                  marginTop: '5px',
+                  marginRight: '8px' 
+                }}></div>
+                <div>Y2: Freemium model introduction with premium features</div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.4 }}
+                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+              >
+                <div style={{ 
+                  minWidth: '6px', 
+                  height: '6px', 
+                  backgroundColor: 'var(--jiboni-primary)', 
+                  borderRadius: '50%', 
+                  marginTop: '5px',
+                  marginRight: '8px' 
+                }}></div>
+                <div>Y3+: Aggressive global user acquisition focus</div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.5 }}
+                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+              >
+                <div style={{ 
+                  minWidth: '6px', 
+                  height: '6px', 
+                  backgroundColor: 'var(--jiboni-primary)', 
+                  borderRadius: '50%', 
+                  marginTop: '5px',
+                  marginRight: '8px' 
+                }}></div>
+                <div>Y3 growth rate higher due to removing beta cap on signups, with significant waiting list expected</div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.6 }}
+                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+              >
+                <div style={{ 
+                  minWidth: '6px', 
+                  height: '6px', 
+                  backgroundColor: 'var(--jiboni-primary)', 
+                  borderRadius: '50%', 
+                  marginTop: '5px',
+                  marginRight: '8px' 
+                }}></div>
+                <div>Low churn due to network stickiness & integrated utility</div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.8 }}
+                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+              >
+                <div style={{ 
+                  minWidth: '6px', 
+                  height: '6px', 
+                  backgroundColor: 'var(--jiboni-primary)', 
+                  borderRadius: '50%', 
+                  marginTop: '5px',
+                  marginRight: '8px' 
+                }}></div>
+                <div>Costs increase with development, monetization & growth investments</div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 2.0 }}
+                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+              >
+                <div style={{ 
+                  minWidth: '6px', 
+                  height: '6px', 
+                  backgroundColor: 'var(--jiboni-primary)', 
+                  borderRadius: '50%', 
+                  marginTop: '5px',
+                  marginRight: '8px' 
+                }}></div>
+                <div>Profitability projected in Year 4 as scaled growth drives revenue</div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
