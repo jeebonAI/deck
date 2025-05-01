@@ -1,82 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 /* Custom styles for Jiboni pitch deck */
 :root {
   --jiboni-primary: #4568dc;
   --jiboni-secondary: #b06ab3;
   --jiboni-dark: #2a3950;
   --jiboni-light: #f5f7fa;
+  --jiboni-accent: #ff7e5f;
+  --jiboni-gradient: linear-gradient(135deg, var(--jiboni-primary), var(--jiboni-secondary));
+}
+
+body {
+  background-color: var(--jiboni-dark);
+  font-family: 'Poppins', sans-serif;
+  color: var(--jiboni-light);
+  margin: 0;
+  padding: 0;
 }
 
 .reveal {
-  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  color: var(--jiboni-light);
 }
 
 .reveal h1, .reveal h2 {
   font-weight: 700;
   letter-spacing: -0.5px;
   color: var(--jiboni-light);
+  text-transform: none;
+}
+
+.reveal h1 {
+  font-size: 4rem;
+  background: var(--jiboni-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.reveal h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .reveal h3 {
+  font-size: 1.8rem;
   color: var(--jiboni-secondary);
+  font-weight: 600;
+  text-transform: none;
 }
 
-.problem-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  margin-top: 2rem;
+.reveal h4 {
+  font-size: 1.4rem;
+  color: var(--jiboni-accent);
+  font-weight: 600;
+  text-transform: none;
+  margin: 0;
 }
 
-.problem-container > div {
-  flex: 1;
-  padding: 1.5rem;
-  margin: 0 1rem;
-  background: rgba(255, 255, 255, 0.05);
+.reveal p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.reveal ul {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.reveal .slides section {
+  background-color: rgba(42, 57, 80, 0.8);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Problem slide styles */
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.problem-item {
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
 }
 
-.app-icons {
+.problem-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.problem-icon {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  align-items: center;
+  background-color: rgba(255, 126, 95, 0.2);
+  border-radius: 50%;
+  margin-right: 1rem;
 }
 
-.icon-grid {
-  width: 80%;
-  max-width: 300px;
+.problem-title {
+  color: var(--jiboni-accent);
+  font-size: 1.4rem;
+  margin: 0;
+  text-align: left;
+}
+
+.problem-description {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-align: left;
 }
 
 /* Solution slide styles */
-.solution-container {
-  text-align: center;
-}
-
 .four-pillars {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
   margin-top: 2rem;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .pillar {
-  flex: 1;
-  min-width: 200px;
-  margin: 1rem;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
+  height: 100%;
 }
 
 .pillar:hover {
   transform: translateY(-5px);
 }
 
-.pillar-icon {
-  font-size: 2.5rem;
+.pillar-header {
+  display: flex;
+  align-items: center;
   margin-bottom: 1rem;
+}
+
+.pillar-icon {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(69, 104, 220, 0.2);
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.pillar p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-align: left;
 }
 
 /* Market opportunity styles */
@@ -156,7 +246,42 @@
   text-align: center;
 }
 
-/* Financial chart styles */
+/* Timeline styles */
+.timeline {
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.milestone {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Team styles */
+.team-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.team-member {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.member-photo {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Financial styles */
 .chart-container {
   width: 80%;
   margin: 0 auto;
@@ -197,6 +322,9 @@
 
 .fund-item {
   margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .fund-bar {
@@ -206,13 +334,33 @@
   border-radius: 4px;
   text-align: right;
   font-weight: bold;
+  margin-left: 1rem;
 }
 
 /* Contact slide */
 .contact-info {
   margin-bottom: 2rem;
+  text-align: center;
 }
 
-.logo img {
-  max-width: 200px;
+.logo {
+  text-align: center;
+}
+
+/* Override Reveal.js defaults */
+.reveal .progress {
+  color: var(--jiboni-secondary);
+}
+
+.reveal .controls {
+  color: var(--jiboni-primary);
+}
+
+.reveal .slide-background {
+  background: radial-gradient(circle at top right, rgba(69, 104, 220, 0.2), transparent 60%),
+              radial-gradient(circle at bottom left, rgba(176, 106, 179, 0.2), transparent 60%);
+}
+
+.reveal .slides {
+  text-align: left;
 }
