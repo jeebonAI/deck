@@ -37,11 +37,22 @@ function App() {
     default: 2000 // Default for other slides
   }), []);
 
-  // Method for slides to register their max steps
-  const registerSlideSteps = (steps) => {
+  // Method for slides to register their max steps and animation duration
+  const registerSlideSteps = (steps, animationDuration) => {
     setMaxSteps(steps);
     // Store the max steps for this slide
     slideMaxStepsRef.current[currentSlide] = steps;
+    
+    // If a custom animation duration is provided, use it
+    if (animationDuration) {
+      // Update animation timer for this slide
+      setAnimationInProgress(true);
+      const timer = setTimeout(() => {
+        setAnimationInProgress(false);
+      }, animationDuration);
+      
+      return () => clearTimeout(timer);
+    }
     console.log(`Slide ${currentSlide} registered ${steps} steps`);
   };
 
@@ -64,6 +75,7 @@ function App() {
     
     // Clear animation in progress after slide-specific delay
     const animationDelay = animationTimers[currentSlide] || animationTimers.default;
+    
     const timer = setTimeout(() => {
       setAnimationInProgress(false);
     }, animationDelay);

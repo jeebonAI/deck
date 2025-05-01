@@ -2,23 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function NavigationInstructions({ currentSlide, animationInProgress, onPrev, onNext }) {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   
-  // Show instructions after initial animations complete
+  // Show instructions when animations complete
   useEffect(() => {
-    // Hide during animations
     if (animationInProgress) {
       setVisible(false);
-      return;
-    }
-    
-    // Show instructions after a delay when animations complete
-    const timer = setTimeout(() => {
+    } else {
+      // Show navigation immediately when animation is complete
       setVisible(true);
-    }, 1000); // 1 second delay after animations complete
-    
-    return () => clearTimeout(timer);
-  }, [currentSlide, animationInProgress]);
+    }
+  }, [animationInProgress]);
 
   return (
     <AnimatePresence>
