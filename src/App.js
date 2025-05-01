@@ -198,13 +198,18 @@ function App() {
   useEffect(() => {
     if (currentStep > 1) {
       setAnimationInProgress(true);
+      
+      // Use a shorter animation time for step 1 to step 2 transition
+      // but only if the slide has more than 1 step total
+      const stepAnimationTime = (currentStep === 2 && maxSteps > 1) ? 500 : 1000;
+      
       const timer = setTimeout(() => {
         setAnimationInProgress(false);
-      }, 1000); // Default 1 second for step animations
+      }, stepAnimationTime);
       
       return () => clearTimeout(timer);
     }
-  }, [currentStep]);
+  }, [currentStep, maxSteps]);
 
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'ArrowRight' || e.key === ' ') {
