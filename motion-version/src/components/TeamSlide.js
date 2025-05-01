@@ -1,6 +1,13 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Import the team member images
+// Note: You'll need to save these images to your project's assets folder
+// and update the import paths accordingly
+import nayeemImage from '../assets/nayeem.png';
+import numanImage from '../assets/numan.jpeg';
+import eliasImage from '../assets/drelias.jpg';
+
 function TeamSlide({ registerSlideSteps, currentStep }) {
   const team = [
     {
@@ -8,21 +15,24 @@ function TeamSlide({ registerSlideSteps, currentStep }) {
       role: "Founder & CEO",
       initial: "NS",
       color: "var(--jiboni-primary)",
-      description: "30 yrs tech dev (Fortune 500, startups), AI focus, real estate acumen"
+      description: "30 yrs tech dev (Fortune 500, startups), AI focus, real estate acumen",
+      image: nayeemImage
     },
     {
       name: "Numan Syed",
       role: "Co-Founder",
       initial: "NS",
       color: "var(--jiboni-secondary)",
-      description: "Strong technical developer, management background"
+      description: "Strong technical, operational, management background",
+      image: numanImage
     },
     {
       name: "Dr. S M Elias",
       role: "Advisor",
       initial: "SE",
       color: "#64B5F6",
-      description: "Renowned family historian (Syed network), invaluable access & context"
+      description: "Renowned author, historian (Syed Family), invaluable access & context",
+      image: eliasImage
     },
     {
       name: "You?",
@@ -30,7 +40,8 @@ function TeamSlide({ registerSlideSteps, currentStep }) {
       initial: "?",
       color: "var(--jiboni-accent)",
       description: "Help us build the future of meaningful connection",
-      highlight: true
+      highlight: true,
+      isPlaceholder: true
     }
   ];
 
@@ -99,23 +110,41 @@ function TeamSlide({ registerSlideSteps, currentStep }) {
                 }}
               >
                 <motion.div
-                  whileHover={{ rotate: 10 }}
+                  whileHover={{ scale: 1.05 }}
                   style={{
-                    width: '80px',
-                    height: '80px',
+                    width: '120px',
+                    height: '120px',
                     borderRadius: '50%',
-                    background: member.color,
+                    overflow: 'hidden',
+                    border: `3px solid ${member.color}`,
+                    margin: '0 auto 1rem',
+                    boxShadow: '0 8px 20px rgba(0, 0, 0, 0.15)',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    fontSize: '2rem',
-                    fontWeight: 'bold',
-                    color: 'white',
-                    margin: '0 auto 1rem',
-                    boxShadow: '0 8px 20px rgba(0, 0, 0, 0.15)'
+                    background: member.isPlaceholder ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
                   }}
                 >
-                  {member.initial}
+                  {member.isPlaceholder ? (
+                    <div style={{
+                      fontSize: '4rem',
+                      fontWeight: 'bold',
+                      color: member.color,
+                      textAlign: 'center',
+                      lineHeight: '1'
+                    }}>?</div>
+                  ) : (
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'center'
+                      }}
+                    />
+                  )}
                 </motion.div>
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{member.name}</h3>
                 <p style={{ fontSize: '1rem', opacity: 0.9, marginBottom: '0.7rem' }}>{member.role}</p>
