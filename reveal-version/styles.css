@@ -16,6 +16,7 @@ body {
   color: var(--jiboni-light);
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .reveal {
@@ -23,11 +24,72 @@ body {
   color: var(--jiboni-light);
 }
 
+.reveal .slides {
+  width: 90%;
+  max-width: 1200px;
+  height: 90%; /* Increased from 80% to give more vertical space */
+  text-align: left;
+  margin-bottom: 40px; /* Add extra bottom margin */
+}
+
+.reveal .slides section {
+  width: 90%;
+  height: 580px; /* Slightly reduced height */
+  background-color: rgba(42, 57, 80, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  margin: 30px auto 60px auto; /* Less space at top, more at bottom */
+}
+
+/* Title slide specific styles */
+.reveal .slides section.title-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 580px;
+  background-color: rgba(42, 57, 80, 0.95); /* Darker background to match image */
+}
+
+.reveal .slides section.title-slide h1 {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  color: #8a7ad6; /* Purple color to match "jeeboni" in image */
+  background: none;
+  -webkit-text-fill-color: #8a7ad6; /* Override gradient */
+  letter-spacing: -1px;
+}
+
+.reveal .slides section.title-slide h3 {
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 4rem;
+}
+
+.reveal .slides section.title-slide .tagline {
+  font-size: 1.5rem;
+  opacity: 0.9;
+  margin-top: 2rem;
+  color: white;
+}
+
 .reveal h1, .reveal h2 {
   font-weight: 700;
   letter-spacing: -0.5px;
   color: var(--jiboni-light);
   text-transform: none;
+  text-align: center;
+  width: 100%;
 }
 
 .reveal h1 {
@@ -35,6 +97,7 @@ body {
   background: var(--jiboni-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
 }
 
 .reveal h2 {
@@ -47,6 +110,7 @@ body {
   color: var(--jiboni-secondary);
   font-weight: 600;
   text-transform: none;
+  margin-bottom: 1rem;
 }
 
 .reveal h4 {
@@ -65,12 +129,6 @@ body {
 .reveal ul {
   font-size: 1.2rem;
   line-height: 1.6;
-}
-
-.reveal .slides section {
-  background-color: rgba(42, 57, 80, 0.8);
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Problem slide styles */
@@ -356,11 +414,27 @@ body {
   color: var(--jiboni-primary);
 }
 
+.reveal-viewport {
+  background-color: var(--jiboni-dark);
+}
+
 .reveal .slide-background {
   background: radial-gradient(circle at top right, rgba(69, 104, 220, 0.2), transparent 60%),
               radial-gradient(circle at bottom left, rgba(176, 106, 179, 0.2), transparent 60%);
 }
 
-.reveal .slides {
-  text-align: left;
+/* Fix for Reveal.js default styles */
+.reveal .slides section > * {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.reveal .slides section .fragment {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.reveal .slides section .fragment.visible {
+  opacity: 1;
+  visibility: visible;
 }
