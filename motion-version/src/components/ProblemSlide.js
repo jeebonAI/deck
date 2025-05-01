@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-function ProblemSlide() {
+function ProblemSlide({ registerSlideSteps }) {
   const [currentStep, setCurrentStep] = useState(1); // Start with heading visible
   
   // Define the key problems with titles, descriptions, and icons
@@ -13,7 +13,7 @@ function ProblemSlide() {
     },
     {
       title: "Passive Consumption",
-      description: "Algorithmic timelines designed to maximize engagement time can trap us into passive consumption, losing valuable time and reduced protuctivity.",
+      description: "Algorithmic timelines designed to maximize engagement time can trap us into passive consumption, losing valuable time and reduced productivity.",
       icon: "📱"
     },
     {
@@ -22,52 +22,29 @@ function ProblemSlide() {
       icon: "🧩"
     },
     {
-      title: "Difficult Group Management",
-      description: "Organizing communications within distinct groups (family, friends, work teams, hobby clubs, community etc) is cumbersome leading to losing important real world connections forever.",
-      icon: "👥"
+      title: "Privacy Concerns",
+      description: "Current platforms often compromise user privacy, selling personal data and creating a sense of constant surveillance.",
+      icon: "🔒"
     }
   ];
 
-  // Set up keyboard handler to advance steps
+  // Register the total number of steps for this slide
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      // Space or right arrow key advances the slide
-      if (e.code === 'Space' || e.code === 'ArrowRight') {
-        if (currentStep < problemItems.length + 1) {
-          setCurrentStep(currentStep + 1);
-          e.preventDefault(); // Prevent default scrolling behavior
-        } else {
-          // Move to next slide when all elements are revealed
-          const nextButton = document.querySelector('.navigation button:last-of-type');
-          if (nextButton) {
-            nextButton.click();
-            e.preventDefault();
-          }
-        }
-      }
-      
-      // Left arrow key goes back a step
-      if (e.code === 'ArrowLeft') {
-        if (currentStep > 1) {
-          setCurrentStep(currentStep - 1);
-          e.preventDefault();
-        } else {
-          // Move to previous slide when at first step
-          const prevButton = document.querySelector('.navigation button:first-of-type');
-          if (prevButton) {
-            prevButton.click();
-            e.preventDefault();
-          }
-        }
-      }
-    };
+    registerSlideSteps(problemItems.length + 1); // +1 for the heading
+  }, [registerSlideSteps, problemItems.length]);
 
-    window.addEventListener('keydown', handleKeyDown);
+  // Listen for step changes from the App component
+  useEffect(() => {
+    const handleStepChange = (e) => {
+      setCurrentStep(e.detail.step);
+    };
+    
+    document.addEventListener('slideStepChange', handleStepChange);
     
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('slideStepChange', handleStepChange);
     };
-  }, [currentStep, problemItems.length]);
+  }, []);
 
   return (
     <div className="slide problem-slide">
@@ -76,35 +53,30 @@ function ProblemSlide() {
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            style={{ marginBottom: '2rem' }}
+            transition={{ duration: 0.5 }}
           >
             The Problem
           </motion.h2>
         )}
       </AnimatePresence>
 
-      <div
-        className="problems-grid"
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '1.5rem',
-          width: '100%',
-          maxWidth: '1000px',
-          margin: '0 auto'
-        }}
-      >
-        {problemItems.map((item, index) => (
-          <AnimatePresence key={index}>
-            {currentStep >= index + 2 && (
+      <div className="problems-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: '1.5rem',
+        width: '100%',
+        maxWidth: '1000px',
+        margin: '0 auto'
+      }}>
+        <AnimatePresence>
+          {problemItems.map((problem, index) => (
+            currentStep >= index + 2 && (
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.8, 
-                  ease: "easeOut"
-                }}
+                key={problem.title}
+                className="problem-item"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
                 style={{
                   backgroundColor: 'rgba(255, 255, 255, 0.1)',
                   borderRadius: '12px',
@@ -114,13 +86,13 @@ function ProblemSlide() {
                   flexDirection: 'column'
                 }}
               >
-                <div style={{ 
-                  display: 'flex', 
+                <div className="problem-header" style={{
+                  display: 'flex',
                   alignItems: 'center',
                   marginBottom: '1rem'
                 }}>
-                  <div style={{ 
-                    fontSize: '2rem', 
+                  <div className="problem-icon" style={{
+                    fontSize: '2rem',
                     marginRight: '1rem',
                     width: '50px',
                     height: '50px',
@@ -129,27 +101,22 @@ function ProblemSlide() {
                     alignItems: 'center',
                     backgroundColor: 'rgba(255, 126, 95, 0.2)',
                     borderRadius: '50%'
-                  }}>
-                    {item.icon}
-                  </div>
-                  <h3 style={{ 
+                  }}>{problem.icon}</div>
+                  <h4 className="problem-title" style={{
                     color: 'var(--jiboni-accent)',
-                    fontSize: '1.4rem'
-                  }}>
-                    {item.title}
-                  </h3>
+                    fontSize: '1.4rem',
+                    margin: 0
+                  }}>{problem.title}</h4>
                 </div>
-                <p style={{ 
+                <p className="problem-description" style={{
                   fontSize: '1.1rem',
                   lineHeight: '1.5',
                   flex: 1
-                }}>
-                  {item.description}
-                </p>
+                }}>{problem.description}</p>
               </motion.div>
-            )}
-          </AnimatePresence>
-        ))}
+            )
+          ))}
+        </AnimatePresence>
       </div>
     </div>
   );

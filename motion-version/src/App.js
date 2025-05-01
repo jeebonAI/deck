@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 
@@ -18,59 +18,115 @@ import ContactSlide from './components/ContactSlide';
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 11; // Based on short-version.md
+  
+  // Create a ref to track the current slide's internal state
+  const slideStateRef = React.useRef({
+    currentStep: 1,
+    maxSteps: 1
+  });
 
   const nextSlide = () => {
     if (currentSlide < totalSlides - 1) {
       setCurrentSlide(currentSlide + 1);
+      // Reset step counter when changing slides
+      slideStateRef.current = { currentStep: 1, maxSteps: 1 };
     }
   };
 
   const prevSlide = () => {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
+      // Reset step counter when changing slides
+      slideStateRef.current = { currentStep: 1, maxSteps: 1 };
     }
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'ArrowRight') nextSlide();
-    if (e.key === 'ArrowLeft') prevSlide();
+  const nextStep = () => {
+    const { currentStep, maxSteps } = slideStateRef.current;
+    if (currentStep < maxSteps) {
+      slideStateRef.current.currentStep += 1;
+      // Dispatch a custom event that slides can listen for
+      document.dispatchEvent(new CustomEvent('slideStepChange', { 
+        detail: { step: slideStateRef.current.currentStep } 
+      }));
+    } else {
+      nextSlide();
+    }
   };
+
+  const prevStep = () => {
+    const { currentStep } = slideStateRef.current;
+    if (currentStep > 1) {
+      slideStateRef.current.currentStep -= 1;
+      // Dispatch a custom event that slides can listen for
+      document.dispatchEvent(new CustomEvent('slideStepChange', { 
+        detail: { step: slideStateRef.current.currentStep } 
+      }));
+    } else {
+      prevSlide();
+    }
+  };
+
+  // Method for slides to register their max steps
+  const registerSlideSteps = (maxSteps) => {
+    slideStateRef.current.maxSteps = maxSteps;
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      nextStep();
+    }
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      prevStep();
+    }
+  };
+
+  // Add global keyboard listener
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentSlide]); // Re-add when slide changes
 
   // Render the appropriate slide based on currentSlide
   const renderSlide = () => {
+    // Pass the registerSlideSteps function to each slide component
+    const props = { registerSlideSteps };
+    
     switch (currentSlide) {
       case 0:
-        return <TitleSlide />;
+        return <TitleSlide {...props} />;
       case 1:
-        return <ProblemSlide />;
+        return <ProblemSlide {...props} />;
       case 2:
-        return <SolutionSlide />;
+        return <SolutionSlide {...props} />;
       case 3:
-        return <MarketSlide />;
+        return <MarketSlide {...props} />;
       case 4:
-        return <BusinessModelSlide />;
+        return <BusinessModelSlide {...props} />;
       case 5:
-        return <GoToMarketSlide />;
+        return <GoToMarketSlide {...props} />;
       case 6:
-        return <TractionSlide />;
+        return <TractionSlide {...props} />;
       case 7:
-        return <TeamSlide />;
+        return <TeamSlide {...props} />;
       case 8:
-        return <FinancialsSlide />;
+        return <FinancialsSlide {...props} />;
       case 9:
-        return <AskSlide />;
+        return <AskSlide {...props} />;
       case 10:
-        return <ContactSlide />;
+        return <ContactSlide {...props} />;
       default:
-        return <TitleSlide />;
+        return <TitleSlide {...props} />;
     }
   };
 
   return (
     <div
       className="presentation"
-      onClick={nextSlide}
-      onKeyDown={handleKeyDown}
       tabIndex="0"
     >
       <AnimatePresence mode="wait">
@@ -92,11 +148,17 @@ function App() {
       </AnimatePresence>
 
       <div className="navigation">
-        <button onClick={(e) => { e.stopPropagation(); prevSlide(); }} title="Previous slide">
+        <button onClick={(e) => { 
+          e.stopPropagation();
+          prevStep();
+        }} title="Previous step">
           ←
         </button>
         <span>{currentSlide + 1} / {totalSlides}</span>
-        <button onClick={(e) => { e.stopPropagation(); nextSlide(); }} title="Next slide">
+        <button onClick={(e) => { 
+          e.stopPropagation();
+          nextStep();
+        }} title="Next step">
           →
         </button>
       </div>
