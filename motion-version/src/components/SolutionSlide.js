@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-function SolutionSlide({ registerSlideSteps, currentStep }) {
+function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) {
   const solutions = [
     {
       title: "Communicate",
@@ -30,6 +30,21 @@ function SolutionSlide({ registerSlideSteps, currentStep }) {
     registerSlideSteps(solutions.length + 2); // +1 for heading, +1 for final message
   }, [registerSlideSteps, solutions.length]);
 
+  // Handle keyboard events
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      // Any slide-specific keyboard actions
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <div className="slide solution-slide">
       <AnimatePresence>
@@ -40,7 +55,7 @@ function SolutionSlide({ registerSlideSteps, currentStep }) {
             transition={{ duration: 0.8 }}
             style={{ marginBottom: '2rem' }}
           >
-            Our Solution: Jiboni
+            Our Solution: {businessNameCapitalized}
           </motion.h2>
         )}
       </AnimatePresence>

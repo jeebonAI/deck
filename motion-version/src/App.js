@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
+import { BUSINESS_NAME, BUSINESS_NAME_CAPITALIZED } from './constants';
 
 // Import slide components
 import TitleSlide from './components/TitleSlide';
@@ -23,11 +24,15 @@ function App() {
   
   // Flag to track if we're going back to previous slide
   const goingBackRef = useRef(false);
+  // Store max steps for each slide
+  const slideMaxStepsRef = useRef({});
 
   // Method for slides to register their max steps
   const registerSlideSteps = (steps) => {
     setMaxSteps(steps);
-    console.log(`Slide registered ${steps} steps`);
+    // Store the max steps for this slide
+    slideMaxStepsRef.current[currentSlide] = steps;
+    console.log(`Slide ${currentSlide} registered ${steps} steps`);
   };
 
   // Reset step and maxSteps when changing slides
@@ -35,7 +40,12 @@ function App() {
     // Reset to first step when changing slides (unless going back)
     if (!goingBackRef.current) {
       setCurrentStep(1);
-      setMaxSteps(1); // Reset maxSteps until the new slide registers
+      // If we already know the max steps for this slide, use it
+      if (slideMaxStepsRef.current[currentSlide]) {
+        setMaxSteps(slideMaxStepsRef.current[currentSlide]);
+      } else {
+        setMaxSteps(1); // Reset maxSteps until the new slide registers
+      }
     }
     goingBackRef.current = false;
   }, [currentSlide]);
@@ -60,11 +70,10 @@ function App() {
       goingBackRef.current = true;
       setCurrentSlide(currentSlide - 1);
       
-      // We need to wait for the previous slide to register its maxSteps
-      setTimeout(() => {
-        // Now set currentStep to maxSteps to show all content
-        setCurrentStep(maxSteps);
-      }, 100);
+      // Use the stored max steps for the previous slide
+      const prevSlideMaxSteps = slideMaxStepsRef.current[currentSlide - 1] || 1;
+      setMaxSteps(prevSlideMaxSteps);
+      setCurrentStep(prevSlideMaxSteps);
     }
   };
 
@@ -92,7 +101,9 @@ function App() {
     // Pass the registerSlideSteps function and currentStep to each slide component
     const props = { 
       registerSlideSteps,
-      currentStep
+      currentStep,
+      businessName: BUSINESS_NAME,
+      businessNameCapitalized: BUSINESS_NAME_CAPITALIZED
     };
     
     switch (currentSlide) {
@@ -164,7 +175,7 @@ function App() {
       
       {/* Debug info */}
       <div style={{ position: 'fixed', bottom: '10px', left: '10px', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
-        Step: {currentStep}/{maxSteps}
+        Step: {currentStep}/{maxSteps} (Slide: {currentSlide + 1})
       </div>
     </div>
   );

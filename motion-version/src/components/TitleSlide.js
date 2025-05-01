@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-function TitleSlide() {
+function TitleSlide({ registerSlideSteps, currentStep, businessName }) {
+  // Register that this slide has only 1 step
+  useEffect(() => {
+    registerSlideSteps(1);
+  }, [registerSlideSteps]);
+
+  // Handle keyboard events
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      // Any slide-specific keyboard actions
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <div className="slide title-slide">
-      <div className="gradient-background" />
-
       <motion.div
         className="content"
         initial={{ opacity: 0 }}
@@ -19,7 +37,7 @@ function TitleSlide() {
           transition={{ duration: 0.8, delay: 0.3 }}
           style={{ fontSize: '5rem' }}
         >
-          jeeboni
+          {businessName}
         </motion.h1>
 
         <motion.h3
@@ -30,21 +48,6 @@ function TitleSlide() {
         >
           Communicate, Connect, Cherish, Curate
         </motion.h3>
-
-        <motion.div
-          className="tagline"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          style={{
-            fontSize: '1.5rem',
-            opacity: 0.9,
-            marginTop: '3rem',
-            textAlign: 'center'
-          }}
-        >
-          Simplifying digital life, deepening real-world connections.
-        </motion.div>
       </motion.div>
     </div>
   );

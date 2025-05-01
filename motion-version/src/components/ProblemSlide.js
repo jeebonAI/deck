@@ -31,6 +31,21 @@ function ProblemSlide({ registerSlideSteps, currentStep }) {
     registerSlideSteps(problemItems.length + 1); // +1 for the heading
   }, [registerSlideSteps, problemItems.length]);
 
+  // Handle keyboard events
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      // Any slide-specific keyboard actions
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <div className="slide problem-slide">
       <AnimatePresence>

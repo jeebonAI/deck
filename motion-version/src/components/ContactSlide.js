@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-function ContactSlide() {
+function ContactSlide({ registerSlideSteps, businessNameCapitalized }) {
+  // Register that this slide has only 1 step
+  useEffect(() => {
+    registerSlideSteps(1);
+  }, [registerSlideSteps]);
+
+  // Handle keyboard events
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      // Any slide-specific keyboard actions
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   const contactInfo = [
     {
       icon: "✉",
@@ -36,7 +56,7 @@ function ContactSlide() {
           transition={{ duration: 0.8, delay: 0.3 }}
           style={{ fontSize: '3.5rem' }}
         >
-          Jiboni
+          {businessNameCapitalized}
         </motion.h1>
 
         <motion.h3

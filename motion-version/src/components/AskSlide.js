@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-function AskSlide() {
+function AskSlide({ registerSlideSteps, businessNameCapitalized }) {
+  // Register that this slide has only 1 step
+  useEffect(() => {
+    registerSlideSteps(1);
+  }, [registerSlideSteps]);
+
+  // Handle keyboard events
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      // Any slide-specific keyboard actions
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   const fundUse = [
     { category: "Core Product & AI Dev", percentage: 35, color: "var(--jiboni-primary)" },
     { category: "Founder Salary & Initial Team", percentage: 35, color: "var(--jiboni-secondary)" },
