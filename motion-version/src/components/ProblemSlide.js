@@ -7,22 +7,26 @@ function ProblemSlide({ registerSlideSteps, currentStep }) {
     {
       title: "Digital Disconnect",
       description: "Most of today's digital apps are moving us to a superficial world disconnecting us more and more from the real world.",
-      icon: "🔌"
+      icon: "🔌",
+      iconBgColor: "rgba(69, 104, 220, 0.3)" // Blue-ish background for contrast
     },
     {
       title: "Passive Consumption",
       description: "Algorithmic timelines designed to maximize engagement time can trap us into passive consumption, losing valuable time and reduced productivity.",
-      icon: "📱"
+      icon: "📱",
+      iconBgColor: "rgba(176, 106, 179, 0.3)" // Purple-ish background for contrast
     },
     {
       title: "Fragmented Histories",
       description: "Personal memories, family narratives, group histories, and even important communications are easily lost, scattered across platforms, leading to a fading of personal and collective memory.",
-      icon: "🧩"
+      icon: "🧩",
+      iconBgColor: "rgba(255, 126, 95, 0.3)" // Orange-ish background for contrast
     },
     {
-      title: "Privacy Concerns",
-      description: "Current platforms often compromise user privacy, selling personal data and creating a sense of constant surveillance.",
-      icon: "🔒"
+      title: "Connections Management",
+      description: "Organizing communications within distinct groups (family, friends, work teams, hobby clubs, community etc) is cumbersome leading to losing important real world connections forever.",
+      icon: "👥",
+      iconBgColor: "rgba(46, 213, 115, 0.3)" // Green-ish background for contrast
     }
   ];
 
@@ -99,8 +103,9 @@ function ProblemSlide({ registerSlideSteps, currentStep }) {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: 'rgba(255, 126, 95, 0.2)',
-                    borderRadius: '50%'
+                    backgroundColor: problem.iconBgColor,
+                    borderRadius: '50%',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
                   }}>{problem.icon}</div>
                   <h4 className="problem-title" style={{
                     color: 'var(--jiboni-accent)',

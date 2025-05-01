@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import StylizedBusinessName from './StylizedBusinessName';
 
-function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) {
+function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalized, businessName }) {
   const solutions = [
     {
       title: "Communicate",
@@ -14,14 +15,14 @@ function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalize
       icon: "⭕"
     },
     {
+      title: "Curate (Memory & AI)",
+      description: "Capture important moments with AI-enabled personal media that enhances real connections",
+      icon: "🧠"
+    },
+    {
       title: "Cherish (Trees)",
       description: "Preserving family legacy through collaborative trees",
       icon: "🌳"
-    },
-    {
-      title: "Curate (Memory & AI)",
-      description: "Capture important moments with AI-enabled storage/retrieval that enhances real connections",
-      icon: "🧠"
     }
   ];
 
@@ -49,14 +50,16 @@ function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalize
     <div className="slide solution-slide">
       <AnimatePresence>
         {currentStep >= 1 && (
-          <motion.h2
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            style={{ marginBottom: '2rem' }}
+            style={{ marginBottom: '2rem', textAlign: 'center' }}
           >
-            Our Solution: {businessNameCapitalized}
-          </motion.h2>
+            <h2 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+              Our Solution: <StylizedBusinessName businessName={businessName} size="medium" inline={true} />
+            </h2>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -138,7 +141,7 @@ function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalize
             style={{
               marginTop: '2rem',
               padding: '1rem 2rem',
-              background: 'rgba(69, 104, 220, 0.15)',
+              background: 'rgba(96, 201, 101, 0.15)',
               borderRadius: '12px',
               textAlign: 'center',
               maxWidth: '80%',
