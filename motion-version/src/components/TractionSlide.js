@@ -1,10 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-function TractionSlide() {
-  // This is a placeholder since the short-version.md doesn't provide specific traction details
-  // We'll create a visually appealing slide with placeholders
-  
+function TractionSlide({ registerSlideSteps, currentStep }) {
   const milestones = [
     {
       title: "Product Development",
@@ -32,97 +29,152 @@ function TractionSlide() {
     }
   ];
 
+  // Register the total number of steps for this slide
+  useEffect(() => {
+    registerSlideSteps(milestones.length + 2); // +1 for heading, +1 for next steps
+  }, [registerSlideSteps, milestones.length]);
+
+  // Handle keyboard events
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <div className="slide traction-slide">
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Traction & Milestones
-      </motion.h2>
-      
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.7, delay: 0.3 }}
-        style={{ textAlign: 'center', marginBottom: '2rem' }}
-      >
-        <p>Our journey so far and what we're working towards</p>
-      </motion.div>
-      
-      <div className="flex-container" style={{ flexDirection: 'column', gap: '1.5rem' }}>
-        {milestones.map((milestone, index) => (
-          <motion.div 
-            key={index}
-            className="card"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 + index * 0.2 }}
-            style={{ 
-              display: 'flex',
-              alignItems: 'center',
-              padding: '1rem 1.5rem'
-            }}
+      <AnimatePresence>
+        {currentStep >= 1 && (
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{ marginBottom: '0.3rem', textAlign: 'center' }}
           >
-            <div style={{ flex: 1 }}>
-              <h3 style={{ color: milestone.color, marginBottom: '0.3rem' }}>{milestone.title}</h3>
-              <p style={{ fontSize: '1rem', opacity: 0.9 }}>{milestone.status}</p>
-            </div>
-            
-            <div style={{ flex: 2, position: 'relative' }}>
-              <div style={{ 
-                width: '100%', 
-                height: '10px', 
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                borderRadius: '5px'
-              }}>
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${milestone.percentage}%` }}
-                  transition={{ duration: 1, delay: 1 + index * 0.2 }}
-                  style={{ 
-                    height: '100%', 
-                    backgroundColor: milestone.color,
-                    borderRadius: '5px'
-                  }}
-                />
-              </div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 1.5 + index * 0.2 }}
+            Traction & Milestones
+          </motion.h2>
+        )}
+      </AnimatePresence>
+      
+      <AnimatePresence>
+        {currentStep >= 1 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            style={{ textAlign: 'center', marginBottom: '2rem' }}
+          >
+            <p style={{ fontSize: '0.9rem', opacity: 0.8, margin: 0 }}>Our journey so far and what we're working towards</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      <div style={{ 
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: '1.5rem',
+        width: '90%',
+        maxWidth: '900px',
+        margin: '0 auto 2.5rem'
+      }}>
+        {milestones.map((milestone, index) => (
+          <AnimatePresence key={index}>
+            {currentStep >= index + 2 && (
+              <motion.div 
+                className="milestone-item"
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
                 style={{ 
-                  position: 'absolute',
-                  right: '10px',
-                  top: '-25px',
-                  fontWeight: 'bold',
-                  color: milestone.color
+                  backgroundColor: 'rgba(30, 41, 59, 0.4)',
+                  borderRadius: '8px',
+                  padding: '1rem',
+                  display: 'flex',
+                  flexDirection: 'column'
                 }}
               >
-                {milestone.percentage}%
+                <div style={{ 
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '0.5rem'
+                }}>
+                  <h3 style={{ 
+                    color: milestone.color, 
+                    margin: 0, 
+                    fontSize: '1.2rem',
+                    fontWeight: '600'
+                  }}>
+                    {milestone.title}
+                  </h3>
+                  
+                  <span style={{ 
+                    fontWeight: 'bold',
+                    color: milestone.color,
+                    fontSize: '1rem'
+                  }}>
+                    {milestone.percentage}%
+                  </span>
+                </div>
+                
+                <div style={{
+                  fontSize: '0.85rem',
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  marginBottom: '0.4rem'
+                }}>
+                  {milestone.status}
+                </div>
+                
+                <div style={{ 
+                  width: '100%', 
+                  height: '6px', 
+                  backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                  borderRadius: '3px'
+                }}>
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${milestone.percentage}%` }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    style={{ 
+                      height: '100%', 
+                      backgroundColor: milestone.color,
+                      borderRadius: '3px'
+                    }}
+                  />
+                </div>
               </motion.div>
-            </div>
-          </motion.div>
+            )}
+          </AnimatePresence>
         ))}
       </div>
       
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 2.5 }}
-        style={{ 
-          marginTop: '2rem', 
-          padding: '1rem 2rem',
-          background: 'rgba(255, 255, 255, 0.08)',
-          borderRadius: '12px',
-          textAlign: 'center',
-          maxWidth: '80%'
-        }}
-      >
-        <h3>Next Steps</h3>
-        <p>Complete MVP development, launch beta with initial user group, and secure seed funding</p>
-      </motion.div>
+      <AnimatePresence>
+        {currentStep >= milestones.length + 2 && (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ 
+              padding: '0.8rem 1.2rem',
+              background: 'rgba(255, 255, 255, 0.08)',
+              borderRadius: '10px',
+              textAlign: 'center',
+              maxWidth: '60%',
+              margin: '0 auto'
+            }}
+          >
+            <h3 style={{ marginBottom: '0.3rem', fontSize: '1.1rem', color: '#b388ff' }}>Next Steps</h3>
+            <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.4' }}>Complete MVP development, launch beta with initial user group, and secure seed funding</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
