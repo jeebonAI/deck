@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 import { BUSINESS_NAME, BUSINESS_NAME_CAPITALIZED } from './constants';
@@ -50,7 +50,7 @@ function App() {
     goingBackRef.current = false;
   }, [currentSlide]);
 
-  const nextStep = () => {
+  const nextStep = useCallback(() => {
     if (currentStep < maxSteps) {
       // If we have more steps in the current slide, go to next step
       setCurrentStep(currentStep + 1);
@@ -59,9 +59,9 @@ function App() {
       setCurrentSlide(currentSlide + 1);
       // Step will be reset to 1 in the useEffect
     }
-  };
+  }, [currentStep, maxSteps, currentSlide, totalSlides]);
 
-  const prevStep = () => {
+  const prevStep = useCallback(() => {
     if (currentStep > 1) {
       // If we're not at the first step, go to previous step
       setCurrentStep(currentStep - 1);
@@ -75,9 +75,9 @@ function App() {
       setMaxSteps(prevSlideMaxSteps);
       setCurrentStep(prevSlideMaxSteps);
     }
-  };
+  }, [currentStep, currentSlide]);
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = useCallback((e) => {
     if (e.key === 'ArrowRight' || e.key === ' ') {
       e.preventDefault();
       nextStep();
@@ -86,7 +86,7 @@ function App() {
       e.preventDefault();
       prevStep();
     }
-  };
+  }, [nextStep, prevStep]);
 
   // Add global keyboard listener
   useEffect(() => {
@@ -94,7 +94,7 @@ function App() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentSlide, currentStep, maxSteps]); // Re-add when slide or step changes
+  }, [handleKeyDown]);
 
   // Render the appropriate slide based on currentSlide
   const renderSlide = () => {

@@ -18,6 +18,7 @@ function FinancialsSlide() {
   const maxUsers = Math.max(...users);
   const minProfit = Math.min(...netProfit);
   const maxProfit = Math.max(...netProfit);
+  // eslint-disable-next-line no-unused-vars
   const profitRange = Math.max(Math.abs(minProfit), Math.abs(maxProfit));
 
   // Format numbers for display
