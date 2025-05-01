@@ -24,12 +24,67 @@ function App() {
   const [maxSteps, setMaxSteps] = useState(1);
   const [animationInProgress, setAnimationInProgress] = useState(true);
   const [debugMode, setDebugMode] = useState(false);
+  const [autoPlay, setAutoPlay] = useState(true); // New state for auto-play
+  const autoPlayTimerRef = useRef(null); // Ref to store the timer
   const totalSlides = 11; // Based on short-version.md
   
   // Flag to track if we're going back to previous slide
   const goingBackRef = useRef(false);
   // Store max steps for each slide
   const slideMaxStepsRef = useRef({});
+
+  // Define nextStep function first to avoid circular dependency
+  const nextStep = useCallback(() => {
+    if (currentStep < maxSteps) {
+      // If we have more steps in the current slide, go to next step
+      setCurrentStep(currentStep + 1);
+    } else if (currentSlide < totalSlides - 1) {
+      // If we're at the last step of the current slide, go to the next slide
+      setCurrentSlide(currentSlide + 1);
+      // Step will be reset to 1 in the useEffect
+    }
+    // If we're at the last step of the last slide, do nothing (stop auto-play)
+    else if (autoPlay) {
+      setAutoPlay(false); // Turn off auto-play at the end
+    }
+  }, [currentStep, maxSteps, currentSlide, totalSlides, autoPlay]);
+
+  // Toggle auto-play function
+  const toggleAutoPlay = useCallback(() => {
+    setAutoPlay(prev => !prev);
+  }, []);
+
+  const prevStep = useCallback(() => {
+    // If auto-play is on, turn it off when manually navigating
+    if (autoPlay) {
+      setAutoPlay(false);
+    }
+    
+    if (currentStep > 1) {
+      // If we're not at the first step, go to previous step
+      setCurrentStep(currentStep - 1);
+    } else if (currentSlide > 0) {
+      // If we're at the first step of the current slide, go to the previous slide
+      goingBackRef.current = true;
+      setCurrentSlide(currentSlide - 1);
+      
+      // Use the stored max steps for the previous slide
+      const prevSlideMaxSteps = slideMaxStepsRef.current[currentSlide - 1] || 1;
+      setMaxSteps(prevSlideMaxSteps);
+      setCurrentStep(prevSlideMaxSteps);
+    }
+  }, [currentStep, currentSlide, autoPlay]);
+
+  // Add goHome function to return to the first slide
+  const goHome = useCallback(() => {
+    // If auto-play is on, turn it off when manually navigating
+    if (autoPlay) {
+      setAutoPlay(false);
+    }
+    
+    setCurrentSlide(0);
+    setCurrentStep(1);
+  }, [autoPlay]);
 
   // Set document title on mount
   useEffect(() => {
@@ -50,6 +105,48 @@ function App() {
     2: 3000, // Solution slide
     default: 2000 // Default for other slides
   }), []);
+
+  // Auto-play timing for each slide
+  const autoPlayTimers = useMemo(() => ({
+    0: 5000,  // Title slide (reduced from 10000)
+    1: 6000,  // Problem slide (reduced from 15000)
+    2: 6000,  // Solution slide (reduced from 15000)
+    default: 4000  // Default for other slides (reduced from 12000)
+  }), []);
+
+  // Auto-play functionality
+  useEffect(() => {
+    // Clear any existing timer
+    if (autoPlayTimerRef.current) {
+      clearTimeout(autoPlayTimerRef.current);
+      autoPlayTimerRef.current = null;
+    }
+
+    // If auto-play is enabled and animation is not in progress
+    if (autoPlay && !animationInProgress) {
+      let delay;
+      
+      // Use longer delay when on the last step of a slide
+      if (currentStep === maxSteps) {
+        // Add 2000ms (2 seconds) extra pause for the last step of each slide
+        delay = (autoPlayTimers[currentSlide] || autoPlayTimers.default) + 2000;
+      } else {
+        delay = autoPlayTimers[currentSlide] || autoPlayTimers.default;
+      }
+      
+      autoPlayTimerRef.current = setTimeout(() => {
+        // Simply use the existing nextStep function
+        nextStep();
+      }, delay);
+    }
+
+    // Clean up timer on unmount or when dependencies change
+    return () => {
+      if (autoPlayTimerRef.current) {
+        clearTimeout(autoPlayTimerRef.current);
+      }
+    };
+  }, [autoPlay, animationInProgress, currentSlide, currentStep, maxSteps, nextStep, autoPlayTimers]);
 
   // Method for slides to register their max steps and animation duration
   const registerSlideSteps = (steps, animationDuration) => {
@@ -109,39 +206,6 @@ function App() {
     }
   }, [currentStep]);
 
-  const nextStep = useCallback(() => {
-    if (currentStep < maxSteps) {
-      // If we have more steps in the current slide, go to next step
-      setCurrentStep(currentStep + 1);
-    } else if (currentSlide < totalSlides - 1) {
-      // If we're at the last step of the current slide, go to the next slide
-      setCurrentSlide(currentSlide + 1);
-      // Step will be reset to 1 in the useEffect
-    }
-  }, [currentStep, maxSteps, currentSlide, totalSlides]);
-
-  const prevStep = useCallback(() => {
-    if (currentStep > 1) {
-      // If we're not at the first step, go to previous step
-      setCurrentStep(currentStep - 1);
-    } else if (currentSlide > 0) {
-      // If we're at the first step of the current slide, go to the previous slide
-      goingBackRef.current = true;
-      setCurrentSlide(currentSlide - 1);
-      
-      // Use the stored max steps for the previous slide
-      const prevSlideMaxSteps = slideMaxStepsRef.current[currentSlide - 1] || 1;
-      setMaxSteps(prevSlideMaxSteps);
-      setCurrentStep(prevSlideMaxSteps);
-    }
-  }, [currentStep, currentSlide]);
-
-  // Add goHome function to return to the first slide
-  const goHome = useCallback(() => {
-    setCurrentSlide(0);
-    setCurrentStep(1);
-  }, []);
-
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'ArrowRight' || e.key === ' ') {
       e.preventDefault();
@@ -155,7 +219,12 @@ function App() {
       e.preventDefault();
       goHome();
     }
-  }, [nextStep, prevStep, goHome]);
+    // Add 'a' key to toggle auto-play
+    if (e.key === 'a') {
+      e.preventDefault();
+      toggleAutoPlay();
+    }
+  }, [nextStep, prevStep, goHome, toggleAutoPlay]);
 
   // Add global keyboard listener
   useEffect(() => {
@@ -241,27 +310,69 @@ function App() {
           bottom: '20px',
           left: '10%',
           zIndex: 100,
-          background: 'var(--jiboni-gradient)',
-          borderRadius: '30px',
-          padding: '8px 15px',
-          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
+          display: 'flex',
+          gap: '8px'
         }}
       >
-        <NavigationButton
-          onClick={goHome}
-          title="Home"
+        <div
+          style={{
+            background: 'var(--jiboni-gradient)',
+            borderRadius: '20px',
+            padding: '4px 8px',
+            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
+          }}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
-            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
-          </svg>
-        </NavigationButton>
+          <NavigationButton
+            onClick={goHome}
+            title="Home"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+              <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+            </svg>
+          </NavigationButton>
+        </div>
+        
+        {/* Auto-play toggle button */}
+        <div
+          style={{
+            background: 'var(--jiboni-gradient)',
+            borderRadius: '20px',
+            padding: '4px 8px',
+            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
+          }}
+        >
+          <NavigationButton
+            onClick={toggleAutoPlay}
+            title={autoPlay ? "Pause auto-play (A)" : "Start auto-play (A)"}
+          >
+            {autoPlay ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+              </svg>
+            )}
+          </NavigationButton>
+        </div>
       </div>
       
       {/* Debug info - only shown when debug mode is enabled */}
       {debugMode && (
-        <div style={{ position: 'fixed', bottom: '20px', left: 'calc(10% + 120px)', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
-          Step: {currentStep}/{maxSteps} (Slide: {currentSlide + 1})
+        <div style={{ 
+          position: 'fixed', 
+          bottom: '20px', 
+          right: '20px',
+          fontSize: '12px', 
+          color: 'rgba(255,255,255,0.5)',
+          background: 'var(--jiboni-dark)',
+          padding: '4px 8px',
+          borderRadius: '4px',
+          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
+        }}>
+          Step: {currentStep}/{maxSteps} (Slide: {currentSlide + 1}) {autoPlay ? "| Auto" : "| Manual"}
         </div>
       )}
     </div>

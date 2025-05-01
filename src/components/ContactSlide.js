@@ -31,7 +31,7 @@ function ContactSlide({ registerSlideSteps, businessNameCapitalized, businessNam
     },
     {
       icon: "📱",
-      value: "+1 (555) 123-4567",
+      value: "+44 (208) 123-4225",
       delay: 3.5
     },
     {
