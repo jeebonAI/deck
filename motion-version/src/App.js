@@ -76,10 +76,15 @@ function App() {
       <AnimatePresence mode="wait">
         <motion.div
           key={`slide-${currentSlide}`}
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -100 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 25,
+            duration: 0.5
+          }}
           className="slide-container"
         >
           {renderSlide()}
