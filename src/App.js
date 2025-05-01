@@ -22,12 +22,20 @@ function App() {
   const [currentStep, setCurrentStep] = useState(1);
   const [maxSteps, setMaxSteps] = useState(1);
   const [animationInProgress, setAnimationInProgress] = useState(true);
+  const [debugMode, setDebugMode] = useState(false);
   const totalSlides = 11; // Based on short-version.md
   
   // Flag to track if we're going back to previous slide
   const goingBackRef = useRef(false);
   // Store max steps for each slide
   const slideMaxStepsRef = useRef({});
+
+  // Check for debug mode in URL on component mount
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const debug = urlParams.get('debug');
+    setDebugMode(debug === '1');
+  }, []);
 
   // Animation timers for different slides - wrapped in useMemo to avoid recreating on every render
   const animationTimers = useMemo(() => ({
@@ -212,7 +220,15 @@ function App() {
         </motion.div>
       </AnimatePresence>
       
-      {/* Home button at bottom left, aligned with slide edge */}
+      {/* Navigation Instructions */}
+      <NavigationInstructions 
+        currentSlide={currentSlide}
+        animationInProgress={animationInProgress}
+        onPrev={prevStep}
+        onNext={nextStep}
+      />
+      
+      {/* Home button at bottom left */}
       <motion.button
         whileHover={{ scale: 1.05, backgroundColor: 'rgba(69, 104, 220, 0.9)' }}
         whileTap={{ scale: 0.95 }}
@@ -220,7 +236,7 @@ function App() {
         style={{
           position: 'fixed',
           bottom: '20px',
-          left: '5%', // Position at 5% from left edge to align with slide
+          left: '10%', // Moved from 5% to 10% to give more space
           backgroundColor: 'rgba(69, 104, 220, 0.7)',
           color: 'white',
           border: 'none',
@@ -243,18 +259,12 @@ function App() {
         </svg>
       </motion.button>
       
-      {/* Navigation instructions component with clickable buttons */}
-      <NavigationInstructions 
-        currentSlide={currentSlide} 
-        animationInProgress={animationInProgress}
-        onPrev={prevStep}
-        onNext={nextStep}
-      />
-      
-      {/* Debug info - moved to align with home button */}
-      <div style={{ position: 'fixed', bottom: '20px', left: 'calc(5% + 50px)', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
-        Step: {currentStep}/{maxSteps} (Slide: {currentSlide + 1})
-      </div>
+      {/* Debug info - only shown when debug mode is enabled */}
+      {debugMode && (
+        <div style={{ position: 'fixed', bottom: '20px', left: 'calc(10% + 60px)', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
+          Step: {currentStep}/{maxSteps} (Slide: {currentSlide + 1})
+        </div>
+      )}
     </div>
   );
 }

@@ -25,8 +25,8 @@ function NavigationInstructions({ currentSlide, animationInProgress, onPrev, onN
           style={{
             position: 'fixed',
             bottom: '20px',
-            left: '50%',
-            transform: 'translateX(-50%)', // Center horizontally
+            left: '45%', // Moved slightly to the left from center
+            transform: 'translateX(-50%)',
             display: 'flex',
             gap: '15px',
             padding: '8px 15px',
@@ -49,18 +49,20 @@ function NavigationInstructions({ currentSlide, animationInProgress, onPrev, onN
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '8px',
               background: 'transparent',
               border: 'none',
               color: 'white',
               padding: '8px 12px',
               borderRadius: '20px',
               cursor: 'pointer',
-              transition: 'background-color 0.2s'
+              transition: 'background-color 0.2s',
+              fontFamily: 'monospace',
+              fontWeight: 'bold',
+              fontSize: '1.2rem'
             }}
+            title="Previous"
           >
-            <span style={{ fontFamily: 'monospace', fontWeight: 'bold' }}>&lt;</span>
-            <span>Previous</span>
+            &lt;
           </motion.button>
 
           {/* Next button */}
@@ -83,9 +85,10 @@ function NavigationInstructions({ currentSlide, animationInProgress, onPrev, onN
               cursor: 'pointer',
               transition: 'background-color 0.2s'
             }}
+            title="Next (Space)"
           >
-            <span>Next</span>
-            <span style={{ fontFamily: 'monospace', fontWeight: 'bold' }}>Space / &gt;</span>
+            <span style={{ fontSize: '0.8rem', opacity: 0.8 }}>Space</span>
+            <span style={{ fontFamily: 'monospace', fontWeight: 'bold', fontSize: '1.2rem' }}>&gt;</span>
           </motion.button>
         </motion.div>
       )}
