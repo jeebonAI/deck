@@ -23,22 +23,37 @@
       <!-- Problem Slide -->
       <section>
         <h2>The Problem</h2>
-        <div class="problem-container">
-          <div class="fragment fade-in">
-            <h3>Digital Overload</h3>
-            <p>We're drowning in apps and platforms</p>
-            <div class="app-icons">
-              <img src="images/app-icons.svg" alt="App icons" class="icon-grid">
+        <div class="problems-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; width: 100%; max-width: 1000px; margin: 0 auto;">
+          <div class="problem-item fragment fade-up">
+            <div class="problem-header">
+              <div class="problem-icon">🔌</div>
+              <h3 class="problem-title">Digital Disconnect</h3>
             </div>
+            <p class="problem-description">Most of today's digital apps are moving us to a superficial world disconnecting us more and more from the real world.</p>
           </div>
-          <div class="fragment fade-in">
-            <h3>The Result</h3>
-            <ul>
-              <li>Fragmented communication</li>
-              <li>Lost context</li>
-              <li>Superficial connections</li>
-              <li>Scattered memories</li>
-            </ul>
+          
+          <div class="problem-item fragment fade-up">
+            <div class="problem-header">
+              <div class="problem-icon">📱</div>
+              <h3 class="problem-title">Passive Consumption</h3>
+            </div>
+            <p class="problem-description">Algorithmic timelines designed to maximize engagement time can trap us into passive consumption, losing valuable time and reduced productivity.</p>
+          </div>
+          
+          <div class="problem-item fragment fade-up">
+            <div class="problem-header">
+              <div class="problem-icon">🧩</div>
+              <h3 class="problem-title">Fragmented Histories</h3>
+            </div>
+            <p class="problem-description">Personal memories, family narratives, group histories, and even important communications are easily lost, scattered across platforms.</p>
+          </div>
+          
+          <div class="problem-item fragment fade-up">
+            <div class="problem-header">
+              <div class="problem-icon">👥</div>
+              <h3 class="problem-title">Difficult Group Management</h3>
+            </div>
+            <p class="problem-description">Organizing communications within distinct groups is cumbersome leading to losing important real world connections forever.</p>
           </div>
         </div>
       </section>
@@ -46,33 +61,42 @@
       <!-- Solution Slide -->
       <section>
         <h2>Our Solution: Jiboni</h2>
-        <div class="solution-container">
-          <div class="fragment fade-up">
-            <h3>Unified Mobile App</h3>
-            <p>One hub for your digital life story</p>
-          </div>
-          <div class="four-pillars">
-            <div class="pillar fragment fade-up" data-fragment-index="1">
+        <div class="four-pillars" style="margin: 0 auto;">
+          <div class="pillar fragment fade-up">
+            <div class="pillar-header">
               <div class="pillar-icon">💬</div>
               <h4>Communicate</h4>
-              <p>Secure, contextual chat/calls</p>
             </div>
-            <div class="pillar fragment fade-up" data-fragment-index="2">
-              <div class="pillar-icon">🔄</div>
+            <p>Secure, contextual chat/calls that enhance real-world connections</p>
+          </div>
+          
+          <div class="pillar fragment fade-up">
+            <div class="pillar-header">
+              <div class="pillar-icon">⭕</div>
               <h4>Connect (Circles)</h4>
-              <p>Manage diverse groups with privacy</p>
             </div>
-            <div class="pillar fragment fade-up" data-fragment-index="3">
+            <p>Manage diverse groups with privacy and control over communication flow</p>
+          </div>
+          
+          <div class="pillar fragment fade-up">
+            <div class="pillar-header">
               <div class="pillar-icon">🌳</div>
               <h4>Cherish (Trees)</h4>
-              <p>Collaborative family legacy</p>
             </div>
-            <div class="pillar fragment fade-up" data-fragment-index="4">
+            <p>Preserving family legacy through collaborative trees</p>
+          </div>
+          
+          <div class="pillar fragment fade-up">
+            <div class="pillar-header">
               <div class="pillar-icon">🧠</div>
               <h4>Curate (AI)</h4>
-              <p>Enhance real-world connections</p>
             </div>
+            <p>Capture important moments with AI-enabled storage/retrieval that enhances real connections</p>
           </div>
+        </div>
+        
+        <div class="fragment fade-up" style="margin-top: 2rem; padding: 1rem 2rem; background: rgba(69, 104, 220, 0.15); border-radius: 12px; text-align: center; max-width: 80%; margin: 2rem auto 0;">
+          <p style="font-weight: bold;">A unified platform that enhances real-world connections, not passive scrolling</p>
         </div>
       </section>
 
@@ -131,18 +155,57 @@
         <p class="fragment fade-in">Target ARPPU: ~$60/year</p>
       </section>
 
-      <!-- Financial Projections -->
+      <!-- Traction & Milestones -->
       <section>
-        <h2>Financial Projections</h2>
-        <div class="chart-container">
-          <canvas id="financialChart"></canvas>
+        <h2>Traction & Milestones</h2>
+        <div class="timeline">
+          <div class="milestone fragment fade-up">
+            <h4>Q3 2023</h4>
+            <p>Concept Development</p>
+          </div>
+          <div class="milestone fragment fade-up">
+            <h4>Q4 2023</h4>
+            <p>Initial Prototype</p>
+          </div>
+          <div class="milestone fragment fade-up">
+            <h4>Q1 2024</h4>
+            <p>Alpha Testing</p>
+          </div>
+          <div class="milestone fragment fade-up">
+            <h4>Q2 2024</h4>
+            <p>Beta Launch</p>
+          </div>
+          <div class="milestone fragment fade-up">
+            <h4>Q3 2024</h4>
+            <p>Public Launch</p>
+          </div>
         </div>
-        <div class="financial-highlights fragment fade-in">
-          <p>Year 1: Development (10k MAU)</p>
-          <p>Year 2: Monetization ($27k Revenue)</p>
-          <p>Year 3: Growth (200k MAU)</p>
-          <p>Year 4: Profitability ($412k Net)</p>
-          <p>Year 5: Scale (1.5M MAU, $1.6M Net)</p>
+      </section>
+
+      <!-- Team -->
+      <section>
+        <h2>Our Team</h2>
+        <div class="team-grid">
+          <div class="team-member fragment fade-up">
+            <div class="member-photo" style="background-color: rgba(69, 104, 220, 0.2);"></div>
+            <h3>Nayeem Syed</h3>
+            <p>Founder & CEO</p>
+          </div>
+          <div class="team-member fragment fade-up">
+            <div class="member-photo" style="background-color: rgba(69, 104, 220, 0.2);"></div>
+            <h3>John Doe</h3>
+            <p>CTO</p>
+          </div>
+          <div class="team-member fragment fade-up">
+            <div class="member-photo" style="background-color: rgba(69, 104, 220, 0.2);"></div>
+            <h3>Jane Smith</h3>
+            <p>Product Manager</p>
+          </div>
+          <div class="team-member fragment fade-up">
+            <div class="member-photo" style="background-color: rgba(69, 104, 220, 0.2);"></div>
+            <h3>Emily Johnson</h3>
+            <p>UI/UX Designer</p>
+          </div>
         </div>
       </section>
 
