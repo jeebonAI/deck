@@ -92,9 +92,13 @@ function App() {
       </AnimatePresence>
 
       <div className="navigation">
-        <button onClick={(e) => { e.stopPropagation(); prevSlide(); }}>Previous</button>
+        <button onClick={(e) => { e.stopPropagation(); prevSlide(); }} title="Previous slide">
+          ←
+        </button>
         <span>{currentSlide + 1} / {totalSlides}</span>
-        <button onClick={(e) => { e.stopPropagation(); nextSlide(); }}>Next</button>
+        <button onClick={(e) => { e.stopPropagation(); nextSlide(); }} title="Next slide">
+          →
+        </button>
       </div>
     </div>
   );

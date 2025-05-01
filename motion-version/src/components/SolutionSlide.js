@@ -1,118 +1,158 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function SolutionSlide() {
-  const pillars = [
+  const [currentStep, setCurrentStep] = useState(1); // Start with heading visible
+  
+  const solutions = [
     {
       title: "Communicate",
-      description: "Secure, contextual chat/calls within groups",
-      icon: "💬",
-      delay: 1.0
+      description: "Seamless and secure communication mediums.",
+      icon: "💬"
     },
     {
       title: "Connect (Circles)",
-      description: "Manage diverse groups with granular privacy",
-      icon: "🔄",
-      delay: 2.5
+      description: "Control over privacy and communication flow",
+      icon: "⭕"
     },
     {
       title: "Cherish (Trees)",
-      description: "Collaborative family legacy building",
-      icon: "🌳",
-      delay: 4.0
+      description: "Preserving family legacy through collaborative trees",
+      icon: "🌳"
     },
     {
-      title: "Curate (AI)",
-      description: "Capture memories; AI enhances real-world connection",
-      icon: "✨",
-      delay: 5.5
+      title: "Curate (Memory & AI)",
+      description: "Capture important moments with AI-enabled storage/retrieval that enhances real connections",
+      icon: "🧠"
     }
   ];
 
+  // Set up keyboard handler to advance steps
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Space or right arrow key advances the slide
+      if (e.code === 'Space' || e.code === 'ArrowRight') {
+        if (currentStep < solutions.length + 2) {
+          setCurrentStep(currentStep + 1);
+          e.preventDefault(); // Prevent default scrolling behavior
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentStep, solutions.length]);
+
   return (
     <div className="slide solution-slide">
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Our Solution: Jiboni
-      </motion.h2>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.7, delay: 0.3 }}
-        style={{ textAlign: 'center', marginBottom: '2rem' }}
-      >
-        <h3>Unified Mobile App</h3>
-        <p>One hub for your digital life story ("Jiboni")</p>
-      </motion.div>
+      <AnimatePresence>
+        {currentStep >= 1 && (
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            style={{ marginBottom: '2rem' }}
+          >
+            Our Solution: Jiboni
+          </motion.h2>
+        )}
+      </AnimatePresence>
 
       <div
-        className="flex-container"
-        style={{ flexWrap: 'wrap', justifyContent: 'center' }}
+        className="solutions-grid"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '1.5rem',
+          width: '100%',
+          maxWidth: '1000px',
+          margin: '0 auto'
+        }}
       >
-        {pillars.map((pillar, index) => (
-          <motion.div
-            key={index}
-            className="card"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 20,
-              delay: pillar.delay
-            }}
-            whileHover={{
-              y: -10,
-              boxShadow: "0 15px 30px rgba(0, 0, 0, 0.2)"
-            }}
-            style={{
-              width: '22%',
-              minWidth: '200px',
-              textAlign: 'center',
-              position: 'relative'
-            }}
-          >
-
-            <motion.div
-              className="icon"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 15,
-                delay: pillar.delay + 0.1
-              }}
-              style={{ fontSize: '2.5rem', marginBottom: '1rem' }}
-            >
-              {pillar.icon}
-            </motion.div>
-            <h4>{pillar.title}</h4>
-            <p style={{ fontSize: '1rem' }}>{pillar.description}</p>
-          </motion.div>
+        {solutions.map((solution, index) => (
+          <AnimatePresence key={index}>
+            {currentStep >= index + 2 && (
+              <motion.div
+                className="solution-card"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  ease: "easeOut"
+                }}
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  borderRadius: '12px',
+                  padding: '1.5rem',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'center',
+                  marginBottom: '1rem'
+                }}>
+                  <div style={{ 
+                    fontSize: '2rem', 
+                    marginRight: '1rem',
+                    width: '50px',
+                    height: '50px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(69, 104, 220, 0.2)',
+                    borderRadius: '50%'
+                  }}>
+                    {solution.icon}
+                  </div>
+                  <h3 style={{ 
+                    color: 'var(--jiboni-accent)',
+                    fontSize: '1.4rem'
+                  }}>
+                    {solution.title}
+                  </h3>
+                </div>
+                <p style={{ 
+                  fontSize: '1.1rem',
+                  lineHeight: '1.5',
+                  flex: 1
+                }}>
+                  {solution.description}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         ))}
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 7.0 }}
-        style={{
-          marginTop: '2rem',
-          padding: '1rem 2rem',
-          background: 'rgba(69, 104, 220, 0.15)',
-          borderRadius: '12px',
-          textAlign: 'center',
-          maxWidth: '80%'
-        }}
-      >
-        <h3 style={{ color: 'var(--jiboni-primary)' }}>Core Value</h3>
-        <p>Requires inviting your network = built-in growth</p>
-      </motion.div>
+      <AnimatePresence>
+        {currentStep >= solutions.length + 2 && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            style={{
+              marginTop: '2rem',
+              padding: '1rem 2rem',
+              background: 'rgba(69, 104, 220, 0.15)',
+              borderRadius: '12px',
+              textAlign: 'center',
+              maxWidth: '80%',
+              alignSelf: 'center',
+              margin: '2rem auto 0'
+            }}
+          >
+            <p style={{ fontWeight: 'bold' }}>
+              A unified platform that enhances real-world connections, not passive scrolling
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

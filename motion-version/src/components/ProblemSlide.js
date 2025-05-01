@@ -1,127 +1,156 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function ProblemSlide() {
-  // App icons for illustration
-  const AppIcon = ({ name, color, delay }) => (
-    <motion.div
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 20,
-        delay: delay
-      }}
-      whileHover={{ scale: 1.1, rotate: 5 }}
-      style={{
-        width: '40px',
-        height: '40px',
-        borderRadius: '10px',
-        backgroundColor: color,
-        margin: '0 5px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: 'white',
-        fontWeight: 'bold',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
-      }}
-    >
-      {name.charAt(0)}
-    </motion.div>
-  );
-
-  const resultItems = [
-    "Fragmented communication",
-    "Lost context",
-    "Superficial connections",
-    "Scattered memories"
+  const [currentStep, setCurrentStep] = useState(1); // Start with heading visible
+  
+  // Define the key problems with titles, descriptions, and icons
+  const problemItems = [
+    {
+      title: "Digital Disconnect",
+      description: "Most of today's digital apps are moving us to a superficial world disconnecting us more and more from the real world.",
+      icon: "🔌"
+    },
+    {
+      title: "Passive Consumption",
+      description: "Algorithmic timelines designed to maximize engagement time can trap us into passive consumption, losing valuable time and reduced protuctivity.",
+      icon: "📱"
+    },
+    {
+      title: "Fragmented Histories",
+      description: "Personal memories, family narratives, group histories, and even important communications are easily lost, scattered across platforms, leading to a fading of personal and collective memory.",
+      icon: "🧩"
+    },
+    {
+      title: "Difficult Group Management",
+      description: "Organizing communications within distinct groups (family, friends, work teams, hobby clubs, community etc) is cumbersome leading to losing important real world connections forever.",
+      icon: "👥"
+    }
   ];
+
+  // Set up keyboard handler to advance steps
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Space or right arrow key advances the slide
+      if (e.code === 'Space' || e.code === 'ArrowRight') {
+        if (currentStep < problemItems.length + 1) {
+          setCurrentStep(currentStep + 1);
+          e.preventDefault(); // Prevent default scrolling behavior
+        } else {
+          // Move to next slide when all elements are revealed
+          const nextButton = document.querySelector('.navigation button:last-of-type');
+          if (nextButton) {
+            nextButton.click();
+            e.preventDefault();
+          }
+        }
+      }
+      
+      // Left arrow key goes back a step
+      if (e.code === 'ArrowLeft') {
+        if (currentStep > 1) {
+          setCurrentStep(currentStep - 1);
+          e.preventDefault();
+        } else {
+          // Move to previous slide when at first step
+          const prevButton = document.querySelector('.navigation button:first-of-type');
+          if (prevButton) {
+            prevButton.click();
+            e.preventDefault();
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentStep, problemItems.length]);
 
   return (
     <div className="slide problem-slide">
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        The Problem
-      </motion.h2>
+      <AnimatePresence>
+        {currentStep >= 1 && (
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            style={{ marginBottom: '2rem' }}
+          >
+            The Problem
+          </motion.h2>
+        )}
+      </AnimatePresence>
 
-      <div className="flex-container" style={{ marginTop: '2rem' }}>
-        <motion.div
-          className="card"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 20,
-            delay: 1.0
-          }}
-          style={{ flex: 1 }}
-        >
-          <h3>Digital Overload</h3>
-          <p>We're drowning in apps (WhatsApp, Slack, Facebook, etc.)</p>
-          <div style={{
-            marginTop: '1.5rem',
-            display: 'flex',
-            justifyContent: 'center'
-          }}>
-            <AppIcon name="WhatsApp" color="#25D366" delay={1.5} />
-            <AppIcon name="Slack" color="#4A154B" delay={1.7} />
-            <AppIcon name="Facebook" color="#1877F2" delay={1.9} />
-            <AppIcon name="Instagram" color="#E1306C" delay={2.1} />
-            <AppIcon name="Twitter" color="#1DA1F2" delay={2.3} />
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="card"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 20,
-            delay: 2.8
-          }}
-          style={{ flex: 1 }}
-        >
-          <h3>The Result</h3>
-          <ul style={{ paddingLeft: '1.5rem', marginTop: '1rem' }}>
-            {resultItems.map((item, index) => (
-              <motion.li
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 3.3 + (index * 0.5) }}
-                style={{ marginBottom: '0.8rem' }}
-              >
-                {item}
-              </motion.li>
-            ))}
-          </ul>
-        </motion.div>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 5.5 }}
+      <div
+        className="problems-grid"
         style={{
-          marginTop: '2rem',
-          padding: '1rem 2rem',
-          background: 'rgba(255, 126, 95, 0.15)',
-          borderRadius: '12px',
-          textAlign: 'center',
-          maxWidth: '80%'
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '1.5rem',
+          width: '100%',
+          maxWidth: '1000px',
+          margin: '0 auto'
         }}
       >
-        <h3 style={{ color: 'var(--jiboni-accent)' }}>The Need</h3>
-        <p>A unified platform for meaningful connection, privacy, and organization.</p>
-      </motion.div>
+        {problemItems.map((item, index) => (
+          <AnimatePresence key={index}>
+            {currentStep >= index + 2 && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.8, 
+                  ease: "easeOut"
+                }}
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  borderRadius: '12px',
+                  padding: '1.5rem',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'center',
+                  marginBottom: '1rem'
+                }}>
+                  <div style={{ 
+                    fontSize: '2rem', 
+                    marginRight: '1rem',
+                    width: '50px',
+                    height: '50px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(255, 126, 95, 0.2)',
+                    borderRadius: '50%'
+                  }}>
+                    {item.icon}
+                  </div>
+                  <h3 style={{ 
+                    color: 'var(--jiboni-accent)',
+                    fontSize: '1.4rem'
+                  }}>
+                    {item.title}
+                  </h3>
+                </div>
+                <p style={{ 
+                  fontSize: '1.1rem',
+                  lineHeight: '1.5',
+                  flex: 1
+                }}>
+                  {item.description}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        ))}
+      </div>
     </div>
   );
 }

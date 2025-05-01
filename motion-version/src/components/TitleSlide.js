@@ -19,7 +19,7 @@ function TitleSlide() {
           transition={{ duration: 0.8, delay: 0.3 }}
           style={{ fontSize: '5rem' }}
         >
-          Jiboni
+          jeeboni
         </motion.h1>
 
         <motion.h3
@@ -28,7 +28,7 @@ function TitleSlide() {
           transition={{ duration: 0.8, delay: 0.6 }}
           style={{ color: 'var(--jiboni-light)', textAlign: 'center', fontSize: '2.2rem', marginTop: '1rem' }}
         >
-          Connect, Communicate, Cherish, Curate
+          Communicate, Connect, Cherish, Curate
         </motion.h3>
 
         <motion.div
