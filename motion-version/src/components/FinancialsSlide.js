@@ -199,10 +199,10 @@ function FinancialsSlide() {
                 fontSize: '0.7rem',
                 color: 'rgba(255, 255, 255, 0.7)'
               }}>
-                <div style={{ position: 'absolute', top: '15%', right: '5px' }}>$2M</div>
-                <div style={{ position: 'absolute', top: '32%', right: '5px' }}>$1M</div>
-                <div style={{ position: 'absolute', top: '50%', right: '5px' }}>$0</div>
-                <div style={{ position: 'absolute', top: '70%', right: '5px' }}>-$1M</div>
+                <div style={{ position: 'absolute', top: '15%', right: '5px', marginTop: '-10px' }}>$2M</div>
+                <div style={{ position: 'absolute', top: '32%', right: '5px', marginTop: '-10px' }}>$1M</div>
+                <div style={{ position: 'absolute', top: '50%', right: '5px', marginTop: '-10px' }}>$0</div>
+                <div style={{ position: 'absolute', top: '70%', right: '5px', marginTop: '-10px' }}>-$1M</div>
               </div>
 
               {/* Horizontal guide lines */}
@@ -213,7 +213,7 @@ function FinancialsSlide() {
                 top: '15%',
                 height: '1px',
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                zIndex: 1
+                zIndex: 0
               }} />
               <div style={{
                 position: 'absolute',
@@ -222,7 +222,7 @@ function FinancialsSlide() {
                 top: '32%',
                 height: '1px',
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                zIndex: 1
+                zIndex: 0
               }} />
               <div style={{
                 position: 'absolute',
@@ -231,7 +231,7 @@ function FinancialsSlide() {
                 top: '50%',
                 height: '1px',
                 backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                zIndex: 1
+                zIndex: 0
               }} />
               <div style={{
                 position: 'absolute',
@@ -240,7 +240,7 @@ function FinancialsSlide() {
                 top: '70%',
                 height: '1px',
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                zIndex: 1
+                zIndex: 0
               }} />
               
               {/* Chart area */}
