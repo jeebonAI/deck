@@ -61,14 +61,18 @@ function FinancialsSlide() {
               flexDirection: 'column'
             }}
           >
-            <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>EOY MAU</h3>
+            <h3 style={{ 
+              marginBottom: '0.5rem', 
+              fontSize: '1rem',
+              textAlign: 'center' 
+            }}>EOY MAU</h3>
             
             <div style={{ 
               flex: 1,
               position: 'relative',
               padding: '0 10px'
             }}>
-              {/* Y-axis labels */}
+              {/* Y-axis labels for MAU chart */}
               <div style={{ 
                 position: 'absolute', 
                 left: 0, 
@@ -83,9 +87,10 @@ function FinancialsSlide() {
                 fontSize: '0.7rem',
                 color: 'rgba(255, 255, 255, 0.7)'
               }}>
-                <div>1.5M</div>
-                <div>750K</div>
-                <div>0</div>
+                <div style={{ position: 'absolute', top: '0%', right: '5px' }}>1.5M</div>
+                <div style={{ position: 'absolute', top: '33%', right: '5px', marginTop: '-10px' }}>1M</div>
+                <div style={{ position: 'absolute', top: '66%', right: '5px', marginTop: '-10px' }}>500K</div>
+                <div style={{ position: 'absolute', bottom: '0%', right: '5px', marginBottom: '5px' }}>0</div>
               </div>
               
               {/* Chart area */}
@@ -168,20 +173,24 @@ function FinancialsSlide() {
               flexDirection: 'column'
             }}
           >
-            <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Revenue, Costs & Net Profit</h3>
+            <h3 style={{ 
+              marginBottom: '0.5rem', 
+              fontSize: '1rem',
+              textAlign: 'center'
+            }}>Revenue, Costs & Net Profit</h3>
             
             <div style={{ 
               flex: 1,
               position: 'relative',
               padding: '0 10px'
             }}>
-              {/* Y-axis labels */}
+              {/* Y-axis labels for Revenue & Costs chart */}
               <div style={{ 
                 position: 'absolute', 
                 left: 0, 
                 top: 0, 
                 bottom: 0, 
-                width: '40px',
+                width: '50px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -190,29 +199,56 @@ function FinancialsSlide() {
                 fontSize: '0.7rem',
                 color: 'rgba(255, 255, 255, 0.7)'
               }}>
-                <div>$2.6M</div>
-                <div>$1.3M</div>
-                <div>$0</div>
-                <div>-$1.3M</div>
+                <div style={{ position: 'absolute', top: '15%', right: '5px' }}>$2M</div>
+                <div style={{ position: 'absolute', top: '32%', right: '5px' }}>$1M</div>
+                <div style={{ position: 'absolute', top: '50%', right: '5px' }}>$0</div>
+                <div style={{ position: 'absolute', top: '70%', right: '5px' }}>-$1M</div>
               </div>
-              
-              {/* Zero line */}
+
+              {/* Horizontal guide lines */}
               <div style={{
                 position: 'absolute',
-                left: '40px',
+                left: '50px',
                 right: '10px',
-                top: '50%', // Position at the $0 mark (changed from 66.7% to 50%)
+                top: '15%',
+                height: '1px',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                zIndex: 1
+              }} />
+              <div style={{
+                position: 'absolute',
+                left: '50px',
+                right: '10px',
+                top: '32%',
+                height: '1px',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                zIndex: 1
+              }} />
+              <div style={{
+                position: 'absolute',
+                left: '50px',
+                right: '10px',
+                top: '50%',
                 height: '1px',
                 backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                zIndex: 1
+              }} />
+              <div style={{
+                position: 'absolute',
+                left: '50px',
+                right: '10px',
+                top: '70%',
+                height: '1px',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
                 zIndex: 1
               }} />
               
               {/* Chart area */}
               <div style={{ 
-                marginLeft: '40px', 
+                marginLeft: '50px', 
                 height: '100%', 
                 display: 'flex',
-                gap: '25px' // Increased gap between year columns
+                gap: '25px'
               }}>
                 {years.map((year, index) => (
                   <div 
@@ -486,109 +522,171 @@ function FinancialsSlide() {
           >
             <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Key Metrics</h3>
             
-            {/* Key metrics content */}
+            {/* Key metrics content - now in 2 columns */}
             <div style={{ 
               display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: 'calc(100% - 30px)'
+              flexDirection: 'row',
+              height: 'calc(100% - 30px)',
+              gap: '15px'
             }}>
-              {/* User Growth */}
-              <div>
-                <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>User Growth</div>
-                <div style={{ 
-                  display: 'flex',
-                  alignItems: 'center',
-                  height: '16px'
-                }}>
-                  <div style={{ width: '35px', fontSize: '0.7rem' }}>10K</div>
+              {/* Left column */}
+              <div style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}>
+                {/* User Growth */}
+                <div>
+                  <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>User Growth</div>
                   <div style={{ 
-                    flex: 1,
-                    height: '6px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    borderRadius: '3px',
-                    overflow: 'hidden'
+                    display: 'flex',
+                    alignItems: 'center',
+                    height: '16px'
                   }}>
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: '100%' }}
-                      transition={{ duration: 1.5, delay: 1 }}
-                      style={{ 
-                        height: '100%',
-                        backgroundColor: 'rgba(111, 116, 217, 0.8)',
-                        borderRadius: '3px'
-                      }}
-                    />
+                    <div style={{ width: '35px', fontSize: '0.7rem' }}>10K</div>
+                    <div style={{ 
+                      flex: 1,
+                      height: '6px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      borderRadius: '3px',
+                      overflow: 'hidden'
+                    }}>
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: '100%' }}
+                        transition={{ duration: 1.5, delay: 1 }}
+                        style={{ 
+                          height: '100%',
+                          backgroundColor: 'rgba(111, 116, 217, 0.8)',
+                          borderRadius: '3px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ width: '35px', fontSize: '0.7rem', textAlign: 'right' }}>1.5M</div>
                   </div>
-                  <div style={{ width: '35px', fontSize: '0.7rem', textAlign: 'right' }}>1.5M</div>
+                </div>
+                
+                {/* Premium Conversion Rate and ARPPU side by side */}
+                <div style={{
+                  display: 'flex',
+                  gap: '10px'
+                }}>
+                  {/* Premium Conversion */}
+                  <div style={{ flex: 1 }}>
+                    <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>Premium Conversion</div>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '30px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      borderRadius: '4px',
+                      fontSize: '0.9rem'
+                    }}>
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: 1.2 }}
+                      >
+                        3% <span style={{ fontSize: '0.7rem', opacity: 0.8 }}>(>10k users)</span>
+                      </motion.span>
+                    </div>
+                  </div>
+                  
+                  {/* ARPPU */}
+                  <div style={{ flex: 1 }}>
+                    <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>ARPPU</div>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '30px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      borderRadius: '4px',
+                      fontSize: '0.9rem',
+                      fontWeight: 'bold'
+                    }}>
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: 1.4 }}
+                      >
+                        $60/year ($5/month)
+                      </motion.span>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              {/* Conversion Rate */}
-              <div>
-                <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>Conversion Rate</div>
-                <div style={{ 
-                  display: 'flex',
-                  alignItems: 'center',
-                  height: '16px'
-                }}>
-                  <div style={{ width: '35px', fontSize: '0.7rem' }}>0%</div>
+              {/* Right column */}
+              <div style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}>
+                {/* Churn Rate Visualization */}
+                <div>
+                  <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>Annual Churn Rate</div>
                   <div style={{ 
-                    flex: 1,
-                    height: '6px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    borderRadius: '3px',
-                    overflow: 'hidden'
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    height: '30px'
                   }}>
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: '60%' }}
-                      transition={{ duration: 1.5, delay: 1.2 }}
-                      style={{ 
-                        height: '100%',
-                        backgroundColor: 'var(--jiboni-primary)',
-                        borderRadius: '3px'
-                      }}
-                    />
+                    {[0, 5, 10, 15, 15].map((rate, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          width: '18%'
+                        }}
+                      >
+                        <div style={{
+                          width: '100%',
+                          height: '6px',
+                          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                          borderRadius: '3px',
+                          overflow: 'hidden'
+                        }}>
+                          <div style={{
+                            width: `${rate}%`,
+                            height: '100%',
+                            backgroundColor: 'rgba(255, 193, 7, 0.8)',
+                            borderRadius: '3px'
+                          }} />
+                        </div>
+                        <div style={{ fontSize: '0.65rem', marginTop: '2px' }}>
+                          {`Y${index+1}: ${rate}%`}
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-                  <div style={{ width: '35px', fontSize: '0.7rem', textAlign: 'right' }}>5-10%</div>
-                </div>
-              </div>
-              
-              {/* Break-even Point */}
-              <div>
-                <div style={{ marginBottom: '0.25rem', fontSize: '0.8rem' }}>Break-even Point</div>
-                <div style={{ 
-                  display: 'flex',
-                  alignItems: 'center',
-                  height: '16px'
-                }}>
-                  <div style={{ width: '35px', fontSize: '0.7rem' }}>Y1</div>
-                  <div style={{ 
-                    flex: 1,
-                    height: '6px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    borderRadius: '3px',
-                    overflow: 'hidden'
-                  }}>
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: '66%' }}
-                      transition={{ duration: 1.5, delay: 1.4 }}
-                      style={{ 
-                        height: '100%',
-                        backgroundColor: 'rgba(46, 213, 115, 0.8)', // Green for break-even
-                        borderRadius: '3px'
-                      }}
-                    />
-                  </div>
-                  <div style={{ width: '35px', fontSize: '0.7rem', textAlign: 'right' }}>Y3</div>
                 </div>
               </div>
             </div>
+            
+            {/* Additional note at the bottom */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 2 }}
+              style={{
+                fontSize: '0.7rem',
+                color: 'rgba(255, 255, 255, 0.7)',
+                marginTop: '5px',
+                textAlign: 'center'
+              }}
+            >
+              Costs increase with development, monetization & growth investments
+            </motion.div>
           </motion.div>
-          
-          <div style={{ flex: 2, marginLeft: '0.5rem' }}></div>
         </div>
       </div>
     </div>
