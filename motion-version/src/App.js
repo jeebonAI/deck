@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 
@@ -17,59 +17,55 @@ import ContactSlide from './components/ContactSlide';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [maxSteps, setMaxSteps] = useState(1);
   const totalSlides = 11; // Based on short-version.md
   
-  // Create a ref to track the current slide's internal state
-  const slideStateRef = React.useRef({
-    currentStep: 1,
-    maxSteps: 1
-  });
+  // Flag to track if we're going back to previous slide
+  const goingBackRef = useRef(false);
 
-  const nextSlide = () => {
-    if (currentSlide < totalSlides - 1) {
-      setCurrentSlide(currentSlide + 1);
-      // Reset step counter when changing slides
-      slideStateRef.current = { currentStep: 1, maxSteps: 1 };
-    }
+  // Method for slides to register their max steps
+  const registerSlideSteps = (steps) => {
+    setMaxSteps(steps);
+    console.log(`Slide registered ${steps} steps`);
   };
 
-  const prevSlide = () => {
-    if (currentSlide > 0) {
-      setCurrentSlide(currentSlide - 1);
-      // Reset step counter when changing slides
-      slideStateRef.current = { currentStep: 1, maxSteps: 1 };
+  // Reset step and maxSteps when changing slides
+  useEffect(() => {
+    // Reset to first step when changing slides (unless going back)
+    if (!goingBackRef.current) {
+      setCurrentStep(1);
+      setMaxSteps(1); // Reset maxSteps until the new slide registers
     }
-  };
+    goingBackRef.current = false;
+  }, [currentSlide]);
 
   const nextStep = () => {
-    const { currentStep, maxSteps } = slideStateRef.current;
     if (currentStep < maxSteps) {
-      slideStateRef.current.currentStep += 1;
-      // Dispatch a custom event that slides can listen for
-      document.dispatchEvent(new CustomEvent('slideStepChange', { 
-        detail: { step: slideStateRef.current.currentStep } 
-      }));
-    } else {
-      nextSlide();
+      // If we have more steps in the current slide, go to next step
+      setCurrentStep(currentStep + 1);
+    } else if (currentSlide < totalSlides - 1) {
+      // If we're at the last step of the current slide, go to the next slide
+      setCurrentSlide(currentSlide + 1);
+      // Step will be reset to 1 in the useEffect
     }
   };
 
   const prevStep = () => {
-    const { currentStep } = slideStateRef.current;
     if (currentStep > 1) {
-      slideStateRef.current.currentStep -= 1;
-      // Dispatch a custom event that slides can listen for
-      document.dispatchEvent(new CustomEvent('slideStepChange', { 
-        detail: { step: slideStateRef.current.currentStep } 
-      }));
-    } else {
-      prevSlide();
+      // If we're not at the first step, go to previous step
+      setCurrentStep(currentStep - 1);
+    } else if (currentSlide > 0) {
+      // If we're at the first step of the current slide, go to the previous slide
+      goingBackRef.current = true;
+      setCurrentSlide(currentSlide - 1);
+      
+      // We need to wait for the previous slide to register its maxSteps
+      setTimeout(() => {
+        // Now set currentStep to maxSteps to show all content
+        setCurrentStep(maxSteps);
+      }, 100);
     }
-  };
-
-  // Method for slides to register their max steps
-  const registerSlideSteps = (maxSteps) => {
-    slideStateRef.current.maxSteps = maxSteps;
   };
 
   const handleKeyDown = (e) => {
@@ -89,12 +85,15 @@ function App() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentSlide]); // Re-add when slide changes
+  }, [currentSlide, currentStep, maxSteps]); // Re-add when slide or step changes
 
   // Render the appropriate slide based on currentSlide
   const renderSlide = () => {
-    // Pass the registerSlideSteps function to each slide component
-    const props = { registerSlideSteps };
+    // Pass the registerSlideSteps function and currentStep to each slide component
+    const props = { 
+      registerSlideSteps,
+      currentStep
+    };
     
     switch (currentSlide) {
       case 0:
@@ -161,6 +160,11 @@ function App() {
         }} title="Next step">
           →
         </button>
+      </div>
+      
+      {/* Debug info */}
+      <div style={{ position: 'fixed', bottom: '10px', left: '10px', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
+        Step: {currentStep}/{maxSteps}
       </div>
     </div>
   );

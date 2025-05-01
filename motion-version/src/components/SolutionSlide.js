@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-function SolutionSlide() {
-  const [currentStep, setCurrentStep] = useState(1); // Start with heading visible
-  
+function SolutionSlide({ registerSlideSteps, currentStep }) {
   const solutions = [
     {
       title: "Communicate",
@@ -27,24 +25,10 @@ function SolutionSlide() {
     }
   ];
 
-  // Set up keyboard handler to advance steps
+  // Register the total number of steps for this slide
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      // Space or right arrow key advances the slide
-      if (e.code === 'Space' || e.code === 'ArrowRight') {
-        if (currentStep < solutions.length + 2) {
-          setCurrentStep(currentStep + 1);
-          e.preventDefault(); // Prevent default scrolling behavior
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [currentStep, solutions.length]);
+    registerSlideSteps(solutions.length + 2); // +1 for heading, +1 for final message
+  }, [registerSlideSteps, solutions.length]);
 
   return (
     <div className="slide solution-slide">

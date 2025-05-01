@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-function ProblemSlide({ registerSlideSteps }) {
-  const [currentStep, setCurrentStep] = useState(1); // Start with heading visible
-  
+function ProblemSlide({ registerSlideSteps, currentStep }) {
   // Define the key problems with titles, descriptions, and icons
   const problemItems = [
     {
@@ -32,19 +30,6 @@ function ProblemSlide({ registerSlideSteps }) {
   useEffect(() => {
     registerSlideSteps(problemItems.length + 1); // +1 for the heading
   }, [registerSlideSteps, problemItems.length]);
-
-  // Listen for step changes from the App component
-  useEffect(() => {
-    const handleStepChange = (e) => {
-      setCurrentStep(e.detail.step);
-    };
-    
-    document.addEventListener('slideStepChange', handleStepChange);
-    
-    return () => {
-      document.removeEventListener('slideStepChange', handleStepChange);
-    };
-  }, []);
 
   return (
     <div className="slide problem-slide">
