@@ -6,19 +6,19 @@ function TractionSlide({ registerSlideSteps, currentStep }) {
     {
       title: "Product Development",
       status: "In Progress",
-      percentage: 65,
+      percentage: 15,
       color: "var(--jiboni-primary)"
     },
     {
       title: "User Testing",
       status: "Starting",
-      percentage: 25,
+      percentage: 5,
       color: "var(--jiboni-secondary)"
     },
     {
       title: "Partnerships",
       status: "Exploring",
-      percentage: 40,
+      percentage: 20,
       color: "var(--jiboni-accent)"
     },
     {
@@ -162,7 +162,7 @@ function TractionSlide({ registerSlideSteps, currentStep }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             style={{ 
-              padding: '0.8rem 1.2rem',
+              padding: '1.2rem 1.5rem',
               background: 'rgba(255, 255, 255, 0.08)',
               borderRadius: '10px',
               textAlign: 'center',
@@ -170,8 +170,32 @@ function TractionSlide({ registerSlideSteps, currentStep }) {
               margin: '0 auto'
             }}
           >
-            <h3 style={{ marginBottom: '0.3rem', fontSize: '1.1rem', color: '#b388ff' }}>Next Steps</h3>
-            <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.4' }}>Complete MVP development, launch beta with initial user group, and secure seed funding</p>
+            <h3 style={{ marginBottom: '0.8rem', fontSize: '1.1rem', color: '#b388ff' }}>Next Steps</h3>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {[
+                "Complete MVP development",
+                "Launch beta with initial user group",
+                "Secure seed funding"
+              ].map((step, index) => (
+                <motion.p
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    duration: 0.4, 
+                    delay: 0.5 + (index * 1.2) // Much longer delay between items (1.2s)
+                  }}
+                  style={{ 
+                    margin: 0, 
+                    fontSize: '0.9rem', 
+                    lineHeight: '1.4'
+                  }}
+                >
+                  {step}
+                </motion.p>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -6,10 +6,10 @@ function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapit
     {
       title: "Free Core",
       items: [
-        "Essential communication",
+        "Essential Communication",
         "Circles",
-        "Trees",
-        "Memory features"
+        "AI/Memory features",
+        "Trees / Legacy Building"
       ],
       footer: "FREE FOREVER",
       background: "rgba(255, 255, 255, 0.05)",

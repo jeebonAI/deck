@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) {
   // Define the number of steps for this slide
-  const totalSteps = 7; // 1 for heading, 1 for funding amount, 1 for "Use of Funds" title + first item, 3 for remaining fund use items, 1 for achieve box
+  const totalSteps = 4; // 1 for heading, 1 for funding amount, 1 for "Use of Funds" section, 1 for achieve box
   
   // Register the total number of steps for this slide
   useEffect(() => {
@@ -83,7 +83,7 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) 
         alignItems: 'flex-start'
       }}>
         <div style={{ 
-          width: currentStep >= 7 ? '65%' : '100%',
+          width: currentStep >= 4 ? '65%' : '100%',
           transition: 'width 0.5s ease'
         }}>
           <AnimatePresence>
@@ -98,114 +98,69 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) 
                   Use of Funds
                 </motion.h3>
                 
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5 }}
-                  style={{ 
-                    marginBottom: '1rem',
-                    display: 'flex',
-                    alignItems: 'center'
-                  }}
-                >
-                  <div style={{ 
-                    width: '60px',
-                    fontSize: '1.1rem',
-                    fontWeight: '500',
-                    paddingRight: '0.5rem'
-                  }}>
-                    {fundUse[0].percentage}%
-                  </div>
-                  
-                  <div style={{ flex: 1 }}>
+                {fundUse.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: 1.0 + (index * 1.2) // Longer initial delay (1.0s) and longer between items (1.2s)
+                    }}
+                    style={{ 
+                      marginBottom: '1rem',
+                      display: 'flex',
+                      alignItems: 'center'
+                    }}
+                  >
                     <div style={{ 
-                      height: '10px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                      borderRadius: '5px',
-                      overflow: 'hidden'
+                      width: '60px',
+                      fontSize: '1.1rem',
+                      fontWeight: '500',
+                      paddingRight: '0.5rem'
                     }}>
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${fundUse[0].percentage}%` }}
-                        transition={{ duration: 1 }}
-                        style={{ 
-                          height: '100%',
-                          backgroundColor: fundUse[0].color,
-                          borderRadius: '5px'
-                        }}
-                      />
+                      {item.percentage}%
                     </div>
-                  </div>
-                  
-                  <div style={{ 
-                    width: '200px',
-                    paddingLeft: '0.5rem',
-                    fontSize: '1rem'
-                  }}>
-                    {fundUse[0].category}
-                  </div>
-                </motion.div>
+                    
+                    <div style={{ flex: 1 }}>
+                      <div style={{ 
+                        height: '10px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        borderRadius: '5px',
+                        overflow: 'hidden'
+                      }}>
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${item.percentage}%` }}
+                          transition={{ 
+                            duration: 1,
+                            delay: 1.0 + (index * 1.2) // Match the delay of the parent
+                          }}
+                          style={{ 
+                            height: '100%',
+                            backgroundColor: item.color,
+                            borderRadius: '5px'
+                          }}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div style={{ 
+                      width: '200px',
+                      paddingLeft: '0.5rem',
+                      fontSize: '1rem'
+                    }}>
+                      {item.category}
+                    </div>
+                  </motion.div>
+                ))}
               </>
             )}
           </AnimatePresence>
-          
-          {fundUse.slice(1).map((item, index) => (
-            <AnimatePresence key={index}>
-              {currentStep >= index + 4 && (
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5 }}
-                  style={{ 
-                    marginBottom: '1rem',
-                    display: 'flex',
-                    alignItems: 'center'
-                  }}
-                >
-                  <div style={{ 
-                    width: '60px',
-                    fontSize: '1.1rem',
-                    fontWeight: '500',
-                    paddingRight: '0.5rem'
-                  }}>
-                    {item.percentage}%
-                  </div>
-                  
-                  <div style={{ flex: 1 }}>
-                    <div style={{ 
-                      height: '10px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                      borderRadius: '5px',
-                      overflow: 'hidden'
-                    }}>
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${item.percentage}%` }}
-                        transition={{ duration: 1 }}
-                        style={{ 
-                          height: '100%',
-                          backgroundColor: item.color,
-                          borderRadius: '5px'
-                        }}
-                      />
-                    </div>
-                  </div>
-                  
-                  <div style={{ 
-                    width: '200px',
-                    paddingLeft: '0.5rem',
-                    fontSize: '1rem'
-                  }}>
-                    {item.category}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          ))}
         </div>
         
         <AnimatePresence>
-          {currentStep >= 7 && (
+          {currentStep >= 4 && (
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -221,26 +176,47 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) 
                 boxShadow: '0 4px 15px rgba(46, 213, 115, 0.1)' // Subtle green glow
               }}
             >
-              <h4 style={{ 
-                margin: '0.25rem 0 0.75rem', 
-                fontSize: '1.2rem',
-                color: 'rgba(46, 213, 115, 0.9)' // Green tint to heading
-              }}>
+              <motion.h4
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                style={{ 
+                  margin: '0.25rem 0 0.75rem', 
+                  fontSize: '1.2rem',
+                  color: 'rgba(46, 213, 115, 0.9)' // Green tint to heading
+                }}
+              >
                 Achieve
-              </h4>
-              <ul style={{ 
+              </motion.h4>
+              <div style={{ 
                 margin: '0.5rem 0', 
                 padding: 0,
                 fontSize: '0.95rem', 
                 lineHeight: '1.8',
-                listStyleType: 'none'
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.5rem'
               }}>
-                <li>Launch</li>
-                <li>10k MAU</li>
-                <li>Validate Model</li>
-                <li>Initiate AI</li>
-                <li>Prepare for Scale</li>
-              </ul>
+                {[
+                  "Launch",
+                  "10k MAU",
+                  "Validate Model",
+                  "Initiate AI",
+                  "Prepare for Scale"
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: 1.0 + (index * 1.2) // 1.0s initial delay + 1.2s between items
+                    }}
+                  >
+                    {item}
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
