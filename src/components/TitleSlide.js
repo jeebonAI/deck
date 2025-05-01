@@ -5,8 +5,8 @@ import StylizedBusinessName from './StylizedBusinessName';
 function TitleSlide({ registerSlideSteps, currentStep, businessName }) {
   // Register the total number of steps for this slide and custom animation duration
   useEffect(() => {
-    // Register 2 steps with a custom animation duration of 7000ms
-    registerSlideSteps(2, 7000);
+    // Register 1 step with a custom animation duration of 7000ms
+    registerSlideSteps(1, 7000);
   }, [registerSlideSteps]);
 
   // Handle keyboard events

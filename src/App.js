@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
-import { BUSINESS_NAME, BUSINESS_NAME_CAPITALIZED } from './constants';
+import { BUSINESS_NAME, BUSINESS_NAME_CAPITALIZED, APP_VERSION } from './constants';
 
 // Import slide components
 import TitleSlide from './components/TitleSlide';
@@ -16,6 +16,7 @@ import FinancialsSlide from './components/FinancialsSlide';
 import AskSlide from './components/AskSlide';
 import ContactSlide from './components/ContactSlide';
 import NavigationInstructions from './components/NavigationInstructions';
+import NavigationButton from './components/NavigationButton';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -29,6 +30,11 @@ function App() {
   const goingBackRef = useRef(false);
   // Store max steps for each slide
   const slideMaxStepsRef = useRef({});
+
+  // Set document title on mount
+  useEffect(() => {
+    document.title = `${BUSINESS_NAME_CAPITALIZED} Pitch Deck ${APP_VERSION}`;
+  }, []);
 
   // Check for debug mode in URL on component mount
   useEffect(() => {
@@ -229,39 +235,32 @@ function App() {
       />
       
       {/* Home button at bottom left */}
-      <motion.button
-        whileHover={{ scale: 1.05, backgroundColor: 'rgba(69, 104, 220, 0.9)' }}
-        whileTap={{ scale: 0.95 }}
-        onClick={goHome}
+      <div
         style={{
           position: 'fixed',
           bottom: '20px',
-          left: '10%', // Moved from 5% to 10% to give more space
-          backgroundColor: 'rgba(69, 104, 220, 0.7)',
-          color: 'white',
-          border: 'none',
-          padding: '8px',
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          cursor: 'pointer',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
-          zIndex: 100
+          left: '10%',
+          zIndex: 100,
+          background: 'var(--jiboni-gradient)',
+          borderRadius: '30px',
+          padding: '8px 15px',
+          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
         }}
-        title="Home"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
-          <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
-        </svg>
-      </motion.button>
+        <NavigationButton
+          onClick={goHome}
+          title="Home"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+          </svg>
+        </NavigationButton>
+      </div>
       
       {/* Debug info - only shown when debug mode is enabled */}
       {debugMode && (
-        <div style={{ position: 'fixed', bottom: '20px', left: 'calc(10% + 60px)', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
+        <div style={{ position: 'fixed', bottom: '20px', left: 'calc(10% + 120px)', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
           Step: {currentStep}/{maxSteps} (Slide: {currentSlide + 1})
         </div>
       )}
