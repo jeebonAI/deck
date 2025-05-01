@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 import { BUSINESS_NAME, BUSINESS_NAME_CAPITALIZED } from './constants';
@@ -15,17 +15,27 @@ import TeamSlide from './components/TeamSlide';
 import FinancialsSlide from './components/FinancialsSlide';
 import AskSlide from './components/AskSlide';
 import ContactSlide from './components/ContactSlide';
+import NavigationInstructions from './components/NavigationInstructions';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
   const [maxSteps, setMaxSteps] = useState(1);
+  const [animationInProgress, setAnimationInProgress] = useState(true);
   const totalSlides = 11; // Based on short-version.md
   
   // Flag to track if we're going back to previous slide
   const goingBackRef = useRef(false);
   // Store max steps for each slide
   const slideMaxStepsRef = useRef({});
+
+  // Animation timers for different slides - wrapped in useMemo to avoid recreating on every render
+  const animationTimers = useMemo(() => ({
+    0: 7000, // Title slide (longer animations)
+    1: 3000, // Problem slide
+    2: 3000, // Solution slide
+    default: 2000 // Default for other slides
+  }), []);
 
   // Method for slides to register their max steps
   const registerSlideSteps = (steps) => {
@@ -48,7 +58,30 @@ function App() {
       }
     }
     goingBackRef.current = false;
-  }, [currentSlide]);
+    
+    // Set animation in progress when slide changes
+    setAnimationInProgress(true);
+    
+    // Clear animation in progress after slide-specific delay
+    const animationDelay = animationTimers[currentSlide] || animationTimers.default;
+    const timer = setTimeout(() => {
+      setAnimationInProgress(false);
+    }, animationDelay);
+    
+    return () => clearTimeout(timer);
+  }, [currentSlide, animationTimers]);
+
+  // Set animation in progress when step changes within a slide
+  useEffect(() => {
+    if (currentStep > 1) {
+      setAnimationInProgress(true);
+      const timer = setTimeout(() => {
+        setAnimationInProgress(false);
+      }, 1000); // Default 1 second for step animations
+      
+      return () => clearTimeout(timer);
+    }
+  }, [currentStep]);
 
   const nextStep = useCallback(() => {
     if (currentStep < maxSteps) {
@@ -77,6 +110,12 @@ function App() {
     }
   }, [currentStep, currentSlide]);
 
+  // Add goHome function to return to the first slide
+  const goHome = useCallback(() => {
+    setCurrentSlide(0);
+    setCurrentStep(1);
+  }, []);
+
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'ArrowRight' || e.key === ' ') {
       e.preventDefault();
@@ -86,7 +125,11 @@ function App() {
       e.preventDefault();
       prevStep();
     }
-  }, [nextStep, prevStep]);
+    if (e.key === 'Home') {
+      e.preventDefault();
+      goHome();
+    }
+  }, [nextStep, prevStep, goHome]);
 
   // Add global keyboard listener
   useEffect(() => {
@@ -156,35 +199,48 @@ function App() {
           {renderSlide()}
         </motion.div>
       </AnimatePresence>
-
-      <div className="navigation">
-        <button onClick={(e) => { 
-          e.stopPropagation();
-          setCurrentSlide(0);
-          setCurrentStep(1);
-        }} title="Home">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
-            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
-          </svg>
-        </button>
-        <button onClick={(e) => { 
-          e.stopPropagation();
-          prevStep();
-        }} title="Previous step">
-          ←
-        </button>
-        <span>{currentSlide + 1} / {totalSlides}</span>
-        <button onClick={(e) => { 
-          e.stopPropagation();
-          nextStep();
-        }} title="Next step">
-          →
-        </button>
-      </div>
       
-      {/* Debug info */}
-      <div style={{ position: 'fixed', bottom: '10px', left: '10px', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
+      {/* Home button at bottom left, aligned with slide edge */}
+      <motion.button
+        whileHover={{ scale: 1.05, backgroundColor: 'rgba(69, 104, 220, 0.9)' }}
+        whileTap={{ scale: 0.95 }}
+        onClick={goHome}
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          left: '5%', // Position at 5% from left edge to align with slide
+          backgroundColor: 'rgba(69, 104, 220, 0.7)',
+          color: 'white',
+          border: 'none',
+          padding: '8px',
+          width: '40px',
+          height: '40px',
+          borderRadius: '50%',
+          cursor: 'pointer',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+          zIndex: 100
+        }}
+        title="Home"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+          <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+        </svg>
+      </motion.button>
+      
+      {/* Navigation instructions component with clickable buttons */}
+      <NavigationInstructions 
+        currentSlide={currentSlide} 
+        animationInProgress={animationInProgress}
+        onPrev={prevStep}
+        onNext={nextStep}
+      />
+      
+      {/* Debug info - moved to align with home button */}
+      <div style={{ position: 'fixed', bottom: '20px', left: 'calc(5% + 50px)', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
         Step: {currentStep}/{maxSteps} (Slide: {currentSlide + 1})
       </div>
     </div>
