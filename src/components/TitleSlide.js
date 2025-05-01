@@ -48,6 +48,28 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName }) {
           />
         </div>
 
+        {/* Updated tagline with handwriting font and green color */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 0.6, 
+            delay: 1.5
+          }}
+          style={{ 
+            textAlign: 'center',
+            fontSize: '2.5rem',
+            fontWeight: 400,
+            margin: '1.5rem 0',
+            padding: '0.8rem 2rem',
+            fontFamily: "'Caveat', cursive", // Handwriting font
+            color: '#4CAF50', // Green color
+            alignSelf: 'center'
+          }}
+        >
+          The story of your life
+        </motion.div>
+
         <div style={{ 
           display: 'flex', 
           justifyContent: 'center', 
@@ -62,7 +84,7 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ 
                 duration: 0.6, 
-                delay: 1.2 + (index * 1.0) // Logo first, then words with 1.0s delay between each
+                delay: 2.8 + (index * 1.0)
               }}
               style={{ 
                 display: 'flex',
@@ -76,7 +98,7 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName }) {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ 
                   duration: 0.5, 
-                  delay: 1.2 + (index * 1.0) - 0.2, // Appear slightly before the text
+                  delay: 2.8 + (index * 1.0) - 0.2,
                   type: "spring",
                   stiffness: 300,
                   damping: 15
