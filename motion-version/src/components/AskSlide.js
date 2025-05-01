@@ -64,7 +64,7 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) 
             }}
           >
             <h3 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
-              <span style={{ color: 'var(--jiboni-accent)' }}>$250,000 - $500,000</span>
+              <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$250,000 - $500,000</span>
             </h3>
             <p style={{ fontSize: '1.3rem', margin: '0.5rem 0' }}>Pre-Seed Funding</p>
             <p style={{ fontSize: '1.1rem', opacity: 0.9, margin: '0.5rem 0' }}>
