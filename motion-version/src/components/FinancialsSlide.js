@@ -212,7 +212,7 @@ function FinancialsSlide() {
                 marginLeft: '40px', 
                 height: '100%', 
                 display: 'flex',
-                gap: '15px'
+                gap: '25px' // Increased gap between year columns
               }}>
                 {years.map((year, index) => (
                   <div 
@@ -235,11 +235,11 @@ function FinancialsSlide() {
                     }}>
                       {/* Revenue bar (positive) */}
                       <div style={{ 
-                        width: '25%', 
-                        height: '50%', // Changed from 66.7% to 50%
+                        width: '18%', // Reduced from 20% to 18%
+                        height: '50%',
                         position: 'absolute',
                         top: 0,
-                        left: '15%',
+                        left: '20%', // Adjusted from 18% to 20%
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'flex-end'
@@ -250,79 +250,75 @@ function FinancialsSlide() {
                           transition={{ duration: 1, delay: 1.0 + index * 0.2 }}
                           style={{ 
                             width: '100%', 
-                            backgroundColor: 'var(--jiboni-primary)', // Purple color for revenue
+                            backgroundColor: 'var(--jiboni-primary)',
                             borderRadius: '4px 4px 0 0'
                           }}
                         />
-                        {revenue[index] > 0 && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 1.6 + index * 0.1 }}
-                            style={{
-                              position: 'absolute',
-                              bottom: `${Math.max((revenue[index] / maxFinancial) * 100, 1)}%`,
-                              transform: 'translateY(-100%)',
-                              width: '100%',
-                              textAlign: 'center',
-                              fontSize: '0.5rem', // Smaller font size
-                              color: 'rgba(255, 255, 255, 0.9)',
-                              marginBottom: '2px'
-                            }}
-                          >
-                            {formatNumber(revenue[index])}
-                          </motion.div>
-                        )}
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.5, delay: 1.6 + index * 0.1 }}
+                          style={{
+                            position: 'absolute',
+                            bottom: `${Math.max((revenue[index] / maxFinancial) * 100, 1)}%`,
+                            transform: 'translateY(-100%)',
+                            width: '100%',
+                            textAlign: 'center',
+                            fontSize: '0.45rem',
+                            color: 'rgba(255, 255, 255, 0.9)',
+                            marginBottom: '2px'
+                          }}
+                        >
+                          {formatNumber(revenue[index])}
+                        </motion.div>
                       </div>
                       
                       {/* Costs bar (negative) */}
                       <div style={{ 
-                        width: '25%', 
-                        height: '50%', // Changed from 33.3% to 50%
+                        width: '18%', // Reduced from 20% to 18%
+                        height: '50%',
                         position: 'absolute',
-                        top: '50%', // Changed from 66.7% to 50%
-                        left: '40%',
+                        top: '50%',
+                        left: '41%', // Adjusted from 42% to 41%
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'flex-start'
                       }}>
                         <motion.div
                           initial={{ height: 0 }}
-                          animate={{ height: `${Math.max((costs[index] / maxFinancial) * 100, 1)}%` }} // Changed from 50 to 100
+                          animate={{ height: `${Math.max((costs[index] / maxFinancial) * 100, 1)}%` }}
                           transition={{ duration: 1, delay: 1.2 + index * 0.2 }}
                           style={{ 
                             width: '100%', 
-                            backgroundColor: 'rgba(255, 99, 71, 0.7)', // Red color for costs
+                            backgroundColor: 'rgba(255, 193, 7, 0.8)', // Changed from red to yellow
                             borderRadius: '0 0 4px 4px'
                           }}
                         />
-                        {costs[index] > 0 && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 1.6 + index * 0.1 }}
-                            style={{
-                              position: 'absolute',
-                              top: `${Math.max((costs[index] / maxFinancial) * 100, 1)}%`, // Changed from 50 to 100
-                              width: '100%',
-                              textAlign: 'center',
-                              fontSize: '0.5rem', // Smaller font size
-                              color: 'rgba(255, 255, 255, 0.9)',
-                              marginTop: '2px'
-                            }}
-                          >
-                            -{formatNumber(costs[index])}
-                          </motion.div>
-                        )}
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.5, delay: 1.6 + index * 0.1 }}
+                          style={{
+                            position: 'absolute',
+                            top: `${Math.max((costs[index] / maxFinancial) * 100, 1)}%`,
+                            width: '100%',
+                            textAlign: 'center',
+                            fontSize: '0.45rem',
+                            color: 'rgba(255, 255, 255, 0.9)',
+                            marginTop: '2px'
+                          }}
+                        >
+                          -{formatNumber(costs[index])}
+                        </motion.div>
                       </div>
                       
                       {/* Net Profit bar */}
                       <div style={{ 
-                        width: '25%', 
+                        width: '18%', // Reduced from 20% to 18%
                         height: '100%', 
                         position: 'absolute',
                         top: 0,
-                        right: '15%',
+                        right: '20%', // Adjusted from 18% to 20%
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center'
@@ -330,7 +326,7 @@ function FinancialsSlide() {
                         {netProfit[index] >= 0 ? (
                           <div style={{ 
                             width: '100%',
-                            height: '50%', // Changed from 66.7% to 50%
+                            height: '50%',
                             position: 'absolute',
                             top: 0,
                             display: 'flex',
@@ -343,68 +339,64 @@ function FinancialsSlide() {
                               transition={{ duration: 1, delay: 1.4 + index * 0.2 }}
                               style={{ 
                                 width: '100%', 
-                                backgroundColor: 'rgba(46, 213, 115, 0.8)', // Green for profit
+                                backgroundColor: 'rgba(46, 213, 115, 0.8)',
                                 borderRadius: '4px 4px 0 0'
                               }}
                             />
-                            {netProfit[index] > 0 && (
-                              <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.5, delay: 1.6 + index * 0.1 }}
-                                style={{
-                                  position: 'absolute',
-                                  bottom: `${Math.max((netProfit[index] / maxFinancial) * 100, 1)}%`,
-                                  transform: 'translateY(-100%)',
-                                  width: '100%',
-                                  textAlign: 'center',
-                                  fontSize: '0.5rem', // Smaller font size
-                                  color: 'rgba(255, 255, 255, 0.9)',
-                                  marginBottom: '2px'
-                                }}
-                              >
-                                {formatNumber(netProfit[index])}
-                              </motion.div>
-                            )}
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.5, delay: 1.6 + index * 0.1 }}
+                              style={{
+                                position: 'absolute',
+                                bottom: `${Math.max((netProfit[index] / maxFinancial) * 100, 1)}%`,
+                                transform: 'translateY(-100%)',
+                                width: '100%',
+                                textAlign: 'center',
+                                fontSize: '0.45rem',
+                                color: 'rgba(255, 255, 255, 0.9)',
+                                marginBottom: '2px'
+                              }}
+                            >
+                              {formatNumber(netProfit[index])}
+                            </motion.div>
                           </div>
                         ) : (
                           <div style={{ 
                             width: '100%',
-                            height: '50%', // Changed from 33.3% to 50%
+                            height: '50%',
                             position: 'absolute',
-                            top: '50%', // Changed from 66.7% to 50%
+                            top: '50%',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'flex-start'
                           }}>
                             <motion.div
                               initial={{ height: 0 }}
-                              animate={{ height: `${Math.max((Math.abs(netProfit[index]) / maxFinancial) * 100, 1)}%` }} // Changed from 50 to 100
+                              animate={{ height: `${Math.max((Math.abs(netProfit[index]) / maxFinancial) * 100, 1)}%` }}
                               transition={{ duration: 1, delay: 1.4 + index * 0.2 }}
                               style={{ 
                                 width: '100%', 
-                                backgroundColor: 'rgba(255, 99, 71, 0.7)', // Red for loss
+                                backgroundColor: 'rgba(46, 213, 115, 0.8)',
                                 borderRadius: '0 0 4px 4px'
                               }}
                             />
-                            {netProfit[index] < 0 && (
-                              <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.5, delay: 1.6 + index * 0.1 }}
-                                style={{
-                                  position: 'absolute',
-                                  top: `${Math.max((Math.abs(netProfit[index]) / maxFinancial) * 100, 1)}%`, // Changed from 50 to 100
-                                  width: '100%',
-                                  textAlign: 'center',
-                                  fontSize: '0.5rem', // Smaller font size
-                                  color: 'rgba(255, 255, 255, 0.9)',
-                                  marginTop: '2px'
-                                }}
-                              >
-                                {formatNumber(netProfit[index])}
-                              </motion.div>
-                            )}
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.5, delay: 1.6 + index * 0.1 }}
+                              style={{
+                                position: 'absolute',
+                                top: `${Math.max((Math.abs(netProfit[index]) / maxFinancial) * 100, 1)}%`,
+                                width: '100%',
+                                textAlign: 'center',
+                                fontSize: '0.45rem',
+                                color: 'rgba(255, 255, 255, 0.9)',
+                                marginTop: '2px'
+                              }}
+                            >
+                              {formatNumber(netProfit[index])}
+                            </motion.div>
                           </div>
                         )}
                       </div>
@@ -455,7 +447,7 @@ function FinancialsSlide() {
                 <div style={{ 
                   width: '10px', 
                   height: '10px', 
-                  backgroundColor: 'rgba(255, 99, 71, 0.7)', // Red for costs
+                  backgroundColor: 'rgba(255, 193, 7, 0.8)', // Yellow for costs
                   marginRight: '5px',
                   borderRadius: '2px'
                 }}></div>
