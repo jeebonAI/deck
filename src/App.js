@@ -248,6 +248,21 @@ function App() {
     };
   }, [handleKeyDown]);
 
+  // Add this effect to listen for the PDF generation event
+  useEffect(() => {
+    const handleSetSlideForPDF = (event) => {
+      const { slide } = event.detail;
+      setCurrentSlide(slide);
+      setCurrentStep(1); // Reset to first step
+    };
+    
+    document.addEventListener('setSlideForPDF', handleSetSlideForPDF);
+    
+    return () => {
+      document.removeEventListener('setSlideForPDF', handleSetSlideForPDF);
+    };
+  }, []);
+
   // Render the appropriate slide based on currentSlide
   const renderSlide = () => {
     // Pass the registerSlideSteps function and currentStep to each slide component
