@@ -26,7 +26,7 @@ function App() {
   const [maxSteps, setMaxSteps] = useState(1);
   const [animationInProgress, setAnimationInProgress] = useState(true);
   const [debugMode, setDebugMode] = useState(false);
-  const [autoPlay, setAutoPlay] = useState(true); // New state for auto-play
+  const [autoPlay, setAutoPlay] = useState(false); // Changed from true to false - autoplay off by default
   const autoPlayTimerRef = useRef(null); // Ref to store the timer
   const totalSlides = 13; // Updated from 12 to 13 to include ContactSlide
   
@@ -107,7 +107,7 @@ function App() {
 
   // Animation timers for different slides - wrapped in useMemo to avoid recreating on every render
   const animationTimers = useMemo(() => ({
-    0: 7000, // Title slide (longer animations)
+    0: 4000, // Title slide (reduced from 7000ms to 4000ms)
     1: 3000, // Problem slide
     2: 3000, // Solution slide
     default: 2000 // Default for other slides
@@ -190,12 +190,14 @@ function App() {
     
     // Set animation in progress when slide changes
     setAnimationInProgress(true);
+    console.log(`Animation started for slide ${currentSlide}`);
     
     // Clear animation in progress after slide-specific delay
     const animationDelay = animationTimers[currentSlide] || animationTimers.default;
     
     const timer = setTimeout(() => {
       setAnimationInProgress(false);
+      console.log(`Animation completed for slide ${currentSlide} after ${animationDelay}ms`);
     }, animationDelay);
     
     return () => clearTimeout(timer);

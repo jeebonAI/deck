@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import StylizedBusinessName from './StylizedBusinessName';
 
 function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNameCapitalized }) {
-  // Register the total number of steps for this slide and custom animation duration
+  // Register the total number of steps for this slide and reduce animation duration
   useEffect(() => {
-    // Register 1 step with a custom animation duration of 7000ms
-    registerSlideSteps(1, 7000);
+    // Register 1 step with a shorter animation duration of 4000ms (down from 7000ms)
+    registerSlideSteps(1, 4000);
   }, [registerSlideSteps]);
 
   // Handle keyboard events
