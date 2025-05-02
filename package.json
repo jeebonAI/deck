@@ -20,13 +20,15 @@
   },
   "scripts": {
     "update-version": "node scripts/update-version.js",
-    "prebuild": "npm run update-version",
+    "prebuild": "pnpm run update-version",
     "build": "react-scripts build",
     "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "pdf": "node scripts/generate-pdf.js",
-    "install-browser": "npx puppeteer browsers install chrome",
+    "pptx": "node scripts/generate-pptx.js",
+    "presentation": "pnpm pdf && pnpm pptx",
+    "install-browser": "pnpm dlx puppeteer browsers install chrome",
     "install-chrome-wsl": "sudo apt update && sudo apt install -y chromium-browser",
     "install-chromium": "sudo snap install chromium || sudo apt update && sudo apt install -y chromium-browser"
   },

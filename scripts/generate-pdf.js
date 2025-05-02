@@ -73,11 +73,10 @@ async function generatePDF() {
       // Create a new page for each slide
       const page = await browser.newPage();
       
-      // Set viewport to match presentation dimensions
       await page.setViewport({
-        width: 1280,
-        height: 720,
-        deviceScaleFactor: 1,
+        width: 1920,
+        height: 1080,
+        deviceScaleFactor: 2, // Higher scaling for sharper rendering
       });
       
       // Navigate to the specific slide with PDF mode enabled
@@ -89,11 +88,11 @@ async function generatePDF() {
       // Wait for the page to be fully loaded
       await page.waitForSelector('.slide-container', { timeout: 10000 })
         .catch(() => console.warn('Slide container not found, continuing anyway'));
-      
-      // Add a small delay to ensure everything is rendered
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      // Hide navigation elements and apply PDF styling
+
+      // Add a longer delay to ensure everything is rendered
+      await new Promise(resolve => setTimeout(resolve, 8000));
+
+      // Force complete all animations before capturing
       await page.evaluate(() => {
         // Force hide all navigation elements
         const elementsToHide = document.querySelectorAll('.navigation-button, .navigation-instructions');
@@ -101,7 +100,43 @@ async function generatePDF() {
           if (el) el.style.display = 'none !important';
         });
         
-        // Add inline styles to ensure navigation is hidden
+        // Force all animations to complete for all slides
+        const motionElements = document.querySelectorAll('motion');
+        motionElements.forEach(el => {
+          if (el.style) {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            // Ensure height is explicitly set for chart bars
+            if (el.style.height && el.style.height.includes('%')) {
+              const computedHeight = window.getComputedStyle(el).height;
+              el.style.height = computedHeight;
+              el.style.minHeight = computedHeight;
+            }
+          }
+        });
+        
+        // Fix for all chart containers and elements with height
+        const chartElements = document.querySelectorAll('[style*="height"]');
+        chartElements.forEach(el => {
+          if (el.style && el.style.height) {
+            // Force the height to be explicitly set
+            const computedHeight = window.getComputedStyle(el).height;
+            el.style.height = computedHeight;
+            el.style.minHeight = computedHeight;
+          }
+        });
+        
+        // Fix for all chart containers
+        const chartContainers = document.querySelectorAll('.card, [class*="chart"], [class*="Chart"]');
+        chartContainers.forEach(container => {
+          if (container) {
+            container.style.overflow = 'visible';
+            container.style.height = 'auto';
+            container.style.minHeight = '150px';
+          }
+        });
+        
+        // Add inline styles to ensure proper rendering for all slides
         const style = document.createElement('style');
         style.textContent = `
           .navigation-button, .navigation-instructions { 
@@ -111,6 +146,24 @@ async function generatePDF() {
           }
           body { 
             overflow: hidden !important; 
+          }
+          /* Fix for all charts in PDF mode */
+          .card, [class*="chart"], [class*="Chart"] {
+            overflow: visible !important;
+            height: auto !important;
+            min-height: 150px !important;
+          }
+          motion.div, motion div {
+            opacity: 1 !important;
+            transform: none !important;
+            height: auto !important;
+          }
+          [style*="height"] {
+            min-height: attr(style height) !important;
+          }
+          /* Ensure all chart bars are visible */
+          [style*="height"][style*="%"] {
+            min-height: 5px !important;
           }
         `;
         document.head.appendChild(style);
@@ -124,14 +177,15 @@ async function generatePDF() {
       const screenshotPath = path.join(slidesPdfDir, `slide-${slideIndex}.png`);
       await page.screenshot({ path: screenshotPath, fullPage: true });
       
-      // Create PDF for this slide
+      // Create PDF for this slide with adjusted settings
       const slidePdfPath = path.join(slidesPdfDir, `slide-${slideIndex}.pdf`);
       await page.pdf({
         path: slidePdfPath,
         format: 'A4',
         landscape: true,
         printBackground: true,
-        margin: { top: '0.4cm', right: '0.4cm', bottom: '0.4cm', left: '0.4cm' }
+        margin: { top: '0.4cm', right: '0.4cm', bottom: '0.4cm', left: '0.4cm' },
+        scale: 0.85 // Scale down slightly more to ensure all content fits
       });
       
       slidePdfPaths.push(slidePdfPath);

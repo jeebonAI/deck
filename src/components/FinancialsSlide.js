@@ -9,6 +9,32 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
     registerSlideSteps(1);
   }, [registerSlideSteps]);
 
+  // Add PDF mode detection and handling
+  useEffect(() => {
+    // Check if we're in PDF mode
+    const isPdfMode = document.body.classList.contains('pdf-mode') || 
+                      new URLSearchParams(window.location.search).get('pdf') === 'true';
+    
+    if (isPdfMode) {
+      // Force all animations to complete immediately
+      const forceAnimationsComplete = setTimeout(() => {
+        const motionElements = document.querySelectorAll('.financials-slide motion');
+        motionElements.forEach(el => {
+          if (el.style) {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            if (el.style.height && el.style.height.includes('%')) {
+              // Ensure height is explicitly set for chart bars
+              el.style.height = el.style.height;
+            }
+          }
+        });
+      }, 1000); // Give a second for initial render
+      
+      return () => clearTimeout(forceAnimationsComplete);
+    }
+  }, []);
+
   // Financial projections visualization
   const years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
   
