@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
 function GoToMarketSlide({ registerSlideSteps, currentStep }) {
   const phases = [
@@ -57,7 +58,9 @@ function GoToMarketSlide({ registerSlideSteps, currentStep }) {
   }, []);
 
   return (
-    <div className="slide gtm-slide">
+    <div className="slide go-to-market-slide">
+      <AnimatedTitleWithUnderline title="Go-To-Market" />
+      
       {currentStep >= 1 && (
         <>
           <motion.h2

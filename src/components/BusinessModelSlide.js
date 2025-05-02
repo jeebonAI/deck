@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
 function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) {
   const tiers = [
@@ -54,13 +55,7 @@ function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapit
     <div className="slide business-model-slide">
       {currentStep >= 1 && (
         <>
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Business Model: Freemium
-          </motion.h2>
+          <AnimatedTitleWithUnderline title="Business Model: Freemium" />
           
           <div className="flex-container" style={{ marginTop: '2rem', alignItems: 'stretch' }}>
             {tiers.map((tier, index) => (

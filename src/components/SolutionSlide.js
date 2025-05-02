@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
 function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalized, businessName }) {
   // Register the total number of steps for this slide
@@ -27,13 +28,7 @@ function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalize
       <AnimatePresence>
         {currentStep >= 1 && (
           <>
-            <motion.h2
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              The Solution
-            </motion.h2>
+            <AnimatedTitleWithUnderline title="The Solution" />
 
             <motion.div
               initial={{ opacity: 0, y: -10 }}

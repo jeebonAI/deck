@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
 function ProblemSlide({ registerSlideSteps, currentStep }) {
   // Add the overall problem statement with bold elements
@@ -13,9 +14,9 @@ function ProblemSlide({ registerSlideSteps, currentStep }) {
     </>
   );
 
-  // Register the total number of steps for this slide
+  // Register just one step for this slide
   useEffect(() => {
-    registerSlideSteps(1); // Combined into a single step
+    registerSlideSteps(1);
   }, [registerSlideSteps]);
 
   // Handle keyboard events
@@ -38,13 +39,7 @@ function ProblemSlide({ registerSlideSteps, currentStep }) {
       <AnimatePresence>
         {currentStep >= 1 && (
           <>
-            <motion.h2
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              The Problem
-            </motion.h2>
+            <AnimatedTitleWithUnderline title="The Problem" />
 
             <motion.div
               initial={{ opacity: 0, y: -10 }}

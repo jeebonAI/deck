@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
 function HowItWorksSlide({ registerSlideSteps, currentStep }) {
   // Register the total number of steps for this slide
@@ -62,14 +63,7 @@ function HowItWorksSlide({ registerSlideSteps, currentStep }) {
 
   return (
     <div className="slide how-it-works-slide">
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        style={{ marginBottom: '1rem' }}
-      >
-        How It Works
-      </motion.h2>
+      <AnimatedTitleWithUnderline title="How It Works" />
 
       <div style={{ 
         display: 'flex', 

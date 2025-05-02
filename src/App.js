@@ -28,7 +28,7 @@ function App() {
   const [debugMode, setDebugMode] = useState(false);
   const [autoPlay, setAutoPlay] = useState(true); // New state for auto-play
   const autoPlayTimerRef = useRef(null); // Ref to store the timer
-  const totalSlides = 11; // Based on short-version.md
+  const totalSlides = 13; // Updated from 12 to 13 to include ContactSlide
   
   // Flag to track if we're going back to previous slide
   const goingBackRef = useRef(false);
@@ -37,16 +37,21 @@ function App() {
 
   // Define nextStep function first to avoid circular dependency
   const nextStep = useCallback(() => {
+    console.log(`nextStep called: currentStep=${currentStep}, maxSteps=${maxSteps}, currentSlide=${currentSlide}, totalSlides=${totalSlides}`);
+    
     if (currentStep < maxSteps) {
       // If we have more steps in the current slide, go to next step
       setCurrentStep(currentStep + 1);
+      console.log(`Advancing to next step: ${currentStep + 1}`);
     } else if (currentSlide < totalSlides - 1) {
       // If we're at the last step of the current slide, go to the next slide
+      console.log(`Advancing to next slide: ${currentSlide + 1}`);
       setCurrentSlide(currentSlide + 1);
       // Step will be reset to 1 in the useEffect
     }
     // If we're at the last step of the last slide, do nothing (stop auto-play)
     else if (autoPlay) {
+      console.log('At last slide and step, turning off autoplay');
       setAutoPlay(false); // Turn off auto-play at the end
     }
   }, [currentStep, maxSteps, currentSlide, totalSlides, autoPlay]);

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import StylizedBusinessName from './StylizedBusinessName';
+import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
 function ContactSlide({ registerSlideSteps, businessNameCapitalized, businessName }) {
   // Register that this slide has only 1 step
@@ -51,12 +51,8 @@ function ContactSlide({ registerSlideSteps, businessNameCapitalized, businessNam
         className="content"
         style={{ textAlign: 'center', zIndex: 1 }}
       >
-        <StylizedBusinessName
-          businessName={businessName}
-          size="large"
-          delay={0.3}
-        />
-
+        <AnimatedTitleWithUnderline title="Contact" />
+        
         <motion.h3
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}

@@ -4,7 +4,7 @@ import NavigationButton from './NavigationButton';
 
 function NavigationInstructions({ currentSlide, animationInProgress, onPrev, onNext }) {
   const [visible, setVisible] = useState(false);
-  const totalSlides = 12; // Updated from 11 to 12 to include the new HowItWorksSlide
+  const totalSlides = 13; // Updated from 12 to 13 to match App.js
   
   // Show instructions when animations complete
   useEffect(() => {
@@ -18,6 +18,9 @@ function NavigationInstructions({ currentSlide, animationInProgress, onPrev, onN
 
   const isFirstSlide = currentSlide === 0;
   const isLastSlide = currentSlide === totalSlides - 1;
+
+  // For debugging
+  console.log(`Current slide: ${currentSlide}, Total slides: ${totalSlides}, Is last slide: ${isLastSlide}`);
 
   return (
     <AnimatePresence>

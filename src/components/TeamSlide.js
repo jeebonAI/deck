@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
 // Import the team member images
 import nayeemImage from '../assets/nayeem.png';
@@ -16,7 +17,8 @@ function TeamSlide({ registerSlideSteps, currentStep }) {
       role: "Founder & CEO",
       points: [
         "30 yrs tech dev (Govt, Fortune 100 & Startups)",
-        "Active AI Engineer since 2003","Built scalable enterprise solutions",
+        "Active AI Engineer since 2003",
+        "Built scalable enterprise solutions",
         "Led multiple successful tech initiatives",
         "commercial real estate professional (UK & US)"
       ],
@@ -27,10 +29,9 @@ function TeamSlide({ registerSlideSteps, currentStep }) {
       name: "Numan Syed",
       role: "Co-Founder & COO",
       points: [
-        "Strong technical background",
-        "Operational management expertise",
-        "Streamlined business processes",
-        "Product development specialist"
+        "United Nations Consultant on Peace Keeping Missions",
+        "10+ Years Management Experience across a wide range of industries",
+        "Product development specialist for well known international brands"
       ],
       image: numanImage
     },
@@ -69,13 +70,7 @@ function TeamSlide({ registerSlideSteps, currentStep }) {
 
   return (
     <div className="slide team-slide">
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Team
-      </motion.h2>
+      <AnimatedTitleWithUnderline title="Team" />
       
       <motion.div
         initial={{ opacity: 0, y: 20 }}

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
 function CompetitorsSlide({ registerSlideSteps, currentStep, businessName }) {
   const competitors = [
@@ -89,13 +90,7 @@ function CompetitorsSlide({ registerSlideSteps, currentStep, businessName }) {
     <div className="slide competitors-slide">
       {currentStep >= 1 && (
         <>
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Competitive Landscape
-          </motion.h2>
+          <AnimatedTitleWithUnderline title="Competitive Landscape" />
           
           <motion.div
             initial={{ opacity: 0, y: -10 }}

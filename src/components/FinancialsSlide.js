@@ -1,8 +1,14 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
-function FinancialsSlide() {
+function FinancialsSlide({ registerSlideSteps, currentStep }) {
+  // Register just one step for this slide
+  useEffect(() => {
+    registerSlideSteps(1);
+  }, [registerSlideSteps]);
+
   // Financial projections visualization
   const years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
   
@@ -30,14 +36,7 @@ function FinancialsSlide() {
 
   return (
     <div className="slide financials-slide">
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        style={{ marginBottom: '0.5rem' }}
-      >
-        Financial Projections
-      </motion.h2>
+      <AnimatedTitleWithUnderline title="Financials" />
       
       <div className="flex-container" style={{ 
         display: 'flex',

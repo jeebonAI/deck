@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
 function MarketSlide({ registerSlideSteps, currentStep }) {
   // Market summary statement
@@ -53,13 +54,7 @@ function MarketSlide({ registerSlideSteps, currentStep }) {
 
   return (
     <div className="slide market-slide">
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Market
-      </motion.h2>
+      <AnimatedTitleWithUnderline title="Market" />
 
       <motion.div
         initial={{ opacity: 0, y: -10 }}
