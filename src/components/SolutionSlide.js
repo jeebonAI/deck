@@ -50,7 +50,7 @@ function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalize
                 padding: '0 1.5rem'
               }}
             >
-              {businessNameCapitalized} is a Personal AI Assistant enabling <strong>AI memory management</strong>, <strong>AI connection management</strong> and <strong>AI family history management</strong>, reducing the need for screentime by leveraging AI indexing and interfaces, <strong>freeing upto 40% of time lost</strong> to regain real world engagement.
+              Jeeboni is a Personal AI Assistant enabling <strong>AI memory management</strong>, <strong>AI connection management</strong> and <strong>AI family history management</strong>, reducing the need for screentime by leveraging AI indexing and interfaces, <strong>freeing upto 40% of time lost</strong> to regain real world engagement.
             </motion.div>
           </>
         )}

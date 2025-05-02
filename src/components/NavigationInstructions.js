@@ -4,7 +4,7 @@ import NavigationButton from './NavigationButton';
 
 function NavigationInstructions({ currentSlide, animationInProgress, onPrev, onNext }) {
   const [visible, setVisible] = useState(false);
-  const totalSlides = 11; // Match the totalSlides from App.js
+  const totalSlides = 12; // Updated from 11 to 12 to include the new HowItWorksSlide
   
   // Show instructions when animations complete
   useEffect(() => {
