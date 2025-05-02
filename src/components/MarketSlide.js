@@ -14,18 +14,21 @@ function MarketSlide({ registerSlideSteps, currentStep }) {
   const marketSegments = [
     {
       title: "TAM",
+      fullTitle: "Total Addressable Market",
       value: "$450M",
       description: "5% of 5 billion social media users at 3% conversion to premium",
       delay: 0.5
     },
     {
       title: "SAM",
+      fullTitle: "Serviceable Addressable Market",
       value: "$4.2M",
       description: "20% of 35M diaspora converting at 3% to premium",
       delay: 0.8
     },
     {
       title: "SOM",
+      fullTitle: "Serviceable Obtainable Market",
       value: "$60K",
       description: "Syed family members 100,000 signups converting at 3% to premium",
       delay: 1.1
@@ -107,14 +110,27 @@ function MarketSlide({ registerSlideSteps, currentStep }) {
           >
             <motion.div
               style={{
-                fontSize: '2.2rem',
-                fontWeight: 'bold',
-                color: 'var(--jiboni-light)',
-                width: '100px',
+                display: 'flex',
+                flexDirection: 'column',
+                width: '180px',
                 flexShrink: 0
               }}
             >
-              {segment.title}
+              <div style={{
+                fontSize: '2.2rem',
+                fontWeight: 'bold',
+                color: 'var(--jiboni-light)'
+              }}>
+                {segment.title}
+              </div>
+              <div style={{
+                fontSize: '0.8rem',
+                color: 'var(--jiboni-light)',
+                opacity: 0.8,
+                marginTop: '-5px'
+              }}>
+                {segment.fullTitle}
+              </div>
             </motion.div>
             
             <motion.div
