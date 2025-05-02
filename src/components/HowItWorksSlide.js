@@ -46,7 +46,7 @@ function HowItWorksSlide({ registerSlideSteps, currentStep }) {
     },
     {
       number: 4,
-      title: "Manage family tree heritage",
+      title: "Manage family tree connections",
       description: "connected tree with the rest of the family",
       delay: 1.2,
       icon: "🌳"
@@ -103,7 +103,7 @@ function HowItWorksSlide({ registerSlideSteps, currentStep }) {
               padding: '1rem 1.5rem'
             }}
           >
-            We are developing <strong>proprietary workflows specific to users</strong> to prompt the most needed information of their connections, memories and legacies through AI at the press of a button.
+            We are developing <strong>proprietary productivity app to users</strong> to prompt the most needed information of their connections, memories and legacies through an intuitive AI interface.
           </motion.div>
           
           {workflowSteps.map((step, index) => (
@@ -172,6 +172,24 @@ function HowItWorksSlide({ registerSlideSteps, currentStep }) {
               </div>
             </motion.div>
           ))}
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 2.0 }}
+            style={{
+              marginBottom: '2rem', 
+              padding: '1rem 1.5rem',
+              borderRadius: '12px',
+              fontSize: '1rem',
+              fontWeight: '500',
+              color: 'var(--jiboni-light)',
+              textAlign: 'center',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+            }}
+          >
+            User saves time on an optimized productivity stack.
+          </motion.div>
         </div>
 
         {/* Right side - App interface mockup */}
@@ -215,7 +233,7 @@ function HowItWorksSlide({ registerSlideSteps, currentStep }) {
                 fontSize: '14px',
                 fontWeight: 'bold'
               }}>J</div>
-              <div style={{ fontWeight: 'bold', fontSize: '16px' }}>Jiboni</div>
+              <div style={{ fontWeight: 'bold', fontSize: '16px' }}>Jeeboni</div>
             </div>
             <div style={{ 
               width: '25px', 

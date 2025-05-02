@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 function GoToMarketSlide({ registerSlideSteps, currentStep }) {
   const phases = [
@@ -36,9 +36,9 @@ function GoToMarketSlide({ registerSlideSteps, currentStep }) {
     }
   ];
 
-  // Register the total number of steps for this slide
+  // Register just one step for this slide
   useEffect(() => {
-    registerSlideSteps(phases.length + 1); // +1 for the heading
+    registerSlideSteps(1);
   }, [registerSlideSteps, phases.length]);
 
   // Handle keyboard events
@@ -58,8 +58,8 @@ function GoToMarketSlide({ registerSlideSteps, currentStep }) {
 
   return (
     <div className="slide gtm-slide">
-      <AnimatePresence>
-        {currentStep >= 1 && (
+      {currentStep >= 1 && (
+        <>
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -67,18 +67,35 @@ function GoToMarketSlide({ registerSlideSteps, currentStep }) {
           >
             Go-to-Market Strategy - Phased
           </motion.h2>
-        )}
-      </AnimatePresence>
-      
-      <div className="flex-container" style={{ marginTop: '2rem', alignItems: 'stretch' }}>
-        {phases.map((phase, index) => (
-          <AnimatePresence key={index}>
-            {currentStep >= index + 2 && (
+          
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            style={{
+              marginTop: '1rem',
+              marginBottom: '1.5rem',
+              padding: '0.8rem 1.5rem',
+              background: 'rgba(46, 213, 115, 0.15)', // Green background for good news
+              border: '1px solid rgba(46, 213, 115, 0.3)', // Subtle green border
+              borderRadius: '10px',
+              fontSize: '1rem',
+              maxWidth: '90%',
+              textAlign: 'center',
+              boxShadow: '0 2px 8px rgba(46, 213, 115, 0.1)' // Subtle green glow
+            }}
+          >
+            Secured first Partnership with the historian of the Syed Family to offer it to the whole Syed Family Network who are regular buyers of the family history book of the past 6 editions.
+          </motion.div>
+        
+          <div className="flex-container" style={{ marginTop: '1rem', alignItems: 'stretch' }}>
+            {phases.map((phase, index) => (
               <motion.div 
+                key={index}
                 className="card"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.5 + index * 0.2 }}
                 style={{ 
                   flex: 1,
                   position: 'relative',
@@ -93,7 +110,7 @@ function GoToMarketSlide({ registerSlideSteps, currentStep }) {
                     type: "spring", 
                     stiffness: 260, 
                     damping: 20, 
-                    delay: 0.5 
+                    delay: 0.7 + index * 0.2
                   }}
                   style={{
                     position: 'absolute',
@@ -123,7 +140,7 @@ function GoToMarketSlide({ registerSlideSteps, currentStep }) {
                       key={i}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.7 + i * 0.1 }}
+                      transition={{ duration: 0.4, delay: 0.9 + index * 0.2 + i * 0.1 }}
                       style={{ marginBottom: '0.8rem' }}
                     >
                       {point}
@@ -131,17 +148,13 @@ function GoToMarketSlide({ registerSlideSteps, currentStep }) {
                   ))}
                 </ul>
               </motion.div>
-            )}
-          </AnimatePresence>
-        ))}
-      </div>
-      
-      <AnimatePresence>
-        {currentStep >= phases.length + 2 && (
+            ))}
+          </div>
+          
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 1, delay: 1.7 }}
             style={{ 
               marginTop: '2rem',
               width: '80%',
@@ -151,8 +164,8 @@ function GoToMarketSlide({ registerSlideSteps, currentStep }) {
               transformOrigin: 'left'
             }}
           />
-        )}
-      </AnimatePresence>
+        </>
+      )}
     </div>
   );
 }

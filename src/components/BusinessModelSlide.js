@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) {
   const tiers = [
@@ -13,7 +13,7 @@ function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapit
       ],
       footer: "FREE FOREVER",
       background: "rgba(255, 255, 255, 0.05)",
-      delay: 1.0
+      delay: 0.3
     },
     {
       title: "Premium Tiers (Year 2+)",
@@ -26,13 +26,13 @@ function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapit
       footer: "Target ARPPU ~$60/yr",
       footerColor: "var(--jiboni-secondary)",
       background: "rgba(69, 104, 220, 0.1)",
-      delay: 3.0
+      delay: 0.6
     }
   ];
 
-  // Register the total number of steps for this slide
+  // Register just one step for this slide
   useEffect(() => {
-    registerSlideSteps(3); // 1 for heading, 1 for each tier
+    registerSlideSteps(1);
   }, [registerSlideSteps]);
 
   // Handle keyboard events
@@ -52,8 +52,8 @@ function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapit
 
   return (
     <div className="slide business-model-slide">
-      <AnimatePresence>
-        {currentStep >= 1 && (
+      {currentStep >= 1 && (
+        <>
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -61,109 +61,59 @@ function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapit
           >
             Business Model: Freemium
           </motion.h2>
-        )}
-      </AnimatePresence>
-      
-      <div className="flex-container" style={{ marginTop: '2rem', alignItems: 'stretch' }}>
-        <AnimatePresence>
-          {currentStep >= 2 && (
-            <motion.div
-              className="card"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              style={{ 
-                flex: 1,
-                background: tiers[0].background,
-                display: 'flex',
-                flexDirection: 'column'
-              }}
-            >
-              <h3>{tiers[0].title}</h3>
-              
-              <ul style={{ paddingLeft: '1.5rem', marginTop: '1rem', flex: 1 }}>
-                {tiers[0].items.map((item, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
-                    style={{ marginBottom: '0.8rem' }}
-                  >
-                    {item}
-                  </motion.li>
-                ))}
-              </ul>
-              
+          
+          <div className="flex-container" style={{ marginTop: '2rem', alignItems: 'stretch' }}>
+            {tiers.map((tier, index) => (
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
+                key={index}
+                className="card"
+                initial={{ opacity: 0, x: index === 0 ? -50 : 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: tier.delay }}
                 style={{ 
-                  marginTop: 'auto',
-                  padding: '0.8rem',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  borderRadius: '0 0 8px 8px',
-                  textAlign: 'center',
-                  fontWeight: 'bold'
+                  flex: 1,
+                  background: tier.background,
+                  display: 'flex',
+                  flexDirection: 'column'
                 }}
               >
-                {tiers[0].footer}
+                <h3>{tier.title}</h3>
+                
+                <ul style={{ paddingLeft: '1.5rem', marginTop: '1rem', flex: 1 }}>
+                  {tier.items.map((item, i) => (
+                    <motion.li
+                      key={i}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: tier.delay + 0.1 + i * 0.1 }}
+                      style={{ marginBottom: '0.8rem' }}
+                    >
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+                
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: tier.delay + 0.5 }}
+                  style={{ 
+                    marginTop: 'auto',
+                    padding: '0.8rem',
+                    background: index === 0 ? 'rgba(255, 255, 255, 0.1)' : 'rgba(69, 104, 220, 0.2)',
+                    borderRadius: '0 0 8px 8px',
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    color: tier.footerColor
+                  }}
+                >
+                  {tier.footer}
+                </motion.div>
               </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        
-        <AnimatePresence>
-          {currentStep >= 3 && (
-            <motion.div
-              className="card"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              style={{ 
-                flex: 1,
-                background: tiers[1].background,
-                display: 'flex',
-                flexDirection: 'column'
-              }}
-            >
-              <h3>{tiers[1].title}</h3>
-              
-              <ul style={{ paddingLeft: '1.5rem', marginTop: '1rem', flex: 1 }}>
-                {tiers[1].items.map((item, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
-                    style={{ marginBottom: '0.8rem' }}
-                  >
-                    {item}
-                  </motion.li>
-                ))}
-              </ul>
-              
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-                style={{ 
-                  marginTop: 'auto',
-                  padding: '0.8rem',
-                  background: 'rgba(69, 104, 220, 0.2)',
-                  borderRadius: '0 0 8px 8px',
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                  color: tiers[1].footerColor
-                }}
-              >
-                {tiers[1].footer}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -10,6 +10,7 @@ import SolutionSlide from './components/SolutionSlide';
 import MarketSlide from './components/MarketSlide';
 import HowItWorksSlide from './components/HowItWorksSlide';
 import BusinessModelSlide from './components/BusinessModelSlide';
+import CompetitorsSlide from './components/CompetitorsSlide';
 import GoToMarketSlide from './components/GoToMarketSlide';
 import TractionSlide from './components/TractionSlide';
 import TeamSlide from './components/TeamSlide';
@@ -266,14 +267,16 @@ function App() {
       case 6:
         return <GoToMarketSlide {...props} />;
       case 7:
-        return <TractionSlide {...props} />;
+        return <CompetitorsSlide {...props} />;
       case 8:
-        return <TeamSlide {...props} />;
+        return <TractionSlide {...props} />;
       case 9:
-        return <FinancialsSlide {...props} />;
+        return <TeamSlide {...props} />;
       case 10:
-        return <AskSlide {...props} />;
+        return <FinancialsSlide {...props} />;
       case 11:
+        return <AskSlide {...props} />;
+      case 12:
         return <ContactSlide {...props} />;
       default:
         return <TitleSlide {...props} />;
