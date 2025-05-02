@@ -7,7 +7,7 @@ const { execSync } = require('child_process');
 async function ensureChromium() {
   try {
     // Check if chromium is installed via snap
-    execSync('which chromium');
+    execSync('which chromium || which chromium-browser');
     console.log('Chromium is already installed');
   } catch (error) {
     console.log('Installing Chromium via snap...');
@@ -39,46 +39,136 @@ async function generatePDF() {
   
   console.log('Launching browser...');
   
+  // Try to find Chromium executable
+  let executablePath;
+  try {
+    executablePath = execSync('which chromium || which chromium-browser', { encoding: 'utf-8' }).trim();
+    console.log(`Using Chromium at: ${executablePath}`);
+  } catch (error) {
+    console.log('Could not find Chromium, will use puppeteer default');
+  }
+  
   // Launch browser with minimal options
   const browser = await puppeteer.launch({
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+    executablePath: executablePath
   });
   
   try {
-    const page = await browser.newPage();
+    // Create a directory for individual slide PDFs
+    const slidesPdfDir = path.join(__dirname, '../temp-slides');
+    fs.ensureDirSync(slidesPdfDir);
     
-    // Set viewport to match presentation dimensions
-    await page.setViewport({
-      width: 1280,
-      height: 720,
-      deviceScaleFactor: 1,
-    });
+    // Define the total number of slides - make sure this matches App.js
+    const totalSlides = 13; // Match the value in App.js
     
-    // Navigate to the local dev server with PDF mode enabled
-    const url = 'http://localhost:3000/?pdf=true';
-    console.log(`Loading page: ${url}`);
+    // Array to store paths to individual slide PDFs
+    const slidePdfPaths = [];
     
-    await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
+    // Generate PDF for each slide
+    for (let slideIndex = 0; slideIndex < totalSlides; slideIndex++) {
+      console.log(`Processing slide ${slideIndex + 1}/${totalSlides}...`);
+      
+      // Create a new page for each slide
+      const page = await browser.newPage();
+      
+      // Set viewport to match presentation dimensions
+      await page.setViewport({
+        width: 1280,
+        height: 720,
+        deviceScaleFactor: 1,
+      });
+      
+      // Navigate to the specific slide with PDF mode enabled
+      const url = `http://localhost:3000/?pdf=true&slide=${slideIndex}`;
+      console.log(`Loading page: ${url}`);
+      
+      await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
+      
+      // Wait for the page to be fully loaded
+      await page.waitForSelector('.slide-container', { timeout: 10000 })
+        .catch(() => console.warn('Slide container not found, continuing anyway'));
+      
+      // Add a small delay to ensure everything is rendered
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      
+      // Hide navigation elements and apply PDF styling
+      await page.evaluate(() => {
+        // Force hide all navigation elements
+        const elementsToHide = document.querySelectorAll('.navigation-button, .navigation-instructions');
+        elementsToHide.forEach(el => {
+          if (el) el.style.display = 'none !important';
+        });
+        
+        // Add inline styles to ensure navigation is hidden
+        const style = document.createElement('style');
+        style.textContent = `
+          .navigation-button, .navigation-instructions { 
+            display: none !important; 
+            visibility: hidden !important;
+            opacity: 0 !important;
+          }
+          body { 
+            overflow: hidden !important; 
+          }
+        `;
+        document.head.appendChild(style);
+        
+        // Add PDF class to body
+        document.body.classList.add('pdf-export');
+        document.body.classList.add('pdf-mode');
+      });
+      
+      // Take a screenshot to verify what's being captured
+      const screenshotPath = path.join(slidesPdfDir, `slide-${slideIndex}.png`);
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+      
+      // Create PDF for this slide
+      const slidePdfPath = path.join(slidesPdfDir, `slide-${slideIndex}.pdf`);
+      await page.pdf({
+        path: slidePdfPath,
+        format: 'A4',
+        landscape: true,
+        printBackground: true,
+        margin: { top: '0.4cm', right: '0.4cm', bottom: '0.4cm', left: '0.4cm' }
+      });
+      
+      slidePdfPaths.push(slidePdfPath);
+      
+      // Close the page to free up memory
+      await page.close();
+    }
     
-    // Wait for the page to be fully loaded
-    await page.waitForSelector('.pdf-mode', { timeout: 10000 })
-      .catch(() => console.warn('PDF mode selector not found, continuing anyway'));
+    // Merge all slide PDFs into a single PDF
+    console.log('Merging slides into a single PDF...');
+    const finalPdfPath = path.join(assetsDir, 'pitch-deck.pdf');
     
-    // Add a small delay to ensure everything is rendered
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Use pdftk to merge PDFs if available
+    try {
+      // Check if pdftk is installed
+      execSync('which pdftk');
+      
+      // Merge PDFs using pdftk
+      const pdftkCommand = `pdftk ${slidePdfPaths.join(' ')} cat output ${finalPdfPath}`;
+      execSync(pdftkCommand);
+      
+      console.log(`PDF generated successfully at: ${finalPdfPath}`);
+    } catch (pdftkError) {
+      console.log('pdftk not found, trying alternative method...');
+      
+      // If pdftk is not available, copy the first PDF and note the limitation
+      fs.copyFileSync(slidePdfPaths[0], finalPdfPath);
+      console.log(`Limited PDF generated at: ${finalPdfPath} (only first slide)`);
+      console.log('To generate a complete PDF with all slides, please install pdftk:');
+      console.log('  sudo apt update && sudo apt install -y pdftk');
+    }
     
-    // Create PDF with landscape orientation
-    const pdfPath = path.join(assetsDir, 'pitch-deck.pdf');
-    await page.pdf({
-      path: pdfPath,
-      format: 'A4',
-      landscape: true,
-      printBackground: true,
-      margin: { top: '0.4cm', right: '0.4cm', bottom: '0.4cm', left: '0.4cm' }
-    });
+    // Clean up temporary files
+    console.log('Cleaning up temporary files...');
+    // Uncomment to remove temp files when everything is working
+    // fs.removeSync(slidesPdfDir);
     
-    console.log(`PDF generated successfully at: ${pdfPath}`);
   } catch (error) {
     console.error('Error generating PDF:', error);
     process.exit(1);

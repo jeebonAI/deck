@@ -1,0 +1,30 @@
+/* PDF-specific styles */
+.pdf-mode .navigation-button,
+.pdf-mode .navigation-instructions {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.pdf-export {
+  /* Add any PDF-specific styling here */
+  overflow: hidden !important;
+}
+
+/* Hide all navigation elements in PDF mode */
+body.pdf-mode div[style*="position: fixed"],
+body.pdf-mode div[style*="position:fixed"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+@media print {
+  /* Hide navigation elements when printing */
+  .navigation-button,
+  .navigation-instructions {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}

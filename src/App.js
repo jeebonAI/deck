@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
+import './pdf-mode.css';
 import { BUSINESS_NAME, BUSINESS_NAME_CAPITALIZED, APP_VERSION } from './constants';
 
 // Import slide components
@@ -262,6 +263,54 @@ function App() {
       document.removeEventListener('setSlideForPDF', handleSetSlideForPDF);
     };
   }, []);
+
+  // Add this useEffect to handle PDF mode
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPdfMode = urlParams.get('pdf') === 'true';
+    const initialSlide = urlParams.get('slide');
+    
+    if (isPdfMode) {
+      // Add PDF mode class to body
+      document.body.classList.add('pdf-mode');
+      
+      // Hide navigation elements
+      const navigationElements = document.querySelectorAll('.navigation-button, .navigation-instructions');
+      navigationElements.forEach(el => {
+        if (el) el.style.display = 'none';
+      });
+      
+      // Set initial slide if specified in URL
+      if (initialSlide !== null) {
+        const slideIndex = parseInt(initialSlide, 10);
+        if (!isNaN(slideIndex) && slideIndex >= 0 && slideIndex < totalSlides) {
+          setCurrentSlide(slideIndex);
+          setCurrentStep(1); // Reset to first step
+        }
+      }
+      
+      // Expose a function to set the slide for PDF generation
+      window.setSlideForPDF = (slideIndex) => {
+        setCurrentSlide(slideIndex);
+        setCurrentStep(1);
+      };
+      
+      // Listen for setSlideForPDF events
+      const handleSetSlideForPDF = (event) => {
+        const { slide } = event.detail;
+        setCurrentSlide(slide);
+        setCurrentStep(1); // Reset to first step
+      };
+      
+      document.addEventListener('setSlideForPDF', handleSetSlideForPDF);
+      
+      return () => {
+        document.removeEventListener('setSlideForPDF', handleSetSlideForPDF);
+        document.body.classList.remove('pdf-mode');
+        delete window.setSlideForPDF;
+      };
+    }
+  }, [totalSlides]);
 
   // Render the appropriate slide based on currentSlide
   const renderSlide = () => {

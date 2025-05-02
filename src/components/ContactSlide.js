@@ -23,6 +23,24 @@ function ContactSlide({ registerSlideSteps, businessNameCapitalized, businessNam
     };
   }, []);
 
+  // Inside the ContactSlide component, ensure all animations have shorter delays in PDF mode
+  useEffect(() => {
+    // Check if we're in PDF mode
+    const isPdfMode = document.body.classList.contains('pdf-mode');
+    
+    // If in PDF mode, force all animations to complete immediately
+    if (isPdfMode) {
+      // Find all motion divs and force them to their final state
+      const motionDivs = document.querySelectorAll('motion.div');
+      motionDivs.forEach(div => {
+        if (div.style) {
+          div.style.opacity = '1';
+          div.style.transform = 'none';
+        }
+      });
+    }
+  }, []);
+
   const contactInfo = [
     {
       icon: "✉",
