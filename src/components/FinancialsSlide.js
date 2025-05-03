@@ -21,25 +21,26 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
         // Apply PDF-specific styles to ensure all content is visible
         const slideElement = document.querySelector('.financials-slide');
         if (slideElement) {
-          // Adjust top spacing to match other slides
+          // Adjust the container itself to match other slides
           slideElement.style.transform = 'scale(0.9)';
           slideElement.style.transformOrigin = 'center center';
-          slideElement.style.height = '100%';
+          slideElement.style.height = '80%'; // Reduced from 85% to 80% to add more bottom margin
           slideElement.style.width = '100%';
           slideElement.style.overflow = 'visible';
           slideElement.style.display = 'flex';
           slideElement.style.flexDirection = 'column';
-          slideElement.style.justifyContent = 'flex-start'; // Changed from center to flex-start
+          slideElement.style.justifyContent = 'flex-start';
           slideElement.style.alignItems = 'center';
           slideElement.style.padding = '20px';
-          slideElement.style.paddingTop = '40px'; // Increased top padding
           slideElement.style.margin = '0 auto';
+          slideElement.style.marginTop = '70px'; // Keep top margin
+          slideElement.style.marginBottom = '50px'; // Add bottom margin
           
           // Adjust the title position
           const title = slideElement.querySelector('.title-with-underline');
           if (title) {
             title.style.marginTop = '0';
-            title.style.marginBottom = '30px'; // Increased margin below title
+            title.style.marginBottom = '15px'; // Reduced margin below title
           }
           
           // Adjust the flex container
@@ -48,20 +49,20 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
             flexContainer.style.height = 'auto';
             flexContainer.style.width = '100%';
             flexContainer.style.maxWidth = '1000px';
-            flexContainer.style.gap = '30px';
-            flexContainer.style.justifyContent = 'space-between';
+            flexContainer.style.gap = '15px'; // Further reduced gap between rows
+            flexContainer.style.justifyContent = 'flex-start';
             flexContainer.style.alignItems = 'stretch';
             flexContainer.style.margin = '0 auto';
-            flexContainer.style.marginTop = '0'; // Removed margin top
+            flexContainer.style.marginTop = '5px';
           }
           
           // Adjust top row
           const topRow = slideElement.querySelector('.flex-container > div:first-child');
           if (topRow) {
-            topRow.style.flex = '2.5';
-            topRow.style.marginBottom = '10px';
-            topRow.style.minHeight = '280px';
-            topRow.style.maxHeight = '320px';
+            topRow.style.flex = '2';
+            topRow.style.marginBottom = '5px'; // Reduced margin
+            topRow.style.minHeight = '260px'; // Reduced height
+            topRow.style.maxHeight = '280px'; // Reduced height
             topRow.style.width = '100%';
             topRow.style.display = 'flex';
             topRow.style.justifyContent = 'space-between';
@@ -70,12 +71,12 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
           // Adjust bottom row - give more height for text
           const bottomRow = slideElement.querySelector('.flex-container > div:last-child');
           if (bottomRow) {
-            bottomRow.style.flex = '1';
-            bottomRow.style.marginTop = '10px';
+            bottomRow.style.flex = '1.8'; // Increased flex to give even more space
+            bottomRow.style.marginTop = '5px';
             bottomRow.style.display = 'flex';
             bottomRow.style.visibility = 'visible';
-            bottomRow.style.minHeight = '160px'; // Increased height
-            bottomRow.style.maxHeight = '180px'; // Increased height
+            bottomRow.style.minHeight = '240px'; // Increased height
+            bottomRow.style.maxHeight = '260px'; // Increased height
             bottomRow.style.width = '100%';
             bottomRow.style.justifyContent = 'space-between';
           }
@@ -100,13 +101,35 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
             text.style.marginBottom = '5px'; // More space between lines
           });
           
-          // Specifically target the Strategic Notes section to improve text fitting
+          // Specifically target the Strategic Notes section to ensure all points are visible
           const strategicNotes = bottomRow.querySelector('.card:last-child');
           if (strategicNotes) {
+            strategicNotes.style.minHeight = '240px'; // Increased height
+            strategicNotes.style.flex = '1.8'; // Give even more space to notes section
+            strategicNotes.style.overflow = 'visible';
+            
+            // Make sure all note items are visible with reduced spacing
             const noteItems = strategicNotes.querySelectorAll('div[style*="display: flex"]');
             noteItems.forEach(item => {
-              item.style.marginBottom = '8px'; // More space between bullet points
+              item.style.marginBottom = '5px'; // Reduced space between bullet points
+              item.style.opacity = '1';
+              item.style.visibility = 'visible';
+              item.style.display = 'flex !important';
+              
+              // Reduce font size slightly to fit more content
+              const textElement = item.querySelector('div:last-child');
+              if (textElement) {
+                textElement.style.fontSize = '0.7rem';
+                textElement.style.lineHeight = '1.2';
+              }
             });
+          }
+          
+          // Adjust the Key Metrics section
+          const keyMetrics = bottomRow.querySelector('.card:first-child');
+          if (keyMetrics) {
+            keyMetrics.style.flex = '0.8'; // Further reduced flex to give more space to notes
+            keyMetrics.style.minHeight = '240px'; // Match height
           }
           
           // Adjust the chart bar heights moderately
@@ -156,11 +179,13 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'flex-start', // Changed from center to flex-start
+      justifyContent: 'flex-start',
       width: '100%',
-      height: '100%',
+      height: '80%', // Reduced from 85% to 80% to add more bottom margin
       padding: '2rem',
-      paddingTop: '3rem' // Increased top padding
+      margin: '0 auto',
+      marginTop: '70px',
+      marginBottom: '50px' // Add bottom margin
     }}>
       <AnimatedTitleWithUnderline title="Financials" />
       
@@ -168,15 +193,15 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        height: 'calc(100% - 100px)', // Adjusted height
-        justifyContent: 'space-between',
-        marginTop: '10px' // Reduced margin top
+        height: 'calc(100% - 60px)',
+        justifyContent: 'flex-start',
+        marginTop: '15px'
       }}>
         {/* Top row with MAU and Revenue/Costs charts */}
         <div style={{ 
           display: 'flex', 
-          flex: 3,
-          marginBottom: '1rem'
+          flex: 1.8,
+          marginBottom: '0.5rem'
         }}>
           {/* MAU Chart */}
           <motion.div 
@@ -638,9 +663,9 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
         {/* Bottom row with Key Metrics and Notes */}
         <div style={{ 
           display: 'flex', 
-          flex: 1,
+          flex: 1.8, // Increased from 1.5 to 1.8
           gap: '0.5rem',
-          minHeight: '150px'
+          minHeight: '240px' // Increased from 220px to 240px
         }}>
           {/* Key Metrics */}
           <motion.div 
@@ -649,9 +674,9 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
             style={{ 
-              flex: 1,
-              maxWidth: '40%',
-              minHeight: '120px'
+              flex: 0.8, // Reduced from 1 to 0.8
+              maxWidth: '32%', // Reduced from 35% to 32%
+              minHeight: '240px' // Increased height
             }}
           >
             <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Key Metrics</h3>
@@ -759,15 +784,15 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
             </div>
           </motion.div>
           
-          {/* Notes Section */}
+          {/* Notes Section - ensure all points are visible */}
           <motion.div 
             className="card"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}
             style={{ 
-              flex: 1,
-              minHeight: '120px'
+              flex: 1.8, // Increased from 1.5 to 1.8
+              minHeight: '240px' // Increased height
             }}
           >
             <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Strategic Notes</h3>
@@ -775,15 +800,16 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
             <div style={{ 
               display: 'flex',
               flexDirection: 'column',
-              gap: '8px',
+              gap: '5px', // Reduced from 8px to 5px
               height: 'calc(100% - 30px)',
-              overflowY: 'auto'
+              overflowY: 'visible'
             }}>
+              {/* Adjust the font size for all note items */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.0 }}
-                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+                style={{ fontSize: '0.7rem', display: 'flex', alignItems: 'flex-start' }}
               >
                 <div style={{ 
                   minWidth: '6px', 
@@ -793,14 +819,15 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                   marginTop: '5px',
                   marginRight: '8px' 
                 }}></div>
-                <div>Y1: Development focus, no monetization</div>
+                <div style={{ lineHeight: '1.2' }}>Y1: Development focus, no monetization</div>
               </motion.div>
               
+              {/* Apply the same style to all other note items */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
-                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+                style={{ fontSize: '0.7rem', display: 'flex', alignItems: 'flex-start' }}
               >
                 <div style={{ 
                   minWidth: '6px', 
@@ -810,14 +837,14 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                   marginTop: '5px',
                   marginRight: '8px' 
                 }}></div>
-                <div>Y2: Freemium model introduction with premium features</div>
+                <div style={{ lineHeight: '1.2' }}>Y2: Freemium model introduction with premium features</div>
               </motion.div>
               
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.4 }}
-                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+                style={{ fontSize: '0.7rem', display: 'flex', alignItems: 'flex-start' }}
               >
                 <div style={{ 
                   minWidth: '6px', 
@@ -827,14 +854,14 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                   marginTop: '5px',
                   marginRight: '8px' 
                 }}></div>
-                <div>Y3+: Aggressive global user acquisition focus</div>
+                <div style={{ lineHeight: '1.2' }}>Y3+: Aggressive global user acquisition focus</div>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.5 }}
-                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+                style={{ fontSize: '0.7rem', display: 'flex', alignItems: 'flex-start' }}
               >
                 <div style={{ 
                   minWidth: '6px', 
@@ -844,14 +871,14 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                   marginTop: '5px',
                   marginRight: '8px' 
                 }}></div>
-                <div>Y3 growth rate higher due to removing beta cap on signups, with significant waiting list expected</div>
+                <div style={{ lineHeight: '1.2' }}>Y3 growth rate higher due to removing beta cap on signups, with significant waiting list expected</div>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.6 }}
-                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+                style={{ fontSize: '0.7rem', display: 'flex', alignItems: 'flex-start' }}
               >
                 <div style={{ 
                   minWidth: '6px', 
@@ -861,14 +888,14 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                   marginTop: '5px',
                   marginRight: '8px' 
                 }}></div>
-                <div>Low churn due to network stickiness & integrated utility</div>
+                <div style={{ lineHeight: '1.2' }}>Low churn due to network stickiness & integrated utility</div>
               </motion.div>
               
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.8 }}
-                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+                style={{ fontSize: '0.7rem', display: 'flex', alignItems: 'flex-start' }}
               >
                 <div style={{ 
                   minWidth: '6px', 
@@ -878,14 +905,14 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                   marginTop: '5px',
                   marginRight: '8px' 
                 }}></div>
-                <div>Costs increase with development, monetization & growth investments</div>
+                <div style={{ lineHeight: '1.2' }}>Costs increase with development, monetization & growth investments</div>
               </motion.div>
               
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 2.0 }}
-                style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start' }}
+                style={{ fontSize: '0.7rem', display: 'flex', alignItems: 'flex-start' }}
               >
                 <div style={{ 
                   minWidth: '6px', 
@@ -895,7 +922,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                   marginTop: '5px',
                   marginRight: '8px' 
                 }}></div>
-                <div>Profitability projected in Year 4 as scaled growth drives revenue</div>
+                <div style={{ lineHeight: '1.2' }}>Profitability projected in Year 4 as scaled growth drives revenue</div>
               </motion.div>
             </div>
           </motion.div>
