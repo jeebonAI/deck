@@ -203,7 +203,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
       {showSlideNumber && (
         <div className="slide-number" style={{
           position: 'absolute',
-          bottom: '-40px',
+          bottom: '20px', // Position inside the container like other slides
           right: '20px',
           fontSize: '0.8rem',
           color: 'rgba(255, 255, 255, 0.6)',
