@@ -38,7 +38,10 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
     <div className="slide ask-slide" style={{ 
       justifyContent: 'flex-start', 
       paddingTop: '2rem',
-      position: 'relative' // Added for absolute positioning of slide number
+      position: 'relative', // Added for absolute positioning of slide number
+      width: '90%', // Added to ensure consistent width
+      maxWidth: '1200px', // Added to match other slides
+      margin: '0 auto' // Center the slide
     }}>
       {/* Slide number indicator */}
       <div className="slide-number" style={{

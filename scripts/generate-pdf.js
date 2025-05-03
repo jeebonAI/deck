@@ -69,7 +69,7 @@ async function generatePDF() {
     // Generate PDF for each slide
     for (let slideIndex = 0; slideIndex < totalSlides; slideIndex++) {
       // Skip the financials slide (slide 11) in the main loop as we'll handle it separately
-      if (slideIndex === 11) {
+      if (slideIndex === 10) { // Changed from 11 to 10 (zero-based index for slide 11)
         console.log(`Skipping slide ${slideIndex + 1}/${totalSlides} (Financials) in main loop, will handle separately`);
         continue;
       }
@@ -186,71 +186,28 @@ async function generatePDF() {
       // Special handling for the financials slide (slide 11)
       if (slideIndex === 11) {
         await page.evaluate(() => {
-          // Adjust the financials slide specifically
-          const financialsSlide = document.querySelector('.financials-slide');
-          if (financialsSlide) {
-            // Move the slide up to show the title
-            financialsSlide.style.marginTop = '-60px';
-            
-            // Set explicit heights for the slide
-            financialsSlide.style.height = 'auto';
-            financialsSlide.style.minHeight = '100%';
-            financialsSlide.style.paddingBottom = '10px';
-            financialsSlide.style.paddingTop = '0';
-            
-            // Ensure the title is visible
-            const title = financialsSlide.querySelector('.title-with-underline');
-            if (title) {
-              title.style.marginTop = '0';
-              title.style.paddingTop = '0';
-              title.style.fontSize = '1.8rem';
-              title.style.marginBottom = '0.2rem';
+          // Add PDF mode class to body
+          document.body.classList.add('pdf-mode');
+          
+          // Force all animations to complete
+          const motionElements = document.querySelectorAll('motion');
+          motionElements.forEach(el => {
+            if (el.style) {
+              el.style.opacity = '1';
+              el.style.transform = 'none';
             }
-            
-            // Adjust the flex container
-            const flexContainer = financialsSlide.querySelector('.flex-container');
-            if (flexContainer) {
-              flexContainer.style.height = 'auto';
-              flexContainer.style.minHeight = '60%';
-              flexContainer.style.gap = '2px';
-              flexContainer.style.marginTop = '0.2rem';
+          });
+          
+          // Ensure slide number is visible
+          const slideElement = document.querySelector('.financials-slide');
+          if (slideElement) {
+            let slideNumber = slideElement.querySelector('.slide-number');
+            if (!slideNumber) {
+              slideNumber = document.createElement('div');
+              slideNumber.className = 'slide-number';
+              slideNumber.textContent = '11/13'; // Financials is slide 11 of 13
+              slideElement.appendChild(slideNumber);
             }
-            
-            // Ensure the bottom row is visible
-            const bottomRow = financialsSlide.querySelector('.flex-container > div:last-child');
-            if (bottomRow) {
-              bottomRow.style.marginBottom = '0';
-              bottomRow.style.marginTop = '0.2rem';
-              bottomRow.style.flex = 'none';
-              bottomRow.style.height = 'auto';
-              bottomRow.style.minHeight = '80px';
-            }
-            
-            // Ensure all cards are visible
-            const cards = financialsSlide.querySelectorAll('.card');
-            cards.forEach(card => {
-              card.style.height = 'auto';
-              card.style.minHeight = '80px';
-              card.style.overflow = 'visible';
-              card.style.padding = '0.4rem';
-              card.style.margin = '0.1rem';
-            });
-            
-            // Reduce font size for better fit
-            const textElements = financialsSlide.querySelectorAll('p, li, div');
-            textElements.forEach(el => {
-              const currentSize = window.getComputedStyle(el).fontSize;
-              const size = parseFloat(currentSize);
-              if (size > 7) {
-                el.style.fontSize = `${size * 0.7}px`;
-              }
-            });
-            
-            // Make charts smaller
-            const charts = financialsSlide.querySelectorAll('canvas');
-            charts.forEach(chart => {
-              chart.style.maxHeight = '120px';
-            });
           }
         });
         
@@ -264,7 +221,7 @@ async function generatePDF() {
           format: 'A4',
           landscape: true,
           printBackground: true,
-          margin: { top: '0.05cm', right: '0.2cm', bottom: '0.2cm', left: '0.2cm' }, // Extremely reduced margins
+          margin: { top: '0.2cm', right: '0.2cm', bottom: '0.2cm', left: '0.2cm' }, // Extremely reduced margins
           scale: 0.55, // Scale down dramatically for financials slide
           pageRanges: '1' // Only capture the first page
         });
@@ -302,11 +259,11 @@ async function generatePDF() {
 
     // Insert the financials slide PDF at the correct position (11)
     console.log('Inserting financials slide into the PDF sequence');
-    slidePdfPaths.splice(11, 0, financialsSlidePath);
+    slidePdfPaths.splice(10, 0, financialsSlidePath); // Changed from 11 to 10 (zero-based index)
 
     // Verify we have the correct number of slides
     console.log(`Total slides to merge: ${slidePdfPaths.length}`);
-    if (slidePdfPaths.length > totalSlides) {
+    if (slidePdfPaths.length !== totalSlides) { // Changed from > to !== for more precise check
       console.warn(`Warning: Found ${slidePdfPaths.length} slides, expected ${totalSlides}. Removing duplicates...`);
       
       // Create a map to track slide numbers
@@ -321,8 +278,14 @@ async function generatePDF() {
         const slideNum = parseInt(match[1], 10);
         
         // Special case for financials slide
-        if (path.includes('special') && slideNum === 11) {
-          return true; // Always keep the special financials slide
+        if (path.includes('special') && slideNum === 10) { // Changed from 11 to 10
+          // Check if we've already seen a special financials slide
+          if (slideMap.has('special-10')) { // Changed from special-11 to special-10
+            console.log(`Removing duplicate special financials slide: ${path}`);
+            return false;
+          }
+          slideMap.set('special-10', true); // Changed from special-11 to special-10
+          return true;
         }
         
         // Check if we've seen this slide number before
@@ -398,182 +361,239 @@ async function handleFinancialsSlide(browser, slidesPdfDir) {
   });
   
   // Navigate to the financials slide with PDF mode enabled
-  const url = `http://localhost:3000/?pdf=true&slide=11`;
-  console.log(`Loading financials page: ${url}`);
+  const url = `http://localhost:3000/?pdf=true&slide=10`; // Using slide 10 (zero-based index for slide 11)
+  console.log(`Loading financials slide: ${url}`);
   
-  await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
-  
-  // Wait for the page to be fully loaded
-  await page.waitForSelector('.slide-container', { timeout: 10000 })
-    .catch(() => console.warn('Slide container not found, continuing anyway'));
-  
-  // Add a longer delay to ensure everything is rendered
-  await new Promise(resolve => setTimeout(resolve, 5000));
-  
-  // Apply specific styles for the financials slide content only
-  await page.evaluate(() => {
-    // Only modify the content inside the slide, not the slide itself
-    const style = document.createElement('style');
-    style.textContent = `
-      /* Target only the content inside the slide */
-      .financials-slide .flex-container {
-        transform: scale(0.9);
-        transform-origin: top center;
-        height: 100% !important;
-        margin-top: -10px !important;
-        gap: 5px !important;
-        justify-content: space-between !important;
-      }
+  try {
+    await page.goto(url, { 
+      waitUntil: ['load', 'networkidle0'], 
+      timeout: 60000 
+    });
+    
+    // Wait for any content to load
+    console.log('Waiting for page content to load...');
+    await page.waitForSelector('body', { timeout: 10000 });
+    
+    // Add a longer delay to ensure everything is rendered
+    console.log('Waiting for additional time to ensure rendering...');
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    
+    // Apply PDF mode class and handle animations
+    await page.evaluate(() => {
+      // Add PDF mode class to body
+      document.body.classList.add('pdf-mode');
       
-      .financials-slide h1 {
-        font-size: 1.8rem !important;
-        margin-bottom: 0.2rem !important;
-      }
+      // Force all animations to complete
+      document.querySelectorAll('motion, [class*="motion"]').forEach(el => {
+        if (el.style) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          el.style.visibility = 'visible';
+        }
+      });
       
-      .financials-slide .card {
-        padding: 0.4rem !important;
-        margin: 0.1rem !important;
-      }
+      // Fix chart bars alignment and visibility
+      document.querySelectorAll('[style*="height"]').forEach(el => {
+        if (el.style) {
+          el.style.opacity = '1';
+          el.style.visibility = 'visible';
+        }
+      });
       
-      .financials-slide h3 {
-        font-size: 0.7rem !important;
-        margin-bottom: 0.1rem !important;
-        margin-top: 0.1rem !important;
-      }
+      // Fix chart container positioning
+      document.querySelectorAll('.card > div[style*="position: relative"]').forEach(container => {
+        if (container) {
+          container.style.height = '280px';
+          container.style.minHeight = '280px';
+          container.style.position = 'relative';
+          container.style.overflow = 'visible';
+        }
+      });
       
-      .financials-slide p, 
-      .financials-slide li, 
-      .financials-slide div:not(.card):not(.chart-container):not(.slide-container):not(.slide) {
-        font-size: 0.65rem !important;
-        line-height: 1 !important;
-        margin-bottom: 0.05rem !important;
-      }
+      // Fix chart bars positioning
+      document.querySelectorAll('[style*="position: absolute"][style*="top"]').forEach(el => {
+        if (el.style && el.style.top) {
+          // Ensure percentage values are properly applied
+          if (el.style.top.includes('%')) {
+            const topValue = el.style.top.replace(/['"]/g, '');
+            el.style.top = topValue;
+          }
+        }
+      });
       
-      /* Adjust the flex container to be more compact */
-      .financials-slide .flex-container {
-        gap: 0.2rem !important;
-        height: auto !important;
-      }
+      // Fix chart values visibility and positioning with smaller font
+      document.querySelectorAll('[style*="fontSize"]').forEach(value => {
+        if (value.style) {
+          value.style.fontSize = '0.4rem'; // Reduced to 0.4rem
+          value.style.opacity = '1';
+          value.style.visibility = 'visible';
+          value.style.color = 'white';
+          value.style.fontWeight = 'bold';
+          value.style.textShadow = '0 0 2px rgba(0, 0, 0, 0.8)';
+          
+          // Add spacing to prevent overlap
+          if (value.parentElement) {
+            if (value.parentElement.style.top && value.parentElement.style.top.includes('%')) {
+              // For negative values (costs)
+              const topValue = parseFloat(value.parentElement.style.top.replace(/['"]/g, '').replace('%', ''));
+              // Adjust position to prevent overlap
+              if (topValue > 45 && topValue < 55) {
+                value.parentElement.style.top = (topValue + 5) + '%';
+              }
+            }
+            
+            if (value.parentElement.style.bottom && value.parentElement.style.bottom.includes('%')) {
+              // For positive values (revenue and profit)
+              const bottomValue = parseFloat(value.parentElement.style.bottom.replace(/['"]/g, '').replace('%', ''));
+              // Adjust position to prevent overlap
+              if (bottomValue > 45 && bottomValue < 55) {
+                value.parentElement.style.bottom = (bottomValue + 5) + '%';
+              }
+            }
+          }
+        }
+      });
       
-      /* Make bottom row more compact */
-      .financials-slide .flex-container > div:last-child {
-        margin-top: 0.2rem !important;
-        margin-bottom: 0 !important;
-      }
-      
-      /* Make charts more compact */
-      .financials-slide .chart-container {
-        height: auto !important;
-        min-height: 100px !important;
-        max-height: 120px !important;
-      }
-      
-      /* Reduce spacing in the key metrics section */
-      .financials-slide .key-metrics div {
-        gap: 2px !important;
-        height: 18px !important;
-      }
-      
-      /* Make all charts smaller */
-      .financials-slide canvas {
-        max-height: 120px !important;
-      }
-      
-      /* Specifically target chart bars to make them much shorter */
-      .financials-slide .card:first-child motion.div[style*="height"] {
-        height: 15% !important; /* MAU bars much smaller */
-        max-height: 20px !important;
-      }
+      // Add specific styles for the financials chart
+      const style = document.createElement('style');
+      style.textContent = `
+        .pdf-mode .card, .pdf-mode [class*="chart"], .pdf-mode [class*="Chart"] {
+          overflow: visible !important;
+          height: auto !important;
+          min-height: 280px !important;
+          background-color: rgba(42, 57, 80, 0.8) !important;
+        }
+        
+        .pdf-mode [style*="position: absolute"][style*="top"] {
+          position: absolute !important;
+        }
+        
+        .pdf-mode [style*="position: absolute"][style*="bottom"] {
+          position: absolute !important;
+        }
+        
+        .pdf-mode [style*="height"][style*="%"] {
+          min-height: 5px !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+        
+        .pdf-mode [style*="backgroundColor: var(--jiboni-primary)"] {
+          background-color: #4568dc !important;
+        }
+        
+        .pdf-mode [style*="backgroundColor: rgba(255, 193, 7, 0.8)"] {
+          background-color: rgba(255, 193, 7, 0.9) !important;
+        }
+        
+        .pdf-mode [style*="backgroundColor: rgba(46, 213, 115, 0.8)"] {
+          background-color: rgba(46, 213, 115, 0.9) !important;
+        }
+        
+        /* Fix for the 0 axis line alignment */
+        .pdf-mode [style*="position: absolute"][style*="top: '50%'"] {
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+        }
+        
+        /* Reduce font size for chart value labels */
+        [style*="fontSize"][style*="0.45rem"],
+        [style*="fontSize"][style*="0.55rem"],
+        [style*="fontSize"][style*="0.65rem"] {
+          font-size: 0.5rem !important;
+          color: white !important;
+          font-weight: bold !important;
+          text-shadow: 0 0 2px rgba(0, 0, 0, 0.8) !important;
+        }
+        
+        /* Target all chart value labels */
+        [style*="position: absolute"][style*="top"][style*="%"] [style*="fontSize"],
+        [style*="position: absolute"][style*="bottom"][style*="%"] [style*="fontSize"] {
+          font-size: 0.5rem !important;
+        }
+        
+        /* Reduce font size for all chart value labels */
+        [style*="fontSize"] {
+          font-size: 0.4rem;
+          color: white;
+          font-weight: bold;
+          text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+        }
+        
+        /* Add spacing between labels to prevent overlap */
+        [style*="position: absolute"][style*="top"],
+        [style*="position: absolute"][style*="bottom"] {
+          margin-top: 2px;
+          margin-bottom: 2px;
+        }
+        
+        /* Ensure labels don't overlap with bars */
+        [style*="position: absolute"][style*="top"][style*="%"] {
+          top: calc(attr(style top) + 5%) !important;
+        }
+        
+        [style*="position: absolute"][style*="bottom"][style*="%"] {
+          bottom: calc(attr(style bottom) + 5%) !important;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+    
+    // Increase the wait time to ensure rendering is complete
+    await new Promise(resolve => setTimeout(resolve, 8000));
 
-      .financials-slide .card:nth-child(2) motion.div[style*="height"] {
-        height: 35% !important; /* Revenue bars slightly larger */
-        max-height: 30px !important;
-      }
+    // Take a screenshot to verify what's being captured
+    const screenshotPath = path.join(slidesPdfDir, `slide-10-special.png`);
+    await page.screenshot({ path: screenshotPath, fullPage: true });
 
-      /* Make the chart containers taller */
-      .financials-slide .card > div[style*="position: relative"] {
-        height: 150px !important;
-        max-height: 150px !important;
-      }
-      
-      /* Hide navigation elements */
-      .navigation-button, .navigation-instructions { 
-        display: none !important; 
-        visibility: hidden !important;
-        opacity: 0 !important;
-      }
-    `;
-    document.head.appendChild(style);
-    
-    // Force all animations to complete
-    const motionElements = document.querySelectorAll('motion');
-    motionElements.forEach(el => {
-      if (el.style) {
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      }
+    // Use a smaller scale to ensure everything fits
+    const slidePdfPath = path.join(slidesPdfDir, `slide-10-special.pdf`); // Changed from 11 to 10
+    await page.pdf({
+      path: slidePdfPath,
+      format: 'A4',
+      landscape: true,
+      printBackground: true,
+      margin: { top: '0.2cm', right: '0.2cm', bottom: '0.2cm', left: '0.2cm' },
+      scale: 0.5, // Reduced scale to fit everything
+      pageRanges: '1'
     });
     
-    // Specifically target and reduce the height of chart bars
-    const chartBars = document.querySelectorAll('.financials-slide motion.div[style*="height"]');
-    chartBars.forEach(bar => {
-      // Drastically reduce the height of all bars
-      const currentHeight = window.getComputedStyle(bar).height;
-      const heightValue = parseFloat(currentHeight);
-      if (!isNaN(heightValue)) {
-        // Make bars much shorter - reduce to 30% of original height
-        bar.style.height = `${Math.max(heightValue * 0.3, 5)}px`;
-        bar.style.maxHeight = '30px';
-      }
+    console.log('Financials slide PDF generated successfully');
+    return slidePdfPath;
+    
+  } catch (error) {
+    console.error('Error processing financials slide:', error);
+    
+    // Fallback: Create a simple PDF with text indicating the financials slide
+    console.log('Creating fallback PDF for financials slide...');
+    
+    // Create a blank page with text
+    await page.setContent(`
+      <html>
+        <body style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif; background-color: #1e293b;">
+          <div style="text-align: center; color: white;">
+            <h1>Financials</h1>
+            <p>Slide 11 of 13</p>
+            <p style="color: #aaa; margin-top: 20px;">Note: This is a fallback slide due to rendering issues.</p>
+          </div>
+        </body>
+      </html>
+    `);
+    
+    // Generate a fallback PDF
+    const fallbackPath = path.join(slidesPdfDir, `slide-10-fallback.pdf`); // Changed from 11 to 10
+    await page.pdf({
+      path: fallbackPath,
+      format: 'A4',
+      landscape: true,
+      printBackground: true
     });
     
-    // Ensure all cards are visible but compact
-    const cards = document.querySelectorAll('.financials-slide .card');
-    cards.forEach(card => {
-      card.style.height = 'auto';
-      card.style.minHeight = '80px';
-      card.style.overflow = 'visible';
-      card.style.padding = '0.4rem';
-      card.style.margin = '0.1rem';
-    });
-    
-    // Reduce font size for better fit
-    const textElements = document.querySelectorAll('.financials-slide p, .financials-slide li, .financials-slide div:not(.slide):not(.slide-container)');
-    textElements.forEach(el => {
-      const currentSize = window.getComputedStyle(el).fontSize;
-      const size = parseFloat(currentSize);
-      if (size > 7) {
-        el.style.fontSize = `${size * 0.7}px`;
-      }
-    });
-    
-    // Make chart containers shorter
-    const chartContainers = document.querySelectorAll('.financials-slide .card > div[style*="position: relative"]');
-    chartContainers.forEach(container => {
-      container.style.height = '120px';
-      container.style.maxHeight = '120px';
-    });
-  });
-  
-  // Take a screenshot to verify what's being captured
-  const screenshotPath = path.join(slidesPdfDir, `slide-11-special.png`);
-  await page.screenshot({ path: screenshotPath });
-  
-  // Create PDF with the same settings as other slides, just with a slightly smaller scale
-  const slidePdfPath = path.join(slidesPdfDir, `slide-11-special.pdf`);
-  await page.pdf({
-    path: slidePdfPath,
-    format: 'A4',
-    landscape: true,
-    printBackground: true,
-    margin: { top: '0.4cm', right: '0.4cm', bottom: '0.4cm', left: '0.4cm' },
-    scale: 0.8, // Use a consistent scale with other slides
-    pageRanges: '1'
-  });
-  
-  await page.close();
-  
-  return slidePdfPath;
+    console.log('Fallback PDF created for financials slide');
+    return fallbackPath;
+  } finally {
+    await page.close();
+  }
 }
 
 generatePDF();

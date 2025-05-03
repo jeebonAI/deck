@@ -13,7 +13,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
   const slideNumberText = `${slideNumber}/${totalSlides}`;
 
   // Add the founder highlight text
-  const founderHighlight = "Founder & Technical Visionary";
+  const founderHighlight = "$100M+ in Tech Projects Delivered";
 
   const team = [
     {

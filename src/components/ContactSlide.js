@@ -48,7 +48,7 @@ function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
   const contactInfo = [
     {
       icon: "✉",
-      value: "contact@jiboni.com",
+      value: "contact@jeeboni.com",
       delay: 2.5
     },
     {
@@ -58,7 +58,7 @@ function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
     },
     {
       icon: "🌐",
-      value: "www.jiboni.com",
+      value: "www.jeeboni.com",
       delay: 4.5
     }
   ];

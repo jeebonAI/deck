@@ -28,3 +28,312 @@ body.pdf-mode div[style*="position:fixed"] {
     opacity: 0 !important;
   }
 }
+
+/* Global PDF mode styles for all slides */
+.pdf-mode .slide {
+  background-color: rgba(30, 41, 59, 0.8) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  width: 90% !important;
+  height: 90% !important;
+  margin: 0 auto !important;
+  transform: scale(0.9) !important;
+  transform-origin: top center !important;
+}
+
+/* Card styling for all slides */
+.pdf-mode .card {
+  background-color: rgba(42, 57, 80, 0.8) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+  overflow: visible !important;
+}
+
+/* Financials slide specific styles for PDF mode */
+.pdf-mode .financials-slide {
+  transform: scale(0.9) !important;
+  transform-origin: top center !important;
+  height: 90% !important;
+  width: 90% !important;
+  overflow: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  padding: 20px !important;
+  margin: 0 auto !important;
+  margin-top: 20px !important;
+  margin-bottom: 40px !important;
+}
+
+/* Title styling */
+.pdf-mode .financials-slide .title-with-underline {
+  margin-top: 10px !important;
+  padding-top: 10px !important;
+  font-size: 2rem !important;
+  margin-bottom: 1.5rem !important; /* Increased from 1rem to 1.5rem */
+  color: white !important;
+}
+
+/* Main container */
+.pdf-mode .financials-slide .flex-container {
+  height: auto !important;
+  min-height: 80% !important;
+  gap: 20px !important; /* Increased from 15px to 20px */
+  margin-top: 20px !important; /* Increased from 10px to 20px */
+  justify-content: space-between !important;
+  width: 95% !important;
+}
+
+/* Top row with charts */
+.pdf-mode .financials-slide .flex-container > div:first-child {
+  margin-bottom: 25px !important; /* Increased from 15px to 25px */
+  flex: 1.8 !important; /* Increased from 1.5 to 1.8 to make charts taller */
+  display: flex !important;
+  gap: 15px !important;
+}
+
+/* Bottom row with metrics */
+.pdf-mode .financials-slide .flex-container > div:last-child {
+  margin-top: 15px !important; /* Increased from 10px to 15px */
+  margin-bottom: 15px !important; /* Increased from 10px to 15px */
+  min-height: 150px !important;
+  gap: 15px !important;
+  flex: 1 !important;
+  height: auto !important;
+  display: flex !important;
+}
+
+/* Card styling - fix background color to match web version */
+.pdf-mode .financials-slide .card {
+  padding: 15px !important;
+  margin: 5px !important;
+  height: auto !important;
+  min-height: 220px !important;
+  background-color: rgba(42, 57, 80, 0.8) !important; /* Changed to match web version */
+  border-radius: 8px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+  overflow: visible !important;
+}
+
+/* Chart headings */
+.pdf-mode .financials-slide h3 {
+  font-size: 1.1rem !important; /* Increased from 1rem to 1.1rem */
+  margin-bottom: 15px !important; /* Increased from 10px to 15px */
+  margin-top: 5px !important;
+  text-align: center !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+/* Text elements */
+.pdf-mode .financials-slide p, 
+.pdf-mode .financials-slide li, 
+.pdf-mode .financials-slide div:not(.card):not(.chart-container):not(.slide-container):not(.slide):not(.flex-container) {
+  font-size: 0.85rem !important; /* Increased from 0.8rem to 0.85rem */
+  line-height: 1.4 !important; /* Increased from 1.3 to 1.4 */
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;
+  color: white !important;
+}
+
+/* Chart containers */
+.pdf-mode .financials-slide .card > div[style*="position: relative"] {
+  height: 220px !important; /* Increased from 200px to 220px */
+  min-height: 220px !important; /* Increased from 200px to 220px */
+  max-height: 280px !important; /* Increased from 250px to 280px */
+  transform: none !important;
+  padding-bottom: 15px !important; /* Increased from 10px to 15px */
+  margin-bottom: 15px !important; /* Increased from 10px to 15px */
+}
+
+/* Chart bars - ensure they're visible */
+.pdf-mode .financials-slide [style*="height"][style*="%"] {
+  min-height: 5px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Chart labels - ensure they're visible */
+.pdf-mode .financials-slide [style*="position: absolute"][style*="transform"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Chart values - make them more visible but smaller */
+.pdf-mode .financials-slide [style*="fontSize"] {
+  font-size: 0.4rem;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Remove the previous specific targeting that might be causing conflicts */
+/* 
+.pdf-mode .financials-slide [style*="fontSize"][style*="0.45rem"],
+.pdf-mode .financials-slide [style*="fontSize"][style*="0.55rem"],
+.pdf-mode .financials-slide [style*="fontSize"][style*="0.65rem"] {
+  font-size: 0.5rem !important;
+  color: white !important;
+  font-weight: bold !important;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.8) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+*/
+
+/* Specifically target the negative values (costs) with smaller font */
+.pdf-mode .financials-slide [style*="top"][style*="%"] {
+  font-size: 0.4rem;
+}
+
+/* Specifically target the positive values (revenue and profit) with smaller font */
+.pdf-mode .financials-slide [style*="bottom"][style*="%"] {
+  font-size: 0.4rem;
+}
+
+/* Add spacing between overlapping labels */
+.pdf-mode .financials-slide [style*="position: absolute"] {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+/* Year labels */
+.pdf-mode .financials-slide .card div[style*="marginTop"] {
+  margin-top: 8px !important; /* Increased from 5px to 8px */
+  font-size: 0.85rem !important; /* Increased from 0.8rem to 0.85rem */
+  position: absolute !important;
+  bottom: 5px !important;
+  width: 100% !important;
+  text-align: center !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+/* Chart bars */
+.pdf-mode .financials-slide [style*="backgroundColor"] {
+  opacity: 1 !important;
+}
+
+/* Slide number */
+.pdf-mode .financials-slide .slide-number {
+  position: absolute !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 100 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  background-color: rgba(69, 104, 220, 0.2) !important;
+  padding: 4px 8px !important;
+  border-radius: 12px !important;
+  font-size: 0.8rem !important;
+  font-weight: bold !important;
+  color: white !important;
+}
+
+/* Force all motion elements to be visible */
+.pdf-mode motion, 
+.pdf-mode .motion,
+.pdf-mode [class*="motion"] {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* Force all chart elements to be visible */
+.pdf-mode .financials-slide [style*="height"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure chart bars are colored properly */
+.pdf-mode .financials-slide [style*="backgroundColor: var(--jiboni-primary)"] {
+  background-color: #4568dc !important;
+}
+
+.pdf-mode .financials-slide [style*="backgroundColor: rgba(255, 193, 7, 0.8)"] {
+  background-color: rgba(255, 193, 7, 0.9) !important;
+}
+
+.pdf-mode .financials-slide [style*="backgroundColor: rgba(46, 213, 115, 0.8)"] {
+  background-color: rgba(46, 213, 115, 0.9) !important;
+}
+
+/* Ensure chart axis labels are visible */
+.pdf-mode .financials-slide [style*="position: absolute"][style*="top"][style*="%"][style*="right"] {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: bold !important;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Fix for the 0 axis line alignment */
+.pdf-mode .financials-slide [style*="position: absolute"][style*="top: '50%'"] {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Reduce spacing between bullet points in notes section */
+.pdf-mode .financials-slide motion.div[style*="fontSize: '0.7rem'"],
+.pdf-mode .financials-slide [style*="fontSize: '0.7rem'"] {
+  margin-bottom: 2px !important; /* Reduced from 4px to 2px */
+  line-height: 1.1 !important; /* Reduced from 1.2 to 1.1 */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Further reduce spacing between bullet points */
+.pdf-mode .financials-slide [style*="marginBottom: '1rem'"] {
+  margin-bottom: 0.3rem !important; /* Reduced from 0.5rem to 0.3rem */
+}
+
+/* Reduce spacing in bullet point containers */
+.pdf-mode .financials-slide [style*="display: flex"][style*="alignItems: 'flex-start'"] {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Make bullet points smaller */
+.pdf-mode .financials-slide [style*="minWidth: '6px'"][style*="height: '6px'"] {
+  min-width: 4px !important;
+  height: 4px !important;
+  margin-top: 4px !important; /* Adjust vertical alignment */
+}
+
+/* Compact the notes section container */
+.pdf-mode .financials-slide [style*="display: 'flex'"][style*="flexDirection: 'column'"][style*="gap: '3px'"] {
+  gap: 1px !important;
+}
+
+/* Ask slide specific styles for PDF mode */
+.pdf-mode .ask-slide {
+  transform: scale(0.9) !important;
+  transform-origin: top center !important;
+  width: 90% !important;
+  height: 90% !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+/* Make sure the Ask slide content is properly sized */
+.pdf-mode .ask-slide > div {
+  width: 100% !important;
+  max-width: 1000px !important;
+}
+
+/* Ensure consistent styling for both slides */
+.pdf-mode .financials-slide,
+.pdf-mode .ask-slide {
+  width: 90% !important;
+  height: 90% !important;
+  margin: 0 auto !important;
+  background-color: rgba(30, 41, 59, 0.8) !important;
+}

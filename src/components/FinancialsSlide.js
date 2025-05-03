@@ -9,146 +9,50 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
     registerSlideSteps(1);
   }, [registerSlideSteps]);
 
-  // Add PDF mode detection and handling
+  // Improve PDF mode handling for financials slide
   useEffect(() => {
     // Check if we're in PDF mode
     const isPdfMode = document.body.classList.contains('pdf-mode') || 
                       new URLSearchParams(window.location.search).get('pdf') === 'true';
     
     if (isPdfMode) {
+      // Add PDF mode class to body
+      document.body.classList.add('pdf-mode');
+      
       // Force all animations to complete immediately
       const forceAnimationsComplete = setTimeout(() => {
-        // Apply PDF-specific styles to ensure all content is visible
+        // Force all animations to complete
+        const motionElements = document.querySelectorAll('.financials-slide motion, .financials-slide [class*="motion"]');
+        motionElements.forEach(el => {
+          if (el.style) {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            el.style.visibility = 'visible';
+          }
+        });
+        
+        // Force all chart bars to be visible
+        const chartBars = document.querySelectorAll('.financials-slide [style*="height"]');
+        chartBars.forEach(el => {
+          if (el.style) {
+            el.style.opacity = '1';
+            el.style.visibility = 'visible';
+          }
+        });
+        
+        // Ensure slide number is visible
         const slideElement = document.querySelector('.financials-slide');
         if (slideElement) {
-          // Adjust the container itself to match other slides
-          slideElement.style.transform = 'scale(0.9)';
-          slideElement.style.transformOrigin = 'center center';
-          slideElement.style.height = '75%'; // Further reduced from 80% to 75% to add more bottom margin
-          slideElement.style.width = '100%';
-          slideElement.style.overflow = 'visible';
-          slideElement.style.display = 'flex';
-          slideElement.style.flexDirection = 'column';
-          slideElement.style.justifyContent = 'flex-start';
-          slideElement.style.alignItems = 'center';
-          slideElement.style.padding = '20px';
-          slideElement.style.margin = '0 auto';
-          slideElement.style.marginTop = '70px'; // Keep top margin
-          slideElement.style.marginBottom = '70px'; // Increased bottom margin from 50px to 70px
-          
-          // Adjust the title position
-          const title = slideElement.querySelector('.title-with-underline');
-          if (title) {
-            title.style.marginTop = '0';
-            title.style.marginBottom = '15px'; // Reduced margin below title
+          let slideNumber = slideElement.querySelector('.slide-number');
+          if (!slideNumber) {
+            slideNumber = document.createElement('div');
+            slideNumber.className = 'slide-number';
+            slideNumber.textContent = '11/13'; // Financials is slide 11 of 13
+            slideElement.appendChild(slideNumber);
           }
           
-          // Adjust the flex container
-          const flexContainer = slideElement.querySelector('.flex-container');
-          if (flexContainer) {
-            flexContainer.style.height = 'auto';
-            flexContainer.style.width = '100%';
-            flexContainer.style.maxWidth = '1000px';
-            flexContainer.style.gap = '15px'; // Further reduced gap between rows
-            flexContainer.style.justifyContent = 'flex-start';
-            flexContainer.style.alignItems = 'stretch';
-            flexContainer.style.margin = '0 auto';
-            flexContainer.style.marginTop = '5px';
-          }
-          
-          // Adjust top row
-          const topRow = slideElement.querySelector('.flex-container > div:first-child');
-          if (topRow) {
-            topRow.style.flex = '2.5'; // Increased from 2 to 2.5
-            topRow.style.marginBottom = '5px'; // Reduced margin
-            topRow.style.minHeight = '300px'; // Increased height from 260px to 300px
-            topRow.style.maxHeight = '320px'; // Increased height from 280px to 320px
-            topRow.style.width = '100%';
-            topRow.style.display = 'flex';
-            topRow.style.justifyContent = 'space-between';
-          }
-          
-          // Adjust bottom row - give more height for text
-          const bottomRow = slideElement.querySelector('.flex-container > div:last-child');
-          if (bottomRow) {
-            bottomRow.style.flex = '2'; // Increased from 1.8 to 2
-            bottomRow.style.marginTop = '5px';
-            bottomRow.style.display = 'flex';
-            bottomRow.style.visibility = 'visible';
-            bottomRow.style.minHeight = '280px'; // Increased height from 240px to 280px
-            bottomRow.style.maxHeight = '300px'; // Increased height from 260px to 300px
-            bottomRow.style.width = '100%';
-            bottomRow.style.justifyContent = 'space-between';
-          }
-          
-          // Adjust the chart containers to be taller
-          const chartContainers = slideElement.querySelectorAll('.card > div[style*="position: relative"]');
-          chartContainers.forEach(container => {
-            container.style.height = '100%'; // Make sure it takes full height
-            container.style.minHeight = '250px'; // Set minimum height
-          });
-          
-          // Make bottom cards more spacious
-          const bottomCards = bottomRow.querySelectorAll('.card');
-          bottomCards.forEach(card => {
-            card.style.overflow = 'visible';
-            card.style.height = 'auto';
-            card.style.padding = '15px'; // Increased padding
-            card.style.margin = '0';
-            card.style.display = 'flex';
-            card.style.flexDirection = 'column';
-            card.style.justifyContent = 'space-between';
-          });
-          
-          // Adjust font sizes in bottom row to fit better
-          const bottomTexts = bottomRow.querySelectorAll('div, p, span, h3');
-          bottomTexts.forEach(text => {
-            text.style.fontSize = '0.85rem'; // Increased font size
-            text.style.lineHeight = '1.4'; // Increased line height
-            text.style.marginBottom = '5px'; // More space between lines
-          });
-          
-          // Specifically target the Strategic Notes section to ensure all points are visible
-          const strategicNotes = bottomRow.querySelector('.card:last-child');
-          if (strategicNotes) {
-            strategicNotes.style.minHeight = '240px'; // Increased height
-            strategicNotes.style.flex = '1.8'; // Give even more space to notes section
-            strategicNotes.style.overflow = 'visible';
-            
-            // Make sure all note items are visible with reduced spacing
-            const noteItems = strategicNotes.querySelectorAll('div[style*="display: flex"]');
-            noteItems.forEach(item => {
-              item.style.marginBottom = '5px'; // Reduced space between bullet points
-              item.style.opacity = '1';
-              item.style.visibility = 'visible';
-              item.style.display = 'flex !important';
-              
-              // Reduce font size slightly to fit more content
-              const textElement = item.querySelector('div:last-child');
-              if (textElement) {
-                textElement.style.fontSize = '0.7rem';
-                textElement.style.lineHeight = '1.2';
-              }
-            });
-          }
-          
-          // Adjust the Key Metrics section
-          const keyMetrics = bottomRow.querySelector('.card:first-child');
-          if (keyMetrics) {
-            keyMetrics.style.flex = '0.8'; // Further reduced flex to give more space to notes
-            keyMetrics.style.minHeight = '240px'; // Match height
-          }
-          
-          // Adjust the chart bar heights moderately
-          const chartBars = slideElement.querySelectorAll('motion.div[style*="height"]');
-          chartBars.forEach(bar => {
-            const heightStyle = bar.style.height;
-            if (heightStyle && heightStyle.includes('%')) {
-              const heightPercent = parseFloat(heightStyle);
-              const newHeight = Math.max(heightPercent * 0.7, 3) + '%'; // Less reduction
-              bar.style.height = newHeight;
-            }
-          });
+          // Add a class to indicate this slide is ready for PDF
+          slideElement.classList.add('pdf-ready');
         }
       }, 1000);
       
@@ -386,7 +290,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
               }}>
                 <div style={{ position: 'absolute', top: '15%', right: '5px', marginTop: '-10px' }}>$2M</div>
                 <div style={{ position: 'absolute', top: '32%', right: '5px', marginTop: '-10px' }}>$1M</div>
-                <div style={{ position: 'absolute', top: '50%', right: '5px', marginTop: '-10px' }}>$0</div>
+                <div style={{ position: 'absolute', top: '50%', right: '5px', marginTop: '-10px', transform: 'translateY(-50%)' }}>$0</div>
                 <div style={{ position: 'absolute', top: '70%', right: '5px', marginTop: '-10px' }}>-$1M</div>
               </div>
 

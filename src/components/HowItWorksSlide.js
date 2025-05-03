@@ -93,7 +93,7 @@ function HowItWorksSlide({ registerSlideSteps, currentStep, totalSlides, showSli
               lineHeight: '1.4' // Reduced line height
             }}
           >
-            We are developing <strong>proprietary productivity AI Agent for users</strong> to prompt the most needed information of their connections, memories and legacies through an intuitive interface.
+            We are developing <strong>a proprietary productivity AI Agent for users</strong> to prompt the most needed information of their connections, memories and legacies through an intuitive interface.
           </motion.div>
           
           {/* Workflow steps */}
@@ -199,35 +199,63 @@ function HowItWorksSlide({ registerSlideSteps, currentStep, totalSlides, showSli
           }}>
             {/* App header */}
             <div style={{ 
-              padding: '10px 12px', // Reduced padding
+              padding: '10px 12px',
               display: 'flex', 
               justifyContent: 'space-between',
               alignItems: 'center',
-              borderBottom: '1px solid #eee'
+              borderBottom: '1px solid #eee',
+              backgroundColor: 'white'
             }}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
+                {/* Logo - concentric circles */}
                 <div style={{ 
-                  width: '24px', // Reduced size
-                  height: '24px', // Reduced size
-                  borderRadius: '50%', 
-                  background: '#333',
-                  marginRight: '8px', // Reduced margin
+                  width: '24px',
+                  height: '24px',
+                  marginRight: '8px',
+                  position: 'relative',
                   display: 'flex',
                   justifyContent: 'center',
-                  alignItems: 'center',
-                  color: 'white',
-                  fontSize: '12px', // Reduced font size
-                  fontWeight: 'bold'
-                }}>J</div>
-                <div style={{ fontWeight: 'bold', fontSize: '14px' }}>Jeeboni</div>
+                  alignItems: 'center'
+                }}>
+                  {/* Outer circle */}
+                  <div style={{
+                    position: 'absolute',
+                    width: '22px',
+                    height: '22px',
+                    borderRadius: '50%',
+                    border: '2px solid #000',
+                  }}></div>
+                  {/* Middle circle */}
+                  <div style={{
+                    position: 'absolute',
+                    width: '14px',
+                    height: '14px',
+                    borderRadius: '50%',
+                    border: '2px solid #000',
+                  }}></div>
+                  {/* Inner circle/dot */}
+                  <div style={{
+                    position: 'absolute',
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    backgroundColor: '#000',
+                  }}></div>
+                </div>
+                {/* Text "Jiboni" */}
+                <div style={{ 
+                  fontWeight: 'bold', 
+                  fontSize: '16px',
+                  color: '#000'
+                }}>Jiboni</div>
               </div>
               <div style={{ 
-                width: '20px', // Reduced size
-                height: '20px', // Reduced size
+                width: '20px',
+                height: '20px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                padding: '4px 0' // Reduced padding
+                padding: '4px 0'
               }}>
                 <div style={{ height: '2px', background: '#333', width: '100%' }}></div>
                 <div style={{ height: '2px', background: '#333', width: '100%' }}></div>
