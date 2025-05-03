@@ -24,7 +24,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
           // Adjust the container itself to match other slides
           slideElement.style.transform = 'scale(0.9)';
           slideElement.style.transformOrigin = 'center center';
-          slideElement.style.height = '80%'; // Reduced from 85% to 80% to add more bottom margin
+          slideElement.style.height = '75%'; // Further reduced from 80% to 75% to add more bottom margin
           slideElement.style.width = '100%';
           slideElement.style.overflow = 'visible';
           slideElement.style.display = 'flex';
@@ -34,7 +34,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
           slideElement.style.padding = '20px';
           slideElement.style.margin = '0 auto';
           slideElement.style.marginTop = '70px'; // Keep top margin
-          slideElement.style.marginBottom = '50px'; // Add bottom margin
+          slideElement.style.marginBottom = '70px'; // Increased bottom margin from 50px to 70px
           
           // Adjust the title position
           const title = slideElement.querySelector('.title-with-underline');
@@ -181,11 +181,11 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
       alignItems: 'center',
       justifyContent: 'flex-start',
       width: '100%',
-      height: '80%', // Reduced from 85% to 80% to add more bottom margin
+      height: '75%', // Further reduced from 80% to 75% to add more bottom margin
       padding: '2rem',
       margin: '0 auto',
       marginTop: '70px',
-      marginBottom: '50px' // Add bottom margin
+      marginBottom: '70px' // Increased bottom margin from 50px to 70px
     }}>
       <AnimatedTitleWithUnderline title="Financials" />
       
@@ -674,14 +674,14 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
             style={{ 
-              flex: 0.8, // Reduced from 1 to 0.8
-              maxWidth: '32%', // Reduced from 35% to 32%
-              minHeight: '240px' // Increased height
+              flex: 1.2, // Increased from 0.8 to 1.2
+              minWidth: '40%', // Added minimum width
+              minHeight: '240px'
             }}
           >
             <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Key Metrics</h3>
             
-            {/* Key metrics content - horizontal layout */}
+            {/* Key metrics content - adjust font size and line height */}
             <div style={{ 
               display: 'flex',
               flexDirection: 'column',
@@ -695,7 +695,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                 alignItems: 'center',
                 height: '25px'
               }}>
-                <div style={{ width: '120px', fontSize: '0.8rem', whiteSpace: 'nowrap' }}>Annual Churn:</div>
+                <div style={{ width: '120px', fontSize: '0.8rem', whiteSpace: 'normal' }}>Annual Churn:</div>
                 <div style={{ 
                   flex: 1,
                   display: 'flex',
@@ -791,8 +791,8 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}
             style={{ 
-              flex: 1.8, // Increased from 1.5 to 1.8
-              minHeight: '240px' // Increased height
+              flex: 1.4, // Reduced from 1.8 to 1.4
+              minHeight: '240px'
             }}
           >
             <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Strategic Notes</h3>
