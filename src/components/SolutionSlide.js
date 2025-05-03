@@ -46,7 +46,7 @@ function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalize
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               style={{
-                fontSize: '1.1rem',
+                fontSize: '2rem', // Increased from 1.1rem to 1.3rem
                 lineHeight: '2',
                 maxWidth: '1000px',
                 margin: '1rem auto 2rem',
@@ -56,7 +56,7 @@ function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalize
                 padding: '0 1.5rem'
               }}
             >
-              Jeebon is a Personal AI Agent enabling <strong>AI memory management</strong>, <strong>AI connection management</strong> and <strong>AI family history management</strong>, reducing the need for screentime by leveraging AI indexing and interfaces, <strong>freeing upto 40% of time lost</strong> to regain real world engagement.
+              Jeebon is a Personal AI Agent enabling <strong>AI memory management</strong>, <strong>AI connection management</strong> and <strong>AI family tree management</strong>, reducing the need for screentime by leveraging AI indexing and interfaces, <strong>freeing upto 40% of time lost</strong> to regain real world engagement.
             </motion.div>
           </>
         )}

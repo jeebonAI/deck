@@ -7,9 +7,9 @@ function ProblemSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
   const problemStatement = (
     <>
       Over <strong>5 billion internet users</strong> worldwide spend an average of <strong>7 hours per day</strong> on digital applications, leading to widespread <strong>digital disconnect</strong> from real-world experiences, <strong>passive consumption</strong> of content, <strong>fragmentation of personal histories</strong>, and <strong>difficulties in managing social connections</strong>. This excessive screen time results in significant <strong>productivity losses</strong>, with the US alone experiencing an annual <strong>cost of $86.3 billion</strong>, highlighting the global economic and social impact of these issues.*
-      <br /><br /><br /><br />
+      <br/>
       <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>
-        * The Impact of Unmanaged excessive screen time in the United States, American Optometric Association 2024
+        * "The Impact of Unmanaged excessive screen time in the United States", American Optometric Association 2024
       </span>
     </>
   );
@@ -57,7 +57,7 @@ function ProblemSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               style={{
-                fontSize: '1.1rem',
+                fontSize: '1.5rem', // Increased from 1.1rem to 1.3rem
                 lineHeight: '2',
                 maxWidth: '1000px',
                 margin: '1rem auto 2rem',

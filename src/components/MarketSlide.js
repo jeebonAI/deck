@@ -10,8 +10,8 @@ function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNu
   // Market summary statement
   const marketSummary = (
     <>
-      Our <strong>total market is over 450 million from disconnected social media users</strong>. The initial focus is on users already looking to reconnect with their circles and families, 
-      representing a <strong>$4.2 million/year opportunity</strong>.
+      Our <strong>total market is over 450 million from disconnected social media users</strong>. <br/>The initial focus is on users already looking to reconnect with their circles and families, 
+      <br/>representing a <strong>$4.2 million/year opportunity</strong>.
     </>
   );
 
