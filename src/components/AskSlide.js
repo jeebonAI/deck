@@ -28,9 +28,9 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
   }, []);
 
   const fundUse = [
-    { category: "Core Product & AI Dev", percentage: 35, color: "var(--jiboni-primary)" },
-    { category: "Founder Salary & Initial Team", percentage: 35, color: "var(--jiboni-secondary)" },
-    { category: "User Acquisition / Marketing", percentage: 20, color: "var(--jiboni-accent)" },
+    { category: "Core Product & AI Resources", percentage: 25, color: "var(--jiboni-primary)" },
+    { category: "Team & Development", percentage: 40, color: "var(--jiboni-secondary)" },
+    { category: "User Acquisition / Marketing", percentage: 25, color: "var(--jiboni-accent)" },
     { category: "Operations / Setup", percentage: 10, color: "#64B5F6" }
   ];
 
@@ -58,9 +58,9 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
       }}>
         {slideNumberText}
       </div>
-      
+
       <AnimatedTitleWithUnderline title="The Ask" />
-      
+
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -76,14 +76,14 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
         }}
       >
         <h3 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
-          <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$500,000</span>
+          <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$1,000,000</span>
         </h3>
         <p style={{ fontSize: '1.3rem', margin: '0.5rem 0' }}>Pre-Seed Funding</p>
         <p style={{ fontSize: '1.1rem', opacity: 0.9, margin: '0.5rem 0' }}>
-          (12-24 months runway)
+          (18-24 months runway)
         </p>
       </motion.div>
-      
+
       <div style={{ 
         display: 'flex',
         width: '90%',

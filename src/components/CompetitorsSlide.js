@@ -48,7 +48,7 @@ function CompetitorsSlide({ registerSlideSteps, currentStep, businessName, total
       shortDescription: "Knowledge-fixated. Ignores broader connection needs"
     },
     {
-      name: businessName || "Jeeboni",
+      name: businessName || "Jeebon",
       description: "Complete integrated platform for meaningful connections",
       features: {
         communication: true,
@@ -120,7 +120,7 @@ function CompetitorsSlide({ registerSlideSteps, currentStep, businessName, total
             }}
           >
             <span style={{ fontWeight: 'normal', opacity: 0.9 }}>
-              Jeeboni is addressing the <strong style={{ fontSize: '1.3rem' }}>73% of people</strong> who find <strong>digital life too fragmented</strong> with an integrated platform, not another app.
+              Jeebon is addressing the <strong style={{ fontSize: '1.3rem' }}>73% of people</strong> who find <strong>digital life too fragmented</strong> with an integrated platform, not another app.
             </span>
           </motion.div>
           
@@ -299,7 +299,7 @@ function CompetitorsSlide({ registerSlideSteps, currentStep, businessName, total
               border: '2px solid #2ED573'
             }}
           >
-            <span style={{ fontWeight: 'bold', color: '#2ED573' }}>Jeeboni</span> is the only platform that offers <span style={{ fontWeight: 'bold' }}>all five key features</span> in one integrated solution.
+            <span style={{ fontWeight: 'bold', color: '#2ED573' }}>Jeebon</span> is the only platform that offers <span style={{ fontWeight: 'bold' }}>all five key features</span> in one integrated solution.
           </motion.div>
         </>
       )}

@@ -65,7 +65,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
   
   // These values match the short-version.md data
   const revenue = [0, 27, 342, 1100, 2600]; // in thousands ($k)
-  const costs = [180, 220, 400, 650, 1000]; // in thousands ($k)
+  const costs = [360, 440, 480, 650, 1000]; // in thousands ($k)
   const netProfit = revenue.map((rev, i) => rev - costs[i]); // Calculate net profit
   const users = [10, 25, 200, 600, 1500]; // in thousands (k)
   
