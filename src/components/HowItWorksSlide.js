@@ -247,7 +247,7 @@ function HowItWorksSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                   fontWeight: 'bold', 
                   fontSize: '16px',
                   color: '#000'
-                }}>Jiboni</div>
+                }}>Jeebon</div>
               </div>
               <div style={{ 
                 width: '20px',
