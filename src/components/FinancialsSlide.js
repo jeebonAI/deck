@@ -18,18 +18,109 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
     if (isPdfMode) {
       // Force all animations to complete immediately
       const forceAnimationsComplete = setTimeout(() => {
-        const motionElements = document.querySelectorAll('.financials-slide motion');
-        motionElements.forEach(el => {
-          if (el.style) {
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-            if (el.style.height && el.style.height.includes('%')) {
-              // Ensure height is explicitly set for chart bars
-              el.style.height = el.style.height;
-            }
+        // Apply PDF-specific styles to ensure all content is visible
+        const slideElement = document.querySelector('.financials-slide');
+        if (slideElement) {
+          // Adjust top spacing to match other slides
+          slideElement.style.transform = 'scale(0.9)';
+          slideElement.style.transformOrigin = 'center center';
+          slideElement.style.height = '100%';
+          slideElement.style.width = '100%';
+          slideElement.style.overflow = 'visible';
+          slideElement.style.display = 'flex';
+          slideElement.style.flexDirection = 'column';
+          slideElement.style.justifyContent = 'flex-start'; // Changed from center to flex-start
+          slideElement.style.alignItems = 'center';
+          slideElement.style.padding = '20px';
+          slideElement.style.paddingTop = '40px'; // Increased top padding
+          slideElement.style.margin = '0 auto';
+          
+          // Adjust the title position
+          const title = slideElement.querySelector('.title-with-underline');
+          if (title) {
+            title.style.marginTop = '0';
+            title.style.marginBottom = '30px'; // Increased margin below title
           }
-        });
-      }, 1000); // Give a second for initial render
+          
+          // Adjust the flex container
+          const flexContainer = slideElement.querySelector('.flex-container');
+          if (flexContainer) {
+            flexContainer.style.height = 'auto';
+            flexContainer.style.width = '100%';
+            flexContainer.style.maxWidth = '1000px';
+            flexContainer.style.gap = '30px';
+            flexContainer.style.justifyContent = 'space-between';
+            flexContainer.style.alignItems = 'stretch';
+            flexContainer.style.margin = '0 auto';
+            flexContainer.style.marginTop = '0'; // Removed margin top
+          }
+          
+          // Adjust top row
+          const topRow = slideElement.querySelector('.flex-container > div:first-child');
+          if (topRow) {
+            topRow.style.flex = '2.5';
+            topRow.style.marginBottom = '10px';
+            topRow.style.minHeight = '280px';
+            topRow.style.maxHeight = '320px';
+            topRow.style.width = '100%';
+            topRow.style.display = 'flex';
+            topRow.style.justifyContent = 'space-between';
+          }
+          
+          // Adjust bottom row - give more height for text
+          const bottomRow = slideElement.querySelector('.flex-container > div:last-child');
+          if (bottomRow) {
+            bottomRow.style.flex = '1';
+            bottomRow.style.marginTop = '10px';
+            bottomRow.style.display = 'flex';
+            bottomRow.style.visibility = 'visible';
+            bottomRow.style.minHeight = '160px'; // Increased height
+            bottomRow.style.maxHeight = '180px'; // Increased height
+            bottomRow.style.width = '100%';
+            bottomRow.style.justifyContent = 'space-between';
+          }
+          
+          // Make bottom cards more spacious
+          const bottomCards = bottomRow.querySelectorAll('.card');
+          bottomCards.forEach(card => {
+            card.style.overflow = 'visible';
+            card.style.height = 'auto';
+            card.style.padding = '15px'; // Increased padding
+            card.style.margin = '0';
+            card.style.display = 'flex';
+            card.style.flexDirection = 'column';
+            card.style.justifyContent = 'space-between';
+          });
+          
+          // Adjust font sizes in bottom row to fit better
+          const bottomTexts = bottomRow.querySelectorAll('div, p, span, h3');
+          bottomTexts.forEach(text => {
+            text.style.fontSize = '0.85rem'; // Increased font size
+            text.style.lineHeight = '1.4'; // Increased line height
+            text.style.marginBottom = '5px'; // More space between lines
+          });
+          
+          // Specifically target the Strategic Notes section to improve text fitting
+          const strategicNotes = bottomRow.querySelector('.card:last-child');
+          if (strategicNotes) {
+            const noteItems = strategicNotes.querySelectorAll('div[style*="display: flex"]');
+            noteItems.forEach(item => {
+              item.style.marginBottom = '8px'; // More space between bullet points
+            });
+          }
+          
+          // Adjust the chart bar heights moderately
+          const chartBars = slideElement.querySelectorAll('motion.div[style*="height"]');
+          chartBars.forEach(bar => {
+            const heightStyle = bar.style.height;
+            if (heightStyle && heightStyle.includes('%')) {
+              const heightPercent = parseFloat(heightStyle);
+              const newHeight = Math.max(heightPercent * 0.7, 3) + '%'; // Less reduction
+              bar.style.height = newHeight;
+            }
+          });
+        }
+      }, 1000);
       
       return () => clearTimeout(forceAnimationsComplete);
     }
@@ -61,19 +152,31 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
   };
 
   return (
-    <div className="slide financials-slide">
+    <div className="slide financials-slide" style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-start', // Changed from center to flex-start
+      width: '100%',
+      height: '100%',
+      padding: '2rem',
+      paddingTop: '3rem' // Increased top padding
+    }}>
       <AnimatedTitleWithUnderline title="Financials" />
       
       <div className="flex-container" style={{ 
         display: 'flex',
         flexDirection: 'column',
-        height: 'calc(100% - 60px)'
+        width: '100%',
+        height: 'calc(100% - 100px)', // Adjusted height
+        justifyContent: 'space-between',
+        marginTop: '10px' // Reduced margin top
       }}>
         {/* Top row with MAU and Revenue/Costs charts */}
         <div style={{ 
           display: 'flex', 
           flex: 3,
-          marginBottom: '0.5rem'
+          marginBottom: '1rem'
         }}>
           {/* MAU Chart */}
           <motion.div 
@@ -536,7 +639,8 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
         <div style={{ 
           display: 'flex', 
           flex: 1,
-          gap: '0.5rem'
+          gap: '0.5rem',
+          minHeight: '150px'
         }}>
           {/* Key Metrics */}
           <motion.div 
@@ -546,7 +650,8 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
             transition={{ duration: 0.6, delay: 0.7 }}
             style={{ 
               flex: 1,
-              maxWidth: '40%'
+              maxWidth: '40%',
+              minHeight: '120px'
             }}
           >
             <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Key Metrics</h3>
@@ -661,7 +766,8 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}
             style={{ 
-              flex: 1
+              flex: 1,
+              minHeight: '120px'
             }}
           >
             <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Strategic Notes</h3>
