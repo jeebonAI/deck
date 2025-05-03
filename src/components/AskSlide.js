@@ -34,14 +34,61 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
     { category: "Operations / Setup", percentage: 10, color: "#64B5F6" }
   ];
 
+  // Calculate the cumulative angles for the pie chart
+  const calculatePieSegments = () => {
+    let cumulativePercentage = 0;
+    return fundUse.map(item => {
+      const startAngle = cumulativePercentage * 3.6; // 3.6 degrees per percentage point (360 / 100)
+      cumulativePercentage += item.percentage;
+      const endAngle = cumulativePercentage * 3.6;
+      return {
+        ...item,
+        startAngle,
+        endAngle
+      };
+    });
+  };
+
+  const pieSegments = calculatePieSegments();
+
+  // Function to create the SVG path for a pie segment
+  const createPieSegment = (startAngle, endAngle, radius) => {
+    // Convert angles from degrees to radians
+    const startRad = (startAngle - 90) * Math.PI / 180;
+    const endRad = (endAngle - 90) * Math.PI / 180;
+    
+    const x1 = radius + radius * Math.cos(startRad);
+    const y1 = radius + radius * Math.sin(startRad);
+    const x2 = radius + radius * Math.cos(endRad);
+    const y2 = radius + radius * Math.sin(endRad);
+    
+    // Determine if the arc should be drawn the long way around
+    const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
+    
+    return `M${radius},${radius} L${x1},${y1} A${radius},${radius} 0 ${largeArcFlag} 1 ${x2},${y2} Z`;
+  };
+
+  // Function to calculate the position for text in each pie segment
+  const calculateTextPosition = (startAngle, endAngle, radius, textDistance = 0.6) => {
+    // Find the middle angle of the segment
+    const midAngle = (startAngle + endAngle) / 2;
+    // Convert to radians and adjust for SVG coordinate system
+    const midRad = (midAngle - 90) * Math.PI / 180;
+    // Calculate position at a certain distance from center (textDistance controls how far from center)
+    const x = radius + radius * textDistance * Math.cos(midRad);
+    const y = radius + radius * textDistance * Math.sin(midRad);
+    
+    return { x, y };
+  };
+
   return (
     <div className="slide ask-slide" style={{ 
       justifyContent: 'flex-start', 
       paddingTop: '2rem',
-      position: 'relative', // Added for absolute positioning of slide number
-      width: '90%', // Added to ensure consistent width
-      maxWidth: '1200px', // Added to match other slides
-      margin: '0 auto' // Center the slide
+      position: 'relative',
+      width: '90%',
+      maxWidth: '1200px',
+      margin: '0 auto'
     }}>
       {/* Slide number indicator */}
       <div className="slide-number" style={{
@@ -67,6 +114,7 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
         transition={{ duration: 0.7 }}
         style={{ 
           marginTop: '0.5rem',
+          marginBottom: '-1rem', // Reduced from default to move content up
           padding: '1.5rem',
           background: 'rgba(255, 255, 255, 0.08)',
           borderRadius: '16px',
@@ -76,7 +124,7 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
         }}
       >
         <h3 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
-          <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$1,000,000</span>
+          <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$1m - $1.1m</span>
         </h3>
         <p style={{ fontSize: '1.3rem', margin: '0.5rem 0' }}>Pre-Seed Funding</p>
         <p style={{ fontSize: '1.1rem', opacity: 0.9, margin: '0.5rem 0' }}>
@@ -88,7 +136,7 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
         display: 'flex',
         width: '90%',
         maxWidth: '1000px',
-        marginTop: '1rem',
+        marginTop: '0', // Reduced from 1rem to 0
         justifyContent: 'space-between',
         alignItems: 'flex-start'
       }}>
@@ -100,67 +148,102 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            style={{ marginBottom: '1rem', color: 'var(--jiboni-secondary)' }}
+            style={{ marginBottom: '0.5rem', color: 'var(--jiboni-secondary)' }} // Reduced from 1rem to 0.5rem
           >
             Use of Funds
           </motion.h3>
           
-          {fundUse.map((item, index) => (
+          {/* Pie Chart */}
+          <div style={{ 
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: '1rem'
+          }}>
+            {/* SVG Pie Chart */}
             <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ 
-                duration: 0.5, 
-                delay: 0.2 + (index * 0.2) // Shorter delays for quicker appearance
-              }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7 }}
               style={{ 
-                marginBottom: '1rem',
-                display: 'flex',
-                alignItems: 'center'
+                width: '280px', // Increased from 200px
+                height: '280px', // Increased from 200px
+                position: 'relative'
               }}
             >
-              <div style={{ 
-                width: '60px',
-                fontSize: '1.1rem',
-                fontWeight: '500',
-                paddingRight: '0.5rem'
-              }}>
-                {item.percentage}%
-              </div>
-              
-              <div style={{ flex: 1 }}>
-                <div style={{ 
-                  height: '10px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                  borderRadius: '5px',
-                  overflow: 'hidden'
-                }}>
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${item.percentage}%` }}
-                    transition={{ 
-                      duration: 1,
-                      delay: 0.3 + (index * 0.2) // Shorter delays
-                    }}
-                    style={{ 
-                      height: '100%',
-                      backgroundColor: item.color,
-                      borderRadius: '5px'
-                    }}
-                  />
-                </div>
-              </div>
-              
-              <div style={{ 
-                width: '200px',
-                paddingLeft: '0.5rem',
-                fontSize: '1rem'
-              }}>
-                {item.category}
-              </div>
+              <svg width="280" height="280" viewBox="0 0 280 280">
+                {pieSegments.map((segment, index) => (
+                  <motion.g key={index}>
+                    <motion.path
+                      d={createPieSegment(segment.startAngle, segment.endAngle, 140)} // Increased radius from 100
+                      fill={segment.color}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                      stroke="#1E293B"
+                      strokeWidth="1"
+                    />
+                    {/* Percentage text */}
+                    {(() => {
+                      const textPos = calculateTextPosition(segment.startAngle, segment.endAngle, 140);
+                      return (
+                        <motion.text
+                          x={textPos.x}
+                          y={textPos.y}
+                          textAnchor="middle"
+                          dominantBaseline="middle"
+                          fill="white"
+                          fontWeight="bold"
+                          fontSize="18"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                        >
+                          {segment.percentage}%
+                        </motion.text>
+                      );
+                    })()}
+                  </motion.g>
+                ))}
+              </svg>
             </motion.div>
-          ))}
+            
+            {/* Legend */}
+            <div style={{ marginLeft: '1.5rem', flex: 1 }}>
+              {fundUse.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  style={{ 
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginBottom: '0.8rem'
+                  }}
+                >
+                  <div style={{ 
+                    width: '16px',
+                    height: '16px',
+                    backgroundColor: item.color,
+                    marginRight: '10px',
+                    borderRadius: '3px'
+                  }}></div>
+                  <div style={{ flex: 1, fontSize: '0.95rem' }}>
+                    {item.category}
+                  </div>
+                  <div style={{ 
+                    width: '40px',
+                    textAlign: 'right',
+                    fontWeight: '500',
+                    fontSize: '1rem'
+                  }}>
+                    {item.percentage}%
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
         
         <motion.div

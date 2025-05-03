@@ -157,7 +157,7 @@ function HowItWorksSlide({ registerSlideSteps, currentStep, totalSlides, showSli
             transition={{ duration: 0.6, delay: 2.0 }}
             style={{ 
               marginTop: '-2.5rem', // Increased negative margin to move it further UP (from -1rem to -2.5rem)
-              marginBottom: '0', // Remove bottom margin
+              marginBottom: '3em', // Remove bottom margin
               fontSize: '1.2rem', // Maintain font size
               fontWeight: '500',
               color: '#2ED573', // Green color

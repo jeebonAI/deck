@@ -111,7 +111,7 @@ function CompetitorsSlide({ registerSlideSteps, currentStep, businessName, total
               marginTop: '1rem',
               marginBottom: '1.5rem',
               padding: '1rem 2rem',
-              background: 'rgba(0, 0, 0, 0.3)',
+              background: 'var(--jiboni-primary)',
               borderRadius: '30px',
               fontSize: '1.2rem',
               maxWidth: '90%',
@@ -120,7 +120,7 @@ function CompetitorsSlide({ registerSlideSteps, currentStep, businessName, total
             }}
           >
             <span style={{ fontWeight: 'normal', opacity: 0.9 }}>
-              Jeebon is addressing the <strong style={{ fontSize: '1.3rem' }}>73% of people</strong> who find <strong>digital life too fragmented</strong> with an integrated platform, not another app.
+              Jeebon is addressing the <strong style={{ fontSize: '1.3rem' }}>73% of people</strong> who find <strong>digital life too fragmented</strong><br/> with an integrated AI solution, not another app.
             </span>
           </motion.div>
           
@@ -299,7 +299,7 @@ function CompetitorsSlide({ registerSlideSteps, currentStep, businessName, total
               border: '2px solid #2ED573'
             }}
           >
-            <span style={{ fontWeight: 'bold', color: '#2ED573' }}>Jeebon</span> is the only platform that offers <span style={{ fontWeight: 'bold' }}>all five key features</span> in one integrated solution.
+            <span style={{ fontWeight: 'bold', color: '#2ED573' }}>Jeebon</span> is the only platform that offers <span style={{ fontWeight: 'bold' }}>all five key features</span> in one integrated platform.
           </motion.div>
         </>
       )}

@@ -10,8 +10,8 @@ function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNu
   // Market summary statement
   const marketSummary = (
     <>
-      Our <strong>total market is over 450 million from disconnected social media users</strong>. <br/>The initial focus is on users already looking to reconnect with their circles and families, 
-      <br/>representing a <strong>$4.2 million/year opportunity</strong>.
+      Our <strong>total market is over 450 million from disconnected social media users</strong>. <br/>The initial focus is on users already looking to reconnect<br/> with their circles and families, 
+      representing a <strong>$4.2 million/year opportunity</strong>.
     </>
   );
 
@@ -75,7 +75,7 @@ function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNu
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         style={{
-          fontSize: '1.1rem',
+          fontSize: '1.3rem',
           lineHeight: '1.8',
           maxWidth: '900px',
           margin: '0.5rem auto 2rem',

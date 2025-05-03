@@ -84,7 +84,7 @@ function TractionSlide({ registerSlideSteps, currentStep, totalSlides, showSlide
                 color: 'white'
               }}
             >
-              Demo of Product Launched in 1st 2 weeks of development!
+              Demo of Product Launched within the 1st 2 weeks of development!
               
             </motion.h3>
             
