@@ -7,10 +7,14 @@ import nayeemImage from '../assets/nayeem.png';
 import numanImage from '../assets/numan.jpeg';
 import eliasImage from '../assets/drelias.jpg';
 
-function TeamSlide({ registerSlideSteps, currentStep }) {
-  // Highlight for Nayeem
-  const founderHighlight = "$100M+ in Tech Projects Delivered";
-  
+function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
+  // Calculate slide number (Team is slide 10 in the deck)
+  const slideNumber = 10;
+  const slideNumberText = `${slideNumber}/${totalSlides}`;
+
+  // Add the founder highlight text
+  const founderHighlight = "Founder & Technical Visionary";
+
   const team = [
     {
       name: "Nayeem Syed",
@@ -69,7 +73,14 @@ function TeamSlide({ registerSlideSteps, currentStep }) {
   }, []);
 
   return (
-    <div className="slide team-slide">
+    <div className="slide team-slide" style={{ position: 'relative' }}>
+      {/* Slide number indicator - only show if showSlideNumber is true */}
+      {showSlideNumber && (
+        <div className="slide-number">
+          {slideNumberText}
+        </div>
+      )}
+      
       <AnimatedTitleWithUnderline title="Team" />
       
       <motion.div

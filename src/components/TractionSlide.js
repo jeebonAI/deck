@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
-function TractionSlide({ registerSlideSteps, currentStep }) {
+function TractionSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
   // Register just one step for this slide
   useEffect(() => {
     registerSlideSteps(1); // Show everything at once
@@ -21,6 +21,10 @@ function TractionSlide({ registerSlideSteps, currentStep }) {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+
+  // Calculate slide number (Traction is slide 9 in the deck)
+  const slideNumber = 9;
+  const slideNumberText = `${slideNumber}/${totalSlides}`;
 
   const mainPoints = [
     {
@@ -55,6 +59,13 @@ function TractionSlide({ registerSlideSteps, currentStep }) {
 
   return (
     <div className="slide traction-slide" style={{ position: 'relative', padding: '2rem 3rem' }}>
+      {/* Slide number indicator - only show if showSlideNumber is true */}
+      {showSlideNumber && (
+        <div className="slide-number">
+          {slideNumberText}
+        </div>
+      )}
+      
       <AnimatePresence>
         {currentStep >= 1 && (
           <>

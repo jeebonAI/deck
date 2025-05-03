@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
-function ProblemSlide({ registerSlideSteps, currentStep }) {
+function ProblemSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
   // Add the overall problem statement with bold elements
   const problemStatement = (
     <>
@@ -34,8 +34,19 @@ function ProblemSlide({ registerSlideSteps, currentStep }) {
     };
   }, []);
 
+  // Calculate slide number (Problem is slide 2 in the deck)
+  const slideNumber = 2;
+  const slideNumberText = `${slideNumber}/${totalSlides}`;
+
   return (
-    <div className="slide problem-slide">
+    <div className="slide problem-slide" style={{ position: 'relative' }}>
+      {/* Slide number indicator - only show if showSlideNumber is true */}
+      {showSlideNumber && (
+        <div className="slide-number">
+          {slideNumberText}
+        </div>
+      )}
+      
       <AnimatePresence>
         {currentStep >= 1 && (
           <>

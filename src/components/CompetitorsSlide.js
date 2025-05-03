@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
-function CompetitorsSlide({ registerSlideSteps, currentStep, businessName }) {
+function CompetitorsSlide({ registerSlideSteps, currentStep, businessName, totalSlides, showSlideNumber }) {
+  // Calculate slide number (Competitors is slide 8 in the deck)
+  const slideNumber = 8;
+  const slideNumberText = `${slideNumber}/${totalSlides}`;
+
   const competitors = [
     {
       name: "WhatsApp",
@@ -87,7 +91,14 @@ function CompetitorsSlide({ registerSlideSteps, currentStep, businessName }) {
   }, []);
 
   return (
-    <div className="slide competitors-slide">
+    <div className="slide competitors-slide" style={{ position: 'relative' }}>
+      {/* Slide number indicator - only show if showSlideNumber is true */}
+      {showSlideNumber && (
+        <div className="slide-number">
+          {slideNumberText}
+        </div>
+      )}
+      
       {currentStep >= 1 && (
         <>
           <AnimatedTitleWithUnderline title="Competitive Landscape" />

@@ -239,3 +239,24 @@ p {
   line-height: 1.5;
   flex: 1;
 }
+
+/* Add slide number styling */
+.slide-number {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: rgba(69, 104, 220, 0.2);
+  backdrop-filter: blur(4px);
+  font-weight: 500;
+  z-index: 10;
+}
+
+/* Adjust for PDF mode */
+.pdf-mode .slide-number {
+  bottom: -40px;
+  right: 20px;
+}

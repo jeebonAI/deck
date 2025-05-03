@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
-function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) {
+function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapitalized, totalSlides, showSlideNumber }) {
+  // Calculate slide number (Business Model is slide 6 in the deck)
+  const slideNumber = 6;
+  const slideNumberText = `${slideNumber}/${totalSlides}`;
+
   const tiers = [
     {
       title: "Free Core",
@@ -52,7 +56,14 @@ function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapit
   }, []);
 
   return (
-    <div className="slide business-model-slide">
+    <div className="slide business-model-slide" style={{ position: 'relative' }}>
+      {/* Slide number indicator - only show if showSlideNumber is true */}
+      {showSlideNumber && (
+        <div className="slide-number">
+          {slideNumberText}
+        </div>
+      )}
+      
       {currentStep >= 1 && (
         <>
           <AnimatedTitleWithUnderline title="Business Model: Freemium" />

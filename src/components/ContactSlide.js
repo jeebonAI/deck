@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
-function ContactSlide({ registerSlideSteps, businessNameCapitalized, businessName }) {
+function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
+  // Calculate slide number (Contact is slide 13 in the deck)
+  const slideNumber = 13;
+  const slideNumberText = `${slideNumber}/${totalSlides}`;
+
   // Register that this slide has only 1 step
   useEffect(() => {
     registerSlideSteps(1);
@@ -62,7 +66,14 @@ function ContactSlide({ registerSlideSteps, businessNameCapitalized, businessNam
   const socialPlatforms = ['LinkedIn', 'Twitter', 'Instagram'];
 
   return (
-    <div className="slide contact-slide">
+    <div className="slide contact-slide" style={{ position: 'relative' }}>
+      {/* Slide number indicator - only show if showSlideNumber is true */}
+      {showSlideNumber && (
+        <div className="slide-number">
+          {slideNumberText}
+        </div>
+      )}
+      
       <div className="gradient-background" style={{ opacity: 0.15 }} />
 
       <div

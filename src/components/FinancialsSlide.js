@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
-function FinancialsSlide({ registerSlideSteps, currentStep }) {
+function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
   // Register just one step for this slide
   useEffect(() => {
     registerSlideSteps(1);
@@ -59,10 +59,10 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
           // Adjust top row
           const topRow = slideElement.querySelector('.flex-container > div:first-child');
           if (topRow) {
-            topRow.style.flex = '2';
+            topRow.style.flex = '2.5'; // Increased from 2 to 2.5
             topRow.style.marginBottom = '5px'; // Reduced margin
-            topRow.style.minHeight = '260px'; // Reduced height
-            topRow.style.maxHeight = '280px'; // Reduced height
+            topRow.style.minHeight = '300px'; // Increased height from 260px to 300px
+            topRow.style.maxHeight = '320px'; // Increased height from 280px to 320px
             topRow.style.width = '100%';
             topRow.style.display = 'flex';
             topRow.style.justifyContent = 'space-between';
@@ -71,15 +71,22 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
           // Adjust bottom row - give more height for text
           const bottomRow = slideElement.querySelector('.flex-container > div:last-child');
           if (bottomRow) {
-            bottomRow.style.flex = '1.8'; // Increased flex to give even more space
+            bottomRow.style.flex = '2'; // Increased from 1.8 to 2
             bottomRow.style.marginTop = '5px';
             bottomRow.style.display = 'flex';
             bottomRow.style.visibility = 'visible';
-            bottomRow.style.minHeight = '240px'; // Increased height
-            bottomRow.style.maxHeight = '260px'; // Increased height
+            bottomRow.style.minHeight = '280px'; // Increased height from 240px to 280px
+            bottomRow.style.maxHeight = '300px'; // Increased height from 260px to 300px
             bottomRow.style.width = '100%';
             bottomRow.style.justifyContent = 'space-between';
           }
+          
+          // Adjust the chart containers to be taller
+          const chartContainers = slideElement.querySelectorAll('.card > div[style*="position: relative"]');
+          chartContainers.forEach(container => {
+            container.style.height = '100%'; // Make sure it takes full height
+            container.style.minHeight = '250px'; // Set minimum height
+          });
           
           // Make bottom cards more spacious
           const bottomCards = bottomRow.querySelectorAll('.card');
@@ -174,6 +181,10 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
     return `${num}K`;
   };
 
+  // Calculate slide number (Financials is slide 11 in the deck)
+  const slideNumber = 11;
+  const slideNumberText = `${slideNumber}/${totalSlides}`;
+
   return (
     <div className="slide financials-slide" style={{
       display: 'flex',
@@ -181,26 +192,45 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
       alignItems: 'center',
       justifyContent: 'flex-start',
       width: '100%',
-      height: '75%', // Further reduced from 80% to 75% to add more bottom margin
-      padding: '2rem',
+      height: '75%', // Reduced from 80% to 75%
+      padding: '1rem',
       margin: '0 auto',
-      marginTop: '70px',
-      marginBottom: '70px' // Increased bottom margin from 50px to 70px
+      marginTop: '20px', // Reduced from 30px to 20px to move everything up more
+      marginBottom: '40px',
+      position: 'relative'
     }}>
+      {/* Slide number indicator - only show if showSlideNumber is true */}
+      {showSlideNumber && (
+        <div className="slide-number" style={{
+          position: 'absolute',
+          bottom: '-40px',
+          right: '20px',
+          fontSize: '0.8rem',
+          color: 'rgba(255, 255, 255, 0.6)',
+          padding: '4px 8px',
+          borderRadius: '12px',
+          background: 'rgba(69, 104, 220, 0.2)',
+          backdropFilter: 'blur(4px)',
+          fontWeight: '500'
+        }}>
+          {slideNumberText}
+        </div>
+      )}
+      
       <AnimatedTitleWithUnderline title="Financials" />
       
       <div className="flex-container" style={{ 
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        height: 'calc(100% - 60px)',
+        height: 'calc(100% - 30px)', // Reduced from calc(100% - 40px)
         justifyContent: 'flex-start',
-        marginTop: '15px'
+        marginTop: '0px' // Reduced from 5px to 0px to move content closer to title
       }}>
         {/* Top row with MAU and Revenue/Costs charts */}
         <div style={{ 
           display: 'flex', 
-          flex: 1.8,
+          flex: 1.5, // Reduced from 1.8 to 1.5
           marginBottom: '0.5rem'
         }}>
           {/* MAU Chart */}
@@ -253,7 +283,8 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                 height: '100%', 
                 display: 'flex',
                 alignItems: 'flex-end',
-                gap: '10px'
+                gap: '10px',
+                minHeight: '220px' // Reduced from 280px to 220px
               }}>
                 {years.map((year, index) => (
                   <div 
@@ -663,31 +694,29 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
         {/* Bottom row with Key Metrics and Notes */}
         <div style={{ 
           display: 'flex', 
-          flex: 1.8, // Increased from 1.5 to 1.8
+          flex: 1,
           gap: '0.5rem',
-          minHeight: '240px' // Increased from 220px to 240px
+          minHeight: '180px'
         }}>
-          {/* Key Metrics */}
+          {/* Key Metrics - remove card styling */}
           <motion.div 
-            className="card"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
             style={{ 
-              flex: 1.2, // Increased from 0.8 to 1.2
-              minWidth: '40%', // Added minimum width
-              minHeight: '240px'
+              flex: 0.8,
+              minWidth: '40%',
+              minHeight: '180px',
+              padding: '1rem'
+              // Removed background, border-radius, box-shadow
             }}
           >
-            <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Key Metrics</h3>
-            
-            {/* Key metrics content - adjust font size and line height */}
             <div style={{ 
               display: 'flex',
               flexDirection: 'column',
-              height: 'calc(100% - 30px)',
+              height: 'calc(100% - 10px)',
               justifyContent: 'space-around',
-              gap: '12px'
+              gap: '4px'
             }}>
               {/* Annual Churn Rate */}
               <div style={{ 
@@ -726,85 +755,71 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                 </div>
               </div>
               
-              {/* Premium Conversion */}
+              {/* Premium Conversion - separate line */}
               <div style={{ 
                 display: 'flex',
                 alignItems: 'center',
-                height: '25px'
+                height: '10px'
               }}>
-                <div style={{ width: '120px', fontSize: '0.8rem', whiteSpace: 'nowrap' }}>Premium Conversion:</div>
-                <div style={{ 
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center'
-                }}>
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 1.2 }}
-                    style={{
-                      fontSize: '0.8rem',
-                      opacity: 0.8,
-                      marginLeft: '25px'
-                    }}
-                  >
-                    3%  (>10k users)
-                  </motion.div>
-                   
-                </div>
+                <div style={{ width: '150px', fontSize: '0.8rem', whiteSpace: 'nowrap' }}>Premium Conversion:</div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 1.2 }}
+                  style={{
+                    fontSize: '0.8rem',
+                    opacity: 0.8
+                  }}
+                >
+                  3% (>10k users)
+                </motion.div>
               </div>
               
-              {/* ARPPU */}
+              {/* ARPPU - separate line */}
               <div style={{ 
                 display: 'flex',
                 alignItems: 'center',
-                height: '25px'
+                height: '20px'
               }}>
                 <div style={{ width: '120px', fontSize: '0.8rem', whiteSpace: 'nowrap' }}>ARPPU:</div>
-                <div style={{ 
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center'
-                }}>
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 1.4 }}
-                    style={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      borderRadius: '4px',
-                      padding: '3px 10px',
-                      fontSize: '0.8rem'
-                    }}
-                  >
-                    $60/year ($5/month)
-                  </motion.div>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 1.4 }}
+                  style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                    borderRadius: '4px',
+                    padding: '3px 10px',
+                    fontSize: '0.8rem'
+                  }}
+                >
+                  $60/year ($5/month)
+                </motion.div>
               </div>
             </div>
           </motion.div>
           
-          {/* Notes Section - ensure all points are visible */}
+          {/* Notes Section - remove card styling */}
           <motion.div 
-            className="card"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}
             style={{ 
-              flex: 1.4, // Reduced from 1.8 to 1.4
-              minHeight: '240px'
+              flex: 1.8,
+              minHeight: '180px',
+              padding: '1rem'
+              // Removed background, border-radius, box-shadow
             }}
           >
-            <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>Strategic Notes</h3>
-            
             <div style={{ 
               display: 'flex',
               flexDirection: 'column',
-              gap: '5px', // Reduced from 8px to 5px
-              height: 'calc(100% - 30px)',
-              overflowY: 'visible'
+              gap: '3px',
+              height: 'calc(100% - 10px)',
+              overflowY: 'visible',
+              paddingTop: '5px'
             }}>
-              {/* Adjust the font size for all note items */}
+              {/* Strategic notes content remains the same */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -840,23 +855,6 @@ function FinancialsSlide({ registerSlideSteps, currentStep }) {
                 <div style={{ lineHeight: '1.2' }}>Y2: Freemium model introduction with premium features</div>
               </motion.div>
               
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 1.4 }}
-                style={{ fontSize: '0.7rem', display: 'flex', alignItems: 'flex-start' }}
-              >
-                <div style={{ 
-                  minWidth: '6px', 
-                  height: '6px', 
-                  backgroundColor: 'var(--jiboni-primary)', 
-                  borderRadius: '50%', 
-                  marginTop: '5px',
-                  marginRight: '8px' 
-                }}></div>
-                <div style={{ lineHeight: '1.2' }}>Y3+: Aggressive global user acquisition focus</div>
-              </motion.div>
-
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}

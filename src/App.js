@@ -314,12 +314,14 @@ function App() {
 
   // Render the appropriate slide based on currentSlide
   const renderSlide = () => {
-    // Pass the registerSlideSteps function and currentStep to each slide component
+    // Pass the registerSlideSteps function, currentStep, and totalSlides to each slide component
     const props = { 
       registerSlideSteps,
       currentStep,
       businessName: BUSINESS_NAME,
-      businessNameCapitalized: BUSINESS_NAME_CAPITALIZED
+      businessNameCapitalized: BUSINESS_NAME_CAPITALIZED,
+      totalSlides, // Add totalSlides to props
+      showSlideNumber: currentSlide > 0 // Only show slide number if not on title slide
     };
     
     switch (currentSlide) {

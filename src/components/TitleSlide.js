@@ -2,30 +2,17 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import StylizedBusinessName from './StylizedBusinessName';
 
-function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNameCapitalized }) {
+function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNameCapitalized, totalSlides }) {
   // Register the total number of steps for this slide and reduce animation duration
   useEffect(() => {
     // Register 1 step with a shorter animation duration of 4000ms (down from 7000ms)
     registerSlideSteps(1, 4000);
   }, [registerSlideSteps]);
 
-  // Handle keyboard events
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      // Any slide-specific keyboard actions
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-  
   return (
     <div className="slide title-slide">
+      {/* No slide number on title slide */}
+      
       <motion.div
         className="content"
         initial={{ opacity: 0 }}
@@ -60,7 +47,7 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNam
             alignSelf: 'center'
           }}
         >
-          The Personal AI Assistant for productivity
+          The Personal AI Agent for productivity
         </motion.div>
 
         {/* Second tagline */}

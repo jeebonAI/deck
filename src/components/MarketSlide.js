@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
-function MarketSlide({ registerSlideSteps, currentStep }) {
+function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
+  // Calculate slide number (Market is slide 4 in the deck)
+  const slideNumber = 4;
+  const slideNumberText = `${slideNumber}/${totalSlides}`;
+
   // Market summary statement
   const marketSummary = (
     <>
@@ -56,7 +60,14 @@ function MarketSlide({ registerSlideSteps, currentStep }) {
   }, []);
 
   return (
-    <div className="slide market-slide">
+    <div className="slide market-slide" style={{ position: 'relative' }}>
+      {/* Slide number indicator - only show if showSlideNumber is true */}
+      {showSlideNumber && (
+        <div className="slide-number">
+          {slideNumberText}
+        </div>
+      )}
+      
       <AnimatedTitleWithUnderline title="Market" />
 
       <motion.div

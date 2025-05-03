@@ -2,173 +2,176 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
-function GoToMarketSlide({ registerSlideSteps, currentStep }) {
+function GoToMarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
+  // Register just one step for this slide
+  useEffect(() => {
+    registerSlideSteps(1);
+  }, [registerSlideSteps]);
+
+  // Calculate slide number
+  const slideNumber = 9; // Assuming this is slide 9
+  const slideNumberText = `${slideNumber}/${totalSlides}`;
+
   const phases = [
     {
       year: "Year 1",
       title: "Develop & Validate",
+      color: "#4568dc",
+      circleColor: "#4568dc",
       points: [
         "Build core product, achieve maturity",
         "Seed initial networks for feedback & validation",
         "Goal: 10k MAU",
         "Manage initial growth for stability"
       ],
-      color: "var(--jiboni-primary)"
+      delay: 0.3
     },
     {
       year: "Year 2",
       title: "Monetize & Expand",
+      color: "#b06ab3",
+      circleColor: "#b06ab3",
       points: [
         "Launch/refine premium tiers",
         "Expand outreach to diaspora hubs & communities",
         "Focus on validating monetization model"
       ],
-      color: "var(--jiboni-secondary)"
+      delay: 0.5
     },
     {
       year: "Year 3+",
       title: "Scale Globally",
+      color: "#FF7E5F",
+      circleColor: "#FF7E5F",
       points: [
         "Unleash network effects",
         "Scale marketing & partnerships",
         "Drive hyper-growth"
       ],
-      color: "var(--jiboni-accent)"
+      delay: 0.7
     }
   ];
 
-  // Register just one step for this slide
-  useEffect(() => {
-    registerSlideSteps(1);
-  }, [registerSlideSteps, phases.length]);
-
-  // Handle keyboard events
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      // Any slide-specific keyboard actions
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
   return (
-    <div className="slide go-to-market-slide">
+    <div className="slide go-to-market-slide" style={{ position: 'relative' }}>
+      {/* Slide number indicator */}
+      {showSlideNumber && (
+        <div className="slide-number">
+          {slideNumberText}
+        </div>
+      )}
+      
       <AnimatedTitleWithUnderline title="Go-To-Market" />
       
-      {currentStep >= 1 && (
-        <>
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Go-to-Market Strategy - Phased
-          </motion.h2>
-          
+      <motion.h2
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        style={{ 
+          fontSize: '2rem', 
+          marginTop: '0.5rem', 
+          marginBottom: '1rem' // Reduced from 2rem to 1rem
+        }}
+      >
+        Go-to-Market Strategy - Phased
+      </motion.h2>
+      
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        style={{ 
+          background: 'rgba(46, 213, 115, 0.2)', 
+          padding: '0.8rem 1rem', // Reduced padding
+          borderRadius: '8px',
+          maxWidth: '90%',
+          marginBottom: '1rem', // Reduced from 2rem to 1rem
+          textAlign: 'center'
+        }}
+      >
+        Secured first Partnership with the historian of the Syed Family to offer it to the whole Syed Family Network who are regular buyers of the family history book of the past 6 editions.
+      </motion.div>
+      
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between',
+        width: '100%',
+        gap: '1rem',
+        height: 'auto', // Changed from fixed height to auto
+        maxHeight: '45%' // Added max height to prevent overflow
+      }}>
+        {phases.map((phase, index) => (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            style={{
-              marginTop: '1rem',
-              marginBottom: '1.5rem',
-              padding: '0.8rem 1.5rem',
-              background: 'rgba(46, 213, 115, 0.15)', // Green background for good news
-              border: '1px solid rgba(46, 213, 115, 0.3)', // Subtle green border
-              borderRadius: '10px',
-              fontSize: '1rem',
-              maxWidth: '90%',
-              textAlign: 'center',
-              boxShadow: '0 2px 8px rgba(46, 213, 115, 0.1)' // Subtle green glow
-            }}
-          >
-            Secured first Partnership with the historian of the Syed Family to offer it to the whole Syed Family Network who are regular buyers of the family history book of the past 6 editions.
-          </motion.div>
-        
-          <div className="flex-container" style={{ marginTop: '1rem', alignItems: 'stretch' }}>
-            {phases.map((phase, index) => (
-              <motion.div 
-                key={index}
-                className="card"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 + index * 0.2 }}
-                style={{ 
-                  flex: 1,
-                  position: 'relative',
-                  overflow: 'hidden',
-                  borderTop: `4px solid ${phase.color}`
-                }}
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ 
-                    type: "spring", 
-                    stiffness: 260, 
-                    damping: 20, 
-                    delay: 0.7 + index * 0.2
-                  }}
-                  style={{
-                    position: 'absolute',
-                    top: '10px',
-                    right: '10px',
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    background: phase.color,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: '0.9rem'
-                  }}
-                >
-                  {index + 1}
-                </motion.div>
-                
-                <h3 style={{ color: phase.color }}>{phase.year}</h3>
-                <h4 style={{ marginBottom: '1rem' }}>{phase.title}</h4>
-                
-                <ul style={{ paddingLeft: '1.5rem' }}>
-                  {phase.points.map((point, i) => (
-                    <motion.li 
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.9 + index * 0.2 + i * 0.1 }}
-                      style={{ marginBottom: '0.8rem' }}
-                    >
-                      {point}
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-          
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1, delay: 1.7 }}
+            transition={{ duration: 0.6, delay: phase.delay }}
             style={{ 
-              marginTop: '2rem',
-              width: '80%',
-              height: '4px',
-              background: 'var(--jiboni-gradient)',
-              borderRadius: '2px',
-              transformOrigin: 'left'
+              flex: 1,
+              background: 'rgba(255, 255, 255, 0.05)',
+              borderRadius: '12px',
+              padding: '1rem', // Reduced padding
+              border: `1px solid ${phase.color}`,
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column'
             }}
-          />
-        </>
-      )}
+          >
+            <div style={{ 
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              width: '30px',
+              height: '30px',
+              borderRadius: '50%',
+              background: phase.circleColor,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              color: 'white',
+              fontWeight: 'bold'
+            }}>
+              {index + 1}
+            </div>
+            
+            <h3 style={{ color: phase.color }}>{phase.year}</h3>
+            <h4 style={{ marginBottom: '0.5rem' }}>{phase.title}</h4> {/* Reduced margin */}
+            
+            <ul style={{ 
+              paddingLeft: '1.2rem', // Reduced padding
+              marginBottom: '0.5rem', // Added bottom margin
+              fontSize: '0.9rem' // Reduced font size
+            }}>
+              {phase.points.map((point, i) => (
+                <motion.li 
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.9 + index * 0.2 + i * 0.1 }}
+                  style={{ marginBottom: '0.5rem' }} // Reduced from 0.8rem to 0.5rem
+                >
+                  {point}
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        ))}
+      </div>
+      
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 1, delay: 1.7 }}
+        style={{ 
+          marginTop: '1rem', // Reduced from 2rem to 1rem
+          width: '80%',
+          height: '4px',
+          background: 'var(--jiboni-gradient)',
+          borderRadius: '2px',
+          transformOrigin: 'left'
+        }}
+      />
     </div>
   );
 }

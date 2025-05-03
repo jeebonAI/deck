@@ -2,11 +2,15 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
-function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) {
+function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, totalSlides }) {
   // Register only 1 step for this slide
   useEffect(() => {
     registerSlideSteps(1);
   }, [registerSlideSteps]);
+
+  // Calculate slide number (Ask is slide 12 in the deck)
+  const slideNumber = 12;
+  const slideNumberText = `${slideNumber}/${totalSlides}`;
 
   // Handle keyboard events
   const handleKeyDown = (e) => {
@@ -31,7 +35,27 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) 
   ];
 
   return (
-    <div className="slide ask-slide" style={{ justifyContent: 'flex-start', paddingTop: '2rem' }}>
+    <div className="slide ask-slide" style={{ 
+      justifyContent: 'flex-start', 
+      paddingTop: '2rem',
+      position: 'relative' // Added for absolute positioning of slide number
+    }}>
+      {/* Slide number indicator */}
+      <div className="slide-number" style={{
+        position: 'absolute',
+        bottom: '20px',
+        right: '20px',
+        fontSize: '0.8rem',
+        color: 'rgba(255, 255, 255, 0.6)',
+        padding: '4px 8px',
+        borderRadius: '12px',
+        background: 'rgba(69, 104, 220, 0.2)',
+        backdropFilter: 'blur(4px)',
+        fontWeight: '500'
+      }}>
+        {slideNumberText}
+      </div>
+      
       <AnimatedTitleWithUnderline title="The Ask" />
       
       <motion.div
@@ -49,7 +73,7 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized }) 
         }}
       >
         <h3 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
-          <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$250,000 - $500,000</span>
+          <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$500,000</span>
         </h3>
         <p style={{ fontSize: '1.3rem', margin: '0.5rem 0' }}>Pre-Seed Funding</p>
         <p style={{ fontSize: '1.1rem', opacity: 0.9, margin: '0.5rem 0' }}>
