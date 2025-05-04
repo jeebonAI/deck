@@ -35,7 +35,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
       name: "Numan Syed",
       role: "Co-Founder & COO",
       points: [
-        "United Nations Consultant on Peace Keeping Missions",
+        "Former United Nations Peace Keeper",
         "10+ Years Management Experience across a wide range of industries",
         "Product development specialist for well known international brands"
       ],

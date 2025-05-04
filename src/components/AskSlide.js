@@ -108,165 +108,203 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
 
       <AnimatedTitleWithUnderline title="The Ask" />
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7 }}
-        style={{ 
-          marginTop: '0.5rem',
-          marginBottom: '-1rem', // Reduced from default to move content up
-          padding: '1.5rem',
-          background: 'rgba(255, 255, 255, 0.08)',
-          borderRadius: '16px',
-          textAlign: 'center',
-          maxWidth: '80%',
-          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)'
-        }}
-      >
-        <h3 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
-          <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$500k - $800k</span>
-        </h3>
-        <p style={{ fontSize: '1.3rem', margin: '0.5rem 0' }}>Pre-Seed Funding</p>
-        <p style={{ fontSize: '1.1rem', opacity: 0.9, margin: '0.5rem 0' }}>
-          (12-18 months runway)
-        </p>
-      </motion.div>
-
       <div style={{ 
         display: 'flex',
         width: '90%',
         maxWidth: '1000px',
-        marginTop: '0', // Reduced from 1rem to 0
+        marginTop: '2rem',
         justifyContent: 'space-between',
-        alignItems: 'flex-start'
+        alignItems: 'center',
+        gap: '1.5rem'
       }}>
+        {/* Left side with amount */}
         <div style={{ 
-          width: '65%',
-          transition: 'width 0.5s ease'
+          width: '25%',
+          position: 'relative'
         }}>
-          <motion.h3
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            style={{ marginBottom: '0.5rem', color: 'var(--jiboni-secondary)' }} // Reduced from 1rem to 0.5rem
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            style={{ 
+              padding: '1.5rem',
+              background: 'rgba(255, 255, 255, 0.08)',
+              borderRadius: '16px',
+              textAlign: 'center',
+              width: '100%',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)'
+            }}
           >
-            Use of Funds
-          </motion.h3>
-          
-          {/* Pie Chart */}
-          <div style={{ 
+            <h3 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
+              <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$500k - $800k</span>
+            </h3>
+            <p style={{ fontSize: '1.3rem', margin: '0.5rem 0' }}>Pre-Seed Funding</p>
+            <p style={{ fontSize: '1.1rem', opacity: 0.9, margin: '0.5rem 0' }}>
+              (12-18 months runway)
+            </p>
+          </motion.div>
+        </div>
+        
+        {/* Chevron from Ask to Pie - MUCH thicker */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          style={{
+            flexShrink: 0,
             display: 'flex',
-            flexDirection: 'row', // Changed to row layout
+            justifyContent: 'center',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: '1rem'
-          }}>
-            {/* Legend */}
-            <div style={{ width: '45%', maxWidth: '350px' }}>
-              {fundUse.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  style={{ 
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginBottom: '0.8rem'
-                  }}
-                >
-                  <div style={{ 
-                    width: '14px',
-                    height: '14px',
-                    backgroundColor: item.color,
-                    marginRight: '8px',
-                    borderRadius: '3px'
-                  }}></div>
-                  <div style={{ 
-                    flex: 1, 
-                    fontSize: '0.9rem', 
-                    whiteSpace: 'nowrap', 
-                    overflow: 'hidden', 
-                    textOverflow: 'ellipsis',
-                    paddingRight: '5px'
-                  }}>
-                    {item.category}
-                  </div>
-                  <div style={{ 
-                    width: '35px',
-                    textAlign: 'right',
-                    fontWeight: '500',
-                    fontSize: '0.9rem'
-                  }}>
-                    {item.percentage}%
-                  </div>
-                </motion.div>
+            width: '60px'
+          }}
+        >
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path 
+              d="M20 10L40 30L20 50" 
+              stroke="rgba(46, 213, 115, 0.9)" 
+              strokeWidth="16" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            />
+          </svg>
+        </motion.div>
+        
+        {/* Middle with pie chart */}
+        <div style={{ 
+          width: '35%',
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}>
+          {/* SVG Pie Chart */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            style={{ 
+              width: '280px',
+              height: '280px',
+              position: 'relative',
+              marginBottom: '1rem'
+            }}
+          >
+            <svg width="280" height="280" viewBox="0 0 280 280">
+              {pieSegments.map((segment, index) => (
+                <motion.g key={index}>
+                  <motion.path
+                    d={createPieSegment(segment.startAngle, segment.endAngle, 140)}
+                    fill={segment.color}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                    stroke="#1E293B"
+                    strokeWidth="1"
+                  />
+                  {(() => {
+                    const textPos = calculateTextPosition(segment.startAngle, segment.endAngle, 140);
+                    return (
+                      <motion.text
+                        x={textPos.x}
+                        y={textPos.y}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        fill="white"
+                        fontWeight="bold"
+                        fontSize="18"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                      >
+                        {segment.percentage}%
+                      </motion.text>
+                    );
+                  })()}
+                </motion.g>
               ))}
-            </div>
-            
-            {/* SVG Pie Chart - Side by side with legend */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7 }}
-              style={{ 
-                width: '280px',
-                height: '280px',
-                position: 'relative'
-              }}
-            >
-              <svg width="280" height="280" viewBox="0 0 280 280">
-                {pieSegments.map((segment, index) => (
-                  <motion.g key={index}>
-                    <motion.path
-                      d={createPieSegment(segment.startAngle, segment.endAngle, 140)} // Increased radius from 100
-                      fill={segment.color}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                      stroke="#1E293B"
-                      strokeWidth="1"
-                    />
-                    {/* Percentage text */}
-                    {(() => {
-                      const textPos = calculateTextPosition(segment.startAngle, segment.endAngle, 140);
-                      return (
-                        <motion.text
-                          x={textPos.x}
-                          y={textPos.y}
-                          textAnchor="middle"
-                          dominantBaseline="middle"
-                          fill="white"
-                          fontWeight="bold"
-                          fontSize="18"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                        >
-                          {segment.percentage}%
-                        </motion.text>
-                      );
-                    })()}
-                  </motion.g>
-                ))}
-              </svg>
-            </motion.div>
+            </svg>
+          </motion.div>
+          
+          {/* Legend */}
+          <div style={{ width: '100%' }}>
+            {fundUse.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                style={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginBottom: '0.5rem'
+                }}
+              >
+                <div style={{ 
+                  width: '14px',
+                  height: '14px',
+                  backgroundColor: item.color,
+                  marginRight: '8px',
+                  borderRadius: '3px'
+                }}></div>
+                <div style={{ 
+                  flex: 1, 
+                  fontSize: '0.9rem', 
+                  whiteSpace: 'nowrap', 
+                  overflow: 'hidden', 
+                  textOverflow: 'ellipsis',
+                  paddingRight: '5px'
+                }}>
+                  {item.category}
+                </div>
+                <div style={{ 
+                  width: '35px',
+                  textAlign: 'right',
+                  fontWeight: '500',
+                  fontSize: '0.9rem'
+                }}>
+                  {item.percentage}%
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
         
+        {/* Chevron from Pie to Achieve - MUCH thicker */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          style={{
+            flexShrink: 0,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '60px'
+          }}
+        >
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path 
+              d="M20 10L40 30L20 50" 
+              stroke="rgba(46, 213, 115, 0.9)" 
+              strokeWidth="16" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            />
+          </svg>
+        </motion.div>
+        
+        {/* Right side with Achieve box */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           style={{ 
-            width: '30%',
+            width: '25%',
             padding: '1.5rem',
-            background: 'rgba(46, 213, 115, 0.15)', // Light green background
+            background: 'rgba(46, 213, 115, 0.15)',
             borderRadius: '12px',
             textAlign: 'center',
-            marginLeft: '1rem',
-            alignSelf: 'center',
-            boxShadow: '0 4px 15px rgba(46, 213, 115, 0.1)' // Subtle green glow
+            boxShadow: '0 4px 15px rgba(46, 213, 115, 0.1)'
           }}
         >
           <motion.h4
