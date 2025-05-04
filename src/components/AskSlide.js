@@ -124,11 +124,11 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
         }}
       >
         <h3 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
-          <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$1m - $1.1m</span>
+          <span style={{ color: 'rgba(46, 213, 115, 0.9)' }}>$500k - $800k</span>
         </h3>
         <p style={{ fontSize: '1.3rem', margin: '0.5rem 0' }}>Pre-Seed Funding</p>
         <p style={{ fontSize: '1.1rem', opacity: 0.9, margin: '0.5rem 0' }}>
-          (18-24 months runway)
+          (12-18 months runway)
         </p>
       </motion.div>
 
@@ -156,18 +156,62 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
           {/* Pie Chart */}
           <div style={{ 
             display: 'flex',
+            flexDirection: 'row', // Changed to row layout
             alignItems: 'center',
             justifyContent: 'space-between',
             marginBottom: '1rem'
           }}>
-            {/* SVG Pie Chart */}
+            {/* Legend */}
+            <div style={{ width: '45%', maxWidth: '350px' }}>
+              {fundUse.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  style={{ 
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginBottom: '0.8rem'
+                  }}
+                >
+                  <div style={{ 
+                    width: '14px',
+                    height: '14px',
+                    backgroundColor: item.color,
+                    marginRight: '8px',
+                    borderRadius: '3px'
+                  }}></div>
+                  <div style={{ 
+                    flex: 1, 
+                    fontSize: '0.9rem', 
+                    whiteSpace: 'nowrap', 
+                    overflow: 'hidden', 
+                    textOverflow: 'ellipsis',
+                    paddingRight: '5px'
+                  }}>
+                    {item.category}
+                  </div>
+                  <div style={{ 
+                    width: '35px',
+                    textAlign: 'right',
+                    fontWeight: '500',
+                    fontSize: '0.9rem'
+                  }}>
+                    {item.percentage}%
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* SVG Pie Chart - Side by side with legend */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
               style={{ 
-                width: '280px', // Increased from 200px
-                height: '280px', // Increased from 200px
+                width: '280px',
+                height: '280px',
                 position: 'relative'
               }}
             >
@@ -207,42 +251,6 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
                 ))}
               </svg>
             </motion.div>
-            
-            {/* Legend */}
-            <div style={{ marginLeft: '1.5rem', flex: 1 }}>
-              {fundUse.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  style={{ 
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginBottom: '0.8rem'
-                  }}
-                >
-                  <div style={{ 
-                    width: '16px',
-                    height: '16px',
-                    backgroundColor: item.color,
-                    marginRight: '10px',
-                    borderRadius: '3px'
-                  }}></div>
-                  <div style={{ flex: 1, fontSize: '0.95rem' }}>
-                    {item.category}
-                  </div>
-                  <div style={{ 
-                    width: '40px',
-                    textAlign: 'right',
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    {item.percentage}%
-                  </div>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </div>
         

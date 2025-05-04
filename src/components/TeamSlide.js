@@ -4,7 +4,7 @@ import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
 
 // Import the team member images
 import nayeemImage from '../assets/nayeem.png';
-import numanImage from '../assets/numan.jpeg';
+import numanImage from '../assets/numan2.jpg';
 import eliasImage from '../assets/drelias.jpg';
 // You'll need to add Mark's image - for now using a placeholder
 import markImage from '../assets/placeholder.jpg'; // Replace with actual image when available
