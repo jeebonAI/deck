@@ -53,7 +53,7 @@ function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
     },
     {
       icon: "📱",
-      value: "+44 (208) 123-4225",
+      value: "+44 (747) 6911-731",
       delay: 3.5
     },
     {
