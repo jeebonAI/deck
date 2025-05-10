@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
+import SmallLogo from './SmallLogo';
 
-function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
+function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber, businessName }) {
   // Calculate slide number (Contact is slide 13 in the deck)
   const slideNumber = 13;
   const slideNumberText = `${slideNumber}/${totalSlides}`;
@@ -67,6 +68,9 @@ function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
 
   return (
     <div className="slide contact-slide" style={{ position: 'relative' }}>
+      {/* Small logo in top right */}
+      <SmallLogo businessName={businessName} />
+      
       {/* Slide number indicator - only show if showSlideNumber is true */}
       {showSlideNumber && (
         <div className="slide-number">
@@ -75,13 +79,15 @@ function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
       )}
       
       <div className="gradient-background" style={{ opacity: 0.15 }} />
-
-      <div
-        className="content"
-        style={{ textAlign: 'center', zIndex: 1 }}
-      >
-        <AnimatedTitleWithUnderline title="Contact" />
-        
+      
+      {/* Add AnimatedTitleWithUnderline at the top left */}
+      <AnimatedTitleWithUnderline title="Contact" />
+      
+      <div className="content" style={{ 
+        textAlign: 'center', 
+        zIndex: 1,
+        marginTop: '1rem' // Add some margin to separate from title
+      }}>
         <motion.h3
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}

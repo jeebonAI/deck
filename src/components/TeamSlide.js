@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
+import SmallLogo from './SmallLogo';
 
 // Import the team member images
 import nayeemImage from '../assets/nayeem.png';
@@ -9,7 +10,7 @@ import eliasImage from '../assets/drelias.jpg';
 // You'll need to add Mark's image - for now using a placeholder
 import markImage from '../assets/placeholder.jpg'; // Replace with actual image when available
 
-function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
+function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber, businessName }) {
   // Calculate slide number (Team is slide 10 in the deck)
   const slideNumber = 10;
   const slideNumberText = `${slideNumber}/${totalSlides}`;
@@ -87,6 +88,9 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
 
   return (
     <div className="slide team-slide" style={{ position: 'relative' }}>
+      {/* Small logo in top right */}
+      <SmallLogo businessName={businessName} />
+      
       {/* Slide number indicator - only show if showSlideNumber is true */}
       {showSlideNumber && (
         <div className="slide-number">
@@ -94,427 +98,429 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
         </div>
       )}
       
-      <AnimatedTitleWithUnderline title="Team" />
-      
-      {/* Top row: Nayeem (left) and Numan (right) */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        style={{
-          display: 'flex',
-          width: '90%',
-          margin: '1.5rem auto 0.5rem auto', // Reduced bottom margin from 1rem to 0.5rem
-          gap: '1.5rem',
-          alignItems: 'flex-start'
-        }}
-      >
-        {/* Founder section - Left side, larger */}
+      <AnimatePresence>
+        <AnimatedTitleWithUnderline title="Team" />
+        
+        {/* Top row: Nayeem (left) and Numan (right) */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           style={{
-            flex: '1.5',
             display: 'flex',
-            flexDirection: 'column'
+            width: '90%',
+            margin: '1.5rem auto 0.5rem auto', // Reduced bottom margin from 1rem to 0.5rem
+            gap: '1.5rem',
+            alignItems: 'flex-start'
           }}
         >
-          {/* Highlight banner */}
+          {/* Founder section - Left side, larger */}
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             style={{
-              background: 'var(--jeebon-primary)',
-              color: 'white',
-              padding: '0.7rem 1.5rem',
-              borderRadius: '30px',
-              marginBottom: '1.2rem',
-              fontSize: '1.3rem',
-              fontWeight: 'bold',
-              textAlign: 'center',
-              border: '2px solid rgba(255,255,255,0.2)'
+              flex: '1.5',
+              display: 'flex',
+              flexDirection: 'column'
             }}
           >
-            {founderHighlight}
+            {/* Highlight banner */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              style={{
+                background: 'var(--jeebon-primary)',
+                color: 'white',
+                padding: '0.7rem 1.5rem',
+                borderRadius: '30px',
+                marginBottom: '1.2rem',
+                fontSize: '1.3rem',
+                fontWeight: 'bold',
+                textAlign: 'center',
+                border: '2px solid rgba(255,255,255,0.2)'
+              }}
+            >
+              {founderHighlight}
+            </motion.div>
+            
+            <div style={{
+              display: 'flex',
+              gap: '1.2rem',
+              alignItems: 'flex-start'
+            }}>
+              {/* Founder image */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                style={{
+                  width: '110px',
+                  height: '110px',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  border: '3px solid var(--jeebon-primary)',
+                  boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)'
+                }}
+              >
+                <img 
+                  src={nayeemImage} 
+                  alt="Nayeem Syed"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </motion.div>
+              
+              {/* Founder details */}
+              <div>
+                <h3 style={{ 
+                  fontSize: '1.7rem',
+                  marginBottom: '0.3rem',
+                  color: 'var(--jeebon-primary)'
+                }}>
+                  Nayeem Syed - Founder & CEO
+                </h3>
+                
+                <ul style={{
+                  listStyleType: 'disc',
+                  paddingLeft: '1.5rem',
+                  marginTop: '0.8rem'
+                }}>
+                  {team[0].points.map((point, idx) => (
+                    <motion.li 
+                      key={idx}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: 0.4 + (idx * 0.1) }}
+                      style={{
+                        marginBottom: '0.4rem',
+                        fontSize: '1rem'
+                      }}
+                    >
+                      {point}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </motion.div>
           
-          <div style={{
-            display: 'flex',
-            gap: '1.2rem',
-            alignItems: 'flex-start'
-          }}>
-            {/* Founder image */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              style={{
-                width: '110px',
-                height: '110px',
-                borderRadius: '50%',
-                overflow: 'hidden',
-                border: '3px solid var(--jeebon-primary)',
-                boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)'
-              }}
-            >
-              <img 
-                src={nayeemImage} 
-                alt="Nayeem Syed"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center'
-                }}
-              />
-            </motion.div>
-            
-            {/* Founder details */}
-            <div>
-              <h3 style={{ 
-                fontSize: '1.7rem',
-                marginBottom: '0.3rem',
-                color: 'var(--jeebon-primary)'
-              }}>
-                Nayeem Syed - Founder & CEO
-              </h3>
-              
-              <ul style={{
-                listStyleType: 'disc',
-                paddingLeft: '1.5rem',
-                marginTop: '0.8rem'
-              }}>
-                {team[0].points.map((point, idx) => (
-                  <motion.li 
-                    key={idx}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.4 + (idx * 0.1) }}
-                    style={{
-                      marginBottom: '0.4rem',
-                      fontSize: '1rem'
-                    }}
-                  >
-                    {point}
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </motion.div>
-        
-        {/* Numan - Right side top */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          style={{
-            flex: '1',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            paddingTop: '7rem' // Added padding to push Numan's box down
-          }}
-        >
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+          {/* Numan - Right side top */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
             style={{
+              flex: '1',
               display: 'flex',
-              gap: '0.8rem',
-              alignItems: 'flex-start',
-              background: 'rgba(255, 255, 255, 0.03)',
-              padding: '0.8rem',
-              borderRadius: '10px'
+              flexDirection: 'column',
+              gap: '1rem',
+              paddingTop: '7rem' // Added padding to push Numan's box down
             }}
           >
-            {/* Numan image */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               style={{
-                width: '70px',
-                height: '70px',
-                borderRadius: '50%',
-                overflow: 'hidden',
-                border: '2px solid var(--jeebon-secondary)',
-                flexShrink: 0
+                display: 'flex',
+                gap: '0.8rem',
+                alignItems: 'flex-start',
+                background: 'rgba(255, 255, 255, 0.03)',
+                padding: '0.8rem',
+                borderRadius: '10px'
               }}
             >
-              <img 
-                src={numanImage} 
-                alt={team[1].name}
+              {/* Numan image */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center'
+                  width: '70px',
+                  height: '70px',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  border: '2px solid var(--jeebon-secondary)',
+                  flexShrink: 0
                 }}
-              />
-            </motion.div>
-            
-            {/* Numan details */}
-            <div>
-              <h3 style={{ 
-                fontSize: '1.3rem',
-                marginBottom: '0.2rem',
-                color: 'var(--jeebon-secondary)'
-              }}>
-                {team[1].name}
-              </h3>
-              <p style={{ 
-                fontSize: '0.9rem',
-                opacity: 0.9, 
-                marginBottom: '0.4rem',
-                fontWeight: 'bold'
-              }}>
-                {team[1].role}
-              </p>
+              >
+                <img 
+                  src={numanImage} 
+                  alt={team[1].name}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </motion.div>
               
-              <ul style={{
-                listStyleType: 'none',
-                padding: 0,
-                margin: 0
-              }}>
-                {team[1].points.map((point, idx) => (
-                  <motion.li 
-                    key={idx}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3, delay: 0.4 + (idx * 0.1) }}
-                    style={{
-                      marginBottom: '0.2rem',
-                      fontSize: '0.75rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      lineHeight: '1.1'
-                    }}
-                  >
-                    <span style={{ 
-                      marginRight: '0.4rem',
-                      color: 'var(--jeebon-accent)',
-                      fontSize: '0.7rem'
-                    }}>•</span>
-                    {point}
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
+              {/* Numan details */}
+              <div>
+                <h3 style={{ 
+                  fontSize: '1.3rem',
+                  marginBottom: '0.2rem',
+                  color: 'var(--jeebon-secondary)'
+                }}>
+                  {team[1].name}
+                </h3>
+                <p style={{ 
+                  fontSize: '0.9rem',
+                  opacity: 0.9, 
+                  marginBottom: '0.4rem',
+                  fontWeight: 'bold'
+                }}>
+                  {team[1].role}
+                </p>
+                
+                <ul style={{
+                  listStyleType: 'none',
+                  padding: 0,
+                  margin: 0
+                }}>
+                  {team[1].points.map((point, idx) => (
+                    <motion.li 
+                      key={idx}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 0.4 + (idx * 0.1) }}
+                      style={{
+                        marginBottom: '0.2rem',
+                        fontSize: '0.75rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        lineHeight: '1.1'
+                      }}
+                    >
+                      <span style={{ 
+                        marginRight: '0.4rem',
+                        color: 'var(--jeebon-accent)',
+                        fontSize: '0.7rem'
+                      }}>•</span>
+                      {point}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
-      
-      {/* Bottom row: Armstrong (left) and Dr. Elias (right) */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        style={{
-          display: 'flex',
-          width: '90%',
-          margin: '0.5rem auto',
-          gap: '1.5rem',
-          alignItems: 'flex-start'
-        }}
-      >
-        {/* Armstrong - Left side bottom */}
+        
+        {/* Bottom row: Armstrong (left) and Dr. Elias (right) */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           style={{
-            flex: '1',
             display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem'
+            width: '90%',
+            margin: '0.5rem auto',
+            gap: '1.5rem',
+            alignItems: 'flex-start'
           }}
         >
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+          {/* Armstrong - Left side bottom */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
             style={{
+              flex: '1',
               display: 'flex',
-              gap: '0.8rem',
-              alignItems: 'flex-start',
-              background: 'rgba(255, 255, 255, 0.03)',
-              padding: '0.8rem',
-              borderRadius: '10px'
+              flexDirection: 'column',
+              gap: '1rem'
             }}
           >
-            {/* Armstrong image */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
               style={{
-                width: '70px',
-                height: '70px',
-                borderRadius: '50%',
-                overflow: 'hidden',
-                border: '2px solid var(--jeebon-secondary)',
-                flexShrink: 0
+                display: 'flex',
+                gap: '0.8rem',
+                alignItems: 'flex-start',
+                background: 'rgba(255, 255, 255, 0.03)',
+                padding: '0.8rem',
+                borderRadius: '10px'
               }}
             >
-              <img 
-                src={markImage} 
-                alt={team[2].name}
+              {/* Armstrong image */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center'
+                  width: '70px',
+                  height: '70px',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  border: '2px solid var(--jeebon-secondary)',
+                  flexShrink: 0
                 }}
-              />
-            </motion.div>
-            
-            {/* Armstrong details */}
-            <div>
-              <h3 style={{ 
-                fontSize: '1.3rem',
-                marginBottom: '0.2rem',
-                color: 'var(--jeebon-secondary)'
-              }}>
-                {team[2].name}
-              </h3>
-              <p style={{ 
-                fontSize: '0.9rem',
-                opacity: 0.9, 
-                marginBottom: '0.4rem',
-                fontWeight: 'bold'
-              }}>
-                {team[2].role}
-              </p>
+              >
+                <img 
+                  src={markImage} 
+                  alt={team[2].name}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </motion.div>
               
-              <ul style={{
-                listStyleType: 'none',
-                padding: 0,
-                margin: 0
-              }}>
-                {team[2].points.map((point, idx) => (
-                  <motion.li 
-                    key={idx}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3, delay: 0.5 + (idx * 0.1) }}
-                    style={{
-                      marginBottom: '0.2rem',
-                      fontSize: '0.75rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      lineHeight: '1.1'
-                    }}
-                  >
-                    <span style={{ 
-                      marginRight: '0.4rem',
-                      color: 'var(--jeebon-accent)',
-                      fontSize: '0.7rem'
-                    }}>•</span>
-                    {point}
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
+              {/* Armstrong details */}
+              <div>
+                <h3 style={{ 
+                  fontSize: '1.3rem',
+                  marginBottom: '0.2rem',
+                  color: 'var(--jeebon-secondary)'
+                }}>
+                  {team[2].name}
+                </h3>
+                <p style={{ 
+                  fontSize: '0.9rem',
+                  opacity: 0.9, 
+                  marginBottom: '0.4rem',
+                  fontWeight: 'bold'
+                }}>
+                  {team[2].role}
+                </p>
+                
+                <ul style={{
+                  listStyleType: 'none',
+                  padding: 0,
+                  margin: 0
+                }}>
+                  {team[2].points.map((point, idx) => (
+                    <motion.li 
+                      key={idx}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 0.5 + (idx * 0.1) }}
+                      style={{
+                        marginBottom: '0.2rem',
+                        fontSize: '0.75rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        lineHeight: '1.1'
+                      }}
+                    >
+                      <span style={{ 
+                        marginRight: '0.4rem',
+                        color: 'var(--jeebon-accent)',
+                        fontSize: '0.7rem'
+                      }}>•</span>
+                      {point}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-        
-        {/* Dr. Elias - Right side bottom */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          style={{
-            flex: '1',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem'
-          }}
-        >
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+          
+          {/* Dr. Elias - Right side bottom */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
             style={{
+              flex: '1',
               display: 'flex',
-              gap: '0.8rem',
-              alignItems: 'flex-start',
-              background: 'rgba(255, 255, 255, 0.03)',
-              padding: '0.8rem',
-              borderRadius: '10px'
+              flexDirection: 'column',
+              gap: '1rem'
             }}
           >
-            {/* Dr. Elias image */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
               style={{
-                width: '70px',
-                height: '70px',
-                borderRadius: '50%',
-                overflow: 'hidden',
-                border: '2px solid var(--jeebon-secondary)',
-                flexShrink: 0
+                display: 'flex',
+                gap: '0.8rem',
+                alignItems: 'flex-start',
+                background: 'rgba(255, 255, 255, 0.03)',
+                padding: '0.8rem',
+                borderRadius: '10px'
               }}
             >
-              <img 
-                src={eliasImage} 
-                alt={team[3].name}
+              {/* Dr. Elias image */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center'
+                  width: '70px',
+                  height: '70px',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  border: '2px solid var(--jeebon-secondary)',
+                  flexShrink: 0
                 }}
-              />
-            </motion.div>
-            
-            {/* Dr. Elias details */}
-            <div>
-              <h3 style={{ 
-                fontSize: '1.3rem',
-                marginBottom: '0.2rem',
-                color: 'var(--jeebon-secondary)'
-              }}>
-                {team[3].name}
-              </h3>
-              <p style={{ 
-                fontSize: '0.9rem',
-                opacity: 0.9, 
-                marginBottom: '0.4rem',
-                fontWeight: 'bold'
-              }}>
-                {team[3].role}
-              </p>
+              >
+                <img 
+                  src={eliasImage} 
+                  alt={team[3].name}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </motion.div>
               
-              <ul style={{
-                listStyleType: 'none',
-                padding: 0,
-                margin: 0
-              }}>
-                {team[3].points.map((point, idx) => (
-                  <motion.li 
-                    key={idx}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3, delay: 0.6 + (idx * 0.1) }}
-                    style={{
-                      marginBottom: '0.2rem',
-                      fontSize: '0.75rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      lineHeight: '1.1'
-                    }}
-                  >
-                    <span style={{ 
-                      marginRight: '0.4rem',
-                      color: 'var(--jeebon-accent)',
-                      fontSize: '0.7rem'
-                    }}>•</span>
-                    {point}
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
+              {/* Dr. Elias details */}
+              <div>
+                <h3 style={{ 
+                  fontSize: '1.3rem',
+                  marginBottom: '0.2rem',
+                  color: 'var(--jeebon-secondary)'
+                }}>
+                  {team[3].name}
+                </h3>
+                <p style={{ 
+                  fontSize: '0.9rem',
+                  opacity: 0.9, 
+                  marginBottom: '0.4rem',
+                  fontWeight: 'bold'
+                }}>
+                  {team[3].role}
+                </p>
+                
+                <ul style={{
+                  listStyleType: 'none',
+                  padding: 0,
+                  margin: 0
+                }}>
+                  {team[3].points.map((point, idx) => (
+                    <motion.li 
+                      key={idx}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 0.6 + (idx * 0.1) }}
+                      style={{
+                        marginBottom: '0.2rem',
+                        fontSize: '0.75rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        lineHeight: '1.1'
+                      }}
+                    >
+                      <span style={{ 
+                        marginRight: '0.4rem',
+                        color: 'var(--jeebon-accent)',
+                        fontSize: '0.7rem'
+                      }}>•</span>
+                      {point}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

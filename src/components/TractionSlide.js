@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
+import SmallLogo from './SmallLogo';
 
-function TractionSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
+function TractionSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber, businessName }) {
   // Register just one step for this slide
   useEffect(() => {
     registerSlideSteps(1); // Show everything at once
@@ -59,6 +60,9 @@ function TractionSlide({ registerSlideSteps, currentStep, totalSlides, showSlide
 
   return (
     <div className="slide traction-slide" style={{ position: 'relative', padding: '2rem 3rem' }}>
+      {/* Small logo in top right */}
+      <SmallLogo businessName={businessName} />
+      
       {/* Slide number indicator - only show if showSlideNumber is true */}
       {showSlideNumber && (
         <div className="slide-number">

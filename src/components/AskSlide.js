@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
+import SmallLogo from './SmallLogo';
 
-function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, totalSlides }) {
+function AskSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber, businessName }) {
   // Register only 1 step for this slide
   useEffect(() => {
     registerSlideSteps(1);
@@ -90,21 +91,26 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
       maxWidth: '1200px',
       margin: '0 auto'
     }}>
-      {/* Slide number indicator */}
-      <div className="slide-number" style={{
-        position: 'absolute',
-        bottom: '20px',
-        right: '20px',
-        fontSize: '0.8rem',
-        color: 'rgba(255, 255, 255, 0.6)',
-        padding: '4px 8px',
-        borderRadius: '12px',
-        background: 'rgba(69, 104, 220, 0.2)',
-        backdropFilter: 'blur(4px)',
-        fontWeight: '500'
-      }}>
-        {slideNumberText}
-      </div>
+      {/* Small logo in top right */}
+      <SmallLogo businessName={businessName} />
+      
+      {/* Slide number indicator - only show if showSlideNumber is true */}
+      {showSlideNumber && (
+        <div className="slide-number" style={{
+          position: 'absolute',
+          bottom: '20px',
+          right: '20px',
+          fontSize: '0.8rem',
+          color: 'rgba(255, 255, 255, 0.6)',
+          padding: '4px 8px',
+          borderRadius: '12px',
+          background: 'rgba(69, 104, 220, 0.2)',
+          backdropFilter: 'blur(4px)',
+          fontWeight: '500'
+        }}>
+          {slideNumberText}
+        </div>
+      )}
 
       <AnimatedTitleWithUnderline title="The Ask" />
 

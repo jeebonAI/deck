@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
+import SmallLogo from './SmallLogo';
 
-function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
+function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber, businessName }) {
   // Calculate slide number (Market is slide 4 in the deck)
   const slideNumber = 4;
   const slideNumberText = `${slideNumber}/${totalSlides}`;
@@ -61,6 +62,9 @@ function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNu
 
   return (
     <div className="slide market-slide" style={{ position: 'relative' }}>
+      {/* Small logo in top right */}
+      <SmallLogo businessName={businessName} />
+      
       {/* Slide number indicator - only show if showSlideNumber is true */}
       {showSlideNumber && (
         <div className="slide-number">
@@ -68,7 +72,9 @@ function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNu
         </div>
       )}
       
-      <AnimatedTitleWithUnderline title="Market" />
+      <AnimatePresence>
+        <AnimatedTitleWithUnderline title="Market" />
+      </AnimatePresence>
 
       <motion.div
         initial={{ opacity: 0, y: -10 }}

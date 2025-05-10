@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
+import SmallLogo from './SmallLogo';
 
-function HowItWorksSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
+function HowItWorksSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber, businessName }) {
   // Register just one step for this slide
   useEffect(() => {
     registerSlideSteps(1);
@@ -55,6 +56,9 @@ function HowItWorksSlide({ registerSlideSteps, currentStep, totalSlides, showSli
       position: 'relative',
       paddingTop: '1rem' // Reduced top padding to move everything up
     }}>
+      {/* Small logo in top right */}
+      <SmallLogo businessName={businessName} />
+      
       {/* Slide number indicator - only show if showSlideNumber is true */}
       {showSlideNumber && (
         <div className="slide-number">

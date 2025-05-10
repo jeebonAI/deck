@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
+import SmallLogo from './SmallLogo';
 
 function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalized, businessName, totalSlides, showSlideNumber }) {
   // Register the total number of steps for this slide
@@ -29,6 +30,9 @@ function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalize
 
   return (
     <div className="slide solution-slide" style={{ position: 'relative' }}>
+      {/* Small logo in top right */}
+      <SmallLogo businessName={businessName} />
+      
       {/* Slide number indicator - only show if showSlideNumber is true */}
       {showSlideNumber && (
         <div className="slide-number">

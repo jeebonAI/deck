@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitleWithUnderline from './AnimatedTitleWithUnderline';
+import SmallLogo from './SmallLogo';
 
-function ProblemSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber }) {
+function ProblemSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumber, businessName }) {
   // Add the overall problem statement with bold elements
   const problemStatement = (
     <>
@@ -40,6 +41,9 @@ function ProblemSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
 
   return (
     <div className="slide problem-slide" style={{ position: 'relative' }}>
+      {/* Small logo in top right */}
+      <SmallLogo businessName={businessName} />
+      
       {/* Slide number indicator - only show if showSlideNumber is true */}
       {showSlideNumber && (
         <div className="slide-number">
@@ -57,11 +61,11 @@ function ProblemSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               style={{
-                fontSize: '1.5rem', // Increased from 1.1rem to 1.3rem
+                fontSize: '1.5rem',
                 lineHeight: '2',
                 maxWidth: '1000px',
                 margin: '1rem auto 2rem',
-                textAlign: 'center',
+                textAlign: 'center',  // Keep this centered as in the image
                 color: 'var(--jeebon-light)',
                 letterSpacing: '0.02em',
                 padding: '0 1.5rem'
