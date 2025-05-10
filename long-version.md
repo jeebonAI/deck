@@ -1,10 +1,10 @@
-# **Jiboni: Connection, Communication, Memory & Legacy**
+# **Jeebon: Connection, Communication, Memory & Legacy**
 
 ## **Introduction: Your Life Story, Connected**
 
-Jiboni, meaning "life story" in Bangla, is more than just an app; it's a philosophy for navigating the digital age. We are building a unified digital platform designed to combat the fragmentation and superficiality of modern online interactions. Jiboni provides an integrated mobile application focused on streamlining communication, organizing diverse connections through curated Circles, enabling collaborative legacy building via interactive Trees, and capturing life's moments through rich Memory Taking.
+Jeebon, meaning "life story" in Bangla, is more than just an app; it's a philosophy for navigating the digital age. We are building a unified digital platform designed to combat the fragmentation and superficiality of modern online interactions. Jeebon provides an integrated mobile application focused on streamlining communication, organizing diverse connections through curated Circles, enabling collaborative legacy building via interactive Trees, and capturing life's moments through rich Memory Taking.
 
-Crucially, Jiboni aims to flip the current social media paradigm. Instead of timelines designed for passive consumption that can disconnect users from reality, Jiboni leverages technology, including planned AI enhancements, to actively strengthen real-world relationships and understanding. It's designed as a comprehensive hub for anyone seeking to meaningfully manage their connections, preserve their complete life story, and foster deeper bonds within their personal, social, and professional spheres. By its very nature, Jiboni thrives on connection, requiring users to invite their network to communicate, share, and build legacies together.
+Crucially, Jeebon aims to flip the current social media paradigm. Instead of timelines designed for passive consumption that can disconnect users from reality, Jeebon leverages technology, including planned AI enhancements, to actively strengthen real-world relationships and understanding. It's designed as a comprehensive hub for anyone seeking to meaningfully manage their connections, preserve their complete life story, and foster deeper bonds within their personal, social, and professional spheres. By its very nature, Jeebon thrives on connection, requiring users to invite their network to communicate, share, and build legacies together.
 
 ## **The Problem: Digital Noise & Disconnection**
 
@@ -17,25 +17,25 @@ In today's hyper-connected world, we face a paradox: more digital tools, yet oft
 
 These challenges highlight a universal need for a platform that cuts through the digital noise, fosters genuine connection, provides nuanced control, and helps users capture and understand their own life story.
 
-## **Our Solution: Jiboni \- Unify Your Digital Life, Enhance Your Real Life**
+## **Our Solution: Jeebon \- Unify Your Digital Life, Enhance Your Real Life**
 
-Jiboni offers an integrated mobile application designed to be the central hub for your connections, memories, and legacy, actively working to enhance your real-world interactions. Its core value is realized when users connect with their network within the app.
+Jeebon offers an integrated mobile application designed to be the central hub for your connections, memories, and legacy, actively working to enhance your real-world interactions. Its core value is realized when users connect with their network within the app.
 
 The platform is built on four core pillars:
 
-* **Communicate:** Seamless and secure text, voice, and video communication, organized within the context of your defined Circles, eliminating platform switching and preserving context. Features like potential translation support enhance global usability. Jiboni offers superior privacy and contextual control compared to generic platforms.  
-* **Connect (Circles):** Jiboni's cornerstone innovation. Create and manage distinct Circles for every facet of life (Personal, Private, Public – e.g., family, work teams, social clubs, sports teams, event groups), providing unparalleled granular control over privacy and communication flow. This solves the context collapse and privacy issues inherent in mainstream platforms, enabling appropriate interaction across all spheres within one app. Using Circles effectively requires inviting members of those circles to join Jiboni.  
+* **Communicate:** Seamless and secure text, voice, and video communication, organized within the context of your defined Circles, eliminating platform switching and preserving context. Features like potential translation support enhance global usability. Jeebon offers superior privacy and contextual control compared to generic platforms.  
+* **Connect (Circles):** Jeebon's cornerstone innovation. Create and manage distinct Circles for every facet of life (Personal, Private, Public – e.g., family, work teams, social clubs, sports teams, event groups), providing unparalleled granular control over privacy and communication flow. This solves the context collapse and privacy issues inherent in mainstream platforms, enabling appropriate interaction across all spheres within one app. Using Circles effectively requires inviting members of those circles to join Jeebon.  
 * **Cherish (Trees):** A powerful, collaborative family tree feature focused on preserving familial legacy through multimedia integration and shared contribution. Building a family tree inherently involves inviting family members to participate and contribute.  
 * **Remember (Memory Taking & AI):** Capture your life story in rich detail – text notes, voice recordings, photos, videos, saved conversations. The future AI integration is designed not for passive scrolling, but for active connection and understanding.  
   * **Intelligent Organization & Retrieval:** The AI will index your information (memories, messages, tree data, circle interactions) allowing you to find anything easily.  
-  * **Meaningful Connections & Suggestions:** Unlike algorithms optimizing for screen time, Jiboni's AI aims to enhance real-life connections. It will analyze shared interests, activities, and connections within your circles and tree to make useful suggestions, prompting meaningful conversation and interaction.  
-  * **Connecting the Dots:** The AI will help you see patterns and connections across your entire "Jiboni" (life story) – linking memories, people, and events to provide deeper personal insights and strengthen your understanding of your own narrative and relationships.
+  * **Meaningful Connections & Suggestions:** Unlike algorithms optimizing for screen time, Jeebon's AI aims to enhance real-life connections. It will analyze shared interests, activities, and connections within your circles and tree to make useful suggestions, prompting meaningful conversation and interaction.  
+  * **Connecting the Dots:** The AI will help you see patterns and connections across your entire "Jeebon" (life story) – linking memories, people, and events to provide deeper personal insights and strengthen your understanding of your own narrative and relationships.
 
-Jiboni's unique integration aims to bring coherence to your digital life while actively fostering more meaningful connections and understanding in your real life, driven by the interactions within your invited network.
+Jeebon's unique integration aims to bring coherence to your digital life while actively fostering more meaningful connections and understanding in your real life, driven by the interactions within your invited network.
 
 ## **Market Opportunity: A Universal Need for Integrated Connection Management**
 
-Jiboni targets a vast global market characterized by high digital adoption and a fundamental, universal need for better tools to manage connections, communications, memories, and legacies, moving beyond superficial online interactions.
+Jeebon targets a vast global market characterized by high digital adoption and a fundamental, universal need for better tools to manage connections, communications, memories, and legacies, moving beyond superficial online interactions.
 
 **Market Sizing:**
 
@@ -49,11 +49,11 @@ Jiboni targets a vast global market characterized by high digital adoption and a
 * **Universal Need for Deeper Connection & Organization:** Fundamental desire to manage diverse relationships meaningfully and preserve personal/family history. Growing demand for privacy and contextual control.  
 * **Underserved Integrated Niche:** No existing platform effectively integrates secure communication, versatile group management (Circles), collaborative legacy building (Trees), and AI aimed at enhancing real-world connections and understanding (Remember) in a unified, private environment. Current tools remain siloed.
 
-Jiboni addresses the universal need for integrated connection management and offers a counter-narrative to passive social media consumption, presenting a significant global opportunity.
+Jeebon addresses the universal need for integrated connection management and offers a counter-narrative to passive social media consumption, presenting a significant global opportunity.
 
 ## **Business Model: Building a Sustainable Global Platform**
 
-Jiboni will employ a phased freemium model focused on building a valuable, engaged global community first, then offering premium features that enhance connection and understanding. The model inherently benefits from network effects, as the app's utility increases significantly as users invite their connections.
+Jeebon will employ a phased freemium model focused on building a valuable, engaged global community first, then offering premium features that enhance connection and understanding. The model inherently benefits from network effects, as the app's utility increases significantly as users invite their connections.
 
 **Phase 1: Growth & Engagement Focus (Pre-10,000 MAU)**
 
@@ -71,7 +71,7 @@ Jiboni will employ a phased freemium model focused on building a valuable, engag
   * Advanced Circle Management: Enhanced admin controls for larger groups, advanced permissions, analytics for group engagement.  
   * Advanced Family Tree Tools: Enhanced data visualization, advanced reporting, digitization tools.  
   * Premium Support: Dedicated or expedited customer support channels.  
-* **Tier Naming & Structure:** We plan to offer multiple premium tiers (e.g., Jiboni Pro, Jiboni Premium) to cater to different user needs and price points, finalized based on user research and branding strategy.  
+* **Tier Naming & Structure:** We plan to offer multiple premium tiers (e.g., Jeebon Pro, Jeebon Premium) to cater to different user needs and price points, finalized based on user research and branding strategy.  
 * **Pricing Strategy:** Tiered subscription plans (e.g., Individual, Family, potentially Team/Organization) based on value and market research across different global markets. Targeting an initial Average Revenue Per Paying User (ARPPU) of \~$60/year ($5/month).  
 * **Rationale:** Generate recurring revenue from users valuing advanced connection, memory, storage, and AI tools while maintaining a large free base. Subscription model aligns with trust and community focus.  
 * **Future Potential:** Explore adjacent revenue streams (e.g., value-added services, partnerships, digital vaults for secure document storage) once globally established and the user base matures.
@@ -80,7 +80,7 @@ This approach balances initial growth with long-term global sustainability, cent
 
 ## **Go-to-Market Strategy: Seeding Networks, Scaling Globally**
 
-Jiboni's GTM strategy leverages initial network access for validation, utilizes the platform's inherent need for user invites to drive organic growth, and then scales globally.
+Jeebon's GTM strategy leverages initial network access for validation, utilizes the platform's inherent need for user invites to drive organic growth, and then scales globally.
 
 **Phase 1: Initial Seeding & Validation (Months 1-3)**
 
@@ -106,7 +106,7 @@ This strategy uses initial advantages for validation before scaling globally, le
 
 ## **Traction: Building Momentum \- Early Signs of Success**
 
-Jiboni has achieved foundational milestones demonstrating progress and validating initial interest for its vision of unified, meaningful connection.
+Jeebon has achieved foundational milestones demonstrating progress and validating initial interest for its vision of unified, meaningful connection.
 
 * **Product Status:** Core iOS/Android app foundational pillars (Communicate, Connect/Circles, Cherish/Trees) development in progress. Memory Taking features underway. AI features enhancing real-world connection defined on roadmap.  
 * **User Acquisition Funnel & Early Interest:**  
@@ -126,9 +126,9 @@ Jiboni has achieved foundational milestones demonstrating progress and validatin
 
 This traction shows product readiness, validated interest, and a clear strategic path towards a unique, connection-enhancing platform with built-in growth potential.
 
-## **Team: The Passionate Force Behind Jiboni**
+## **Team: The Passionate Force Behind Jeebon**
 
-Jiboni is driven by a dedicated team blending technical expertise, deep community understanding, and a commitment to fostering genuine connection and preserving life stories in the digital age.
+Jeebon is driven by a dedicated team blending technical expertise, deep community understanding, and a commitment to fostering genuine connection and preserving life stories in the digital age.
 
 **Founder(s):**
 
@@ -146,14 +146,14 @@ Jiboni is driven by a dedicated team blending technical expertise, deep communit
 
 * Possesses deep technical proficiency (Rust, AI, scalable systems) combined with decades of real-world application development and business experience.  
 * Holds unique, direct access to a large initial target community (Syed network) through personal connections and advisor expertise.  
-* Passionate driven by the "Jiboni" mission to enhance meaningful connections globally.  
+* Passionate driven by the "Jeebon" mission to enhance meaningful connections globally.  
 * Planning to augment the core team with key hires post-funding.
 
-The Jiboni team offers the right blend of technical mastery, market access, strategic vision, and commitment to build a successful global platform focused on real human connection.
+The Jeebon team offers the right blend of technical mastery, market access, strategic vision, and commitment to build a successful global platform focused on real human connection.
 
 ## **Financials: Phased Growth Towards Global Sustainability**
 
-Jiboni's financial plan is structured in distinct phases, prioritizing foundational development, careful monetization implementation, and then scaled global growth. Projections show significant long-term user growth potential (fueled by inherent network effects and universal appeal), leading to sustainable revenue via the freemium model. Our efficient tech stack choices contribute to remarkably low projected operational costs initially, scaling predictably with user growth. The following 5-year outlook illustrates this phased strategy, incorporating key user dynamics and cost breakdowns. (Disclaimer: Projections based on stated assumptions.)
+Jeebon's financial plan is structured in distinct phases, prioritizing foundational development, careful monetization implementation, and then scaled global growth. Projections show significant long-term user growth potential (fueled by inherent network effects and universal appeal), leading to sustainable revenue via the freemium model. Our efficient tech stack choices contribute to remarkably low projected operational costs initially, scaling predictably with user growth. The following 5-year outlook illustrates this phased strategy, incorporating key user dynamics and cost breakdowns. (Disclaimer: Projections based on stated assumptions.)
 
 **Key Strategic Phases & Assumptions:**
 
@@ -180,13 +180,13 @@ Jiboni's financial plan is structured in distinct phases, prioritizing foundatio
 
 *Note: These are illustrative projections reflecting the phased strategy and incorporating churn assumptions. MAU figures represent estimated year-end active users, net of churn. Revenue and Profit/Burn figures are approximate based on MAU, conversion, and ARPPU assumptions. Profitability is projected starting in Year 4 as scaled net growth drives revenue significantly past costs. Actual figures depend on execution, market dynamics, and actual churn/conversion rates.*
 
-**Focus Narrative:** Our financial strategy follows a deliberate path: **Year 1** is dedicated to building a robust platform and achieving product maturity, validated by an initial 10k MAU base. **Year 2** focuses on implementing and refining our freemium monetization model (with multiple planned tiers) with early adopters, ensuring value fit before scaling. From **Year 3 onwards**, the focus shifts decisively to aggressive global growth ("Hyper Growth" in Y4/Y5), leveraging the validated platform, established monetization, and powerful network effects. These projections account for anticipated user churn, though we expect lower rates due to Jiboni's integrated utility and network stickiness. This phased approach requires initial investment but sets the stage for significant net MAU growth, revenue acceleration, and profitability by Year 4, with potential for additional revenue streams in the future. Our lean operational model enhances capital efficiency throughout.
+**Focus Narrative:** Our financial strategy follows a deliberate path: **Year 1** is dedicated to building a robust platform and achieving product maturity, validated by an initial 10k MAU base. **Year 2** focuses on implementing and refining our freemium monetization model (with multiple planned tiers) with early adopters, ensuring value fit before scaling. From **Year 3 onwards**, the focus shifts decisively to aggressive global growth ("Hyper Growth" in Y4/Y5), leveraging the validated platform, established monetization, and powerful network effects. These projections account for anticipated user churn, though we expect lower rates due to Jeebon's integrated utility and network stickiness. This phased approach requires initial investment but sets the stage for significant net MAU growth, revenue acceleration, and profitability by Year 4, with potential for additional revenue streams in the future. Our lean operational model enhances capital efficiency throughout.
 
 This phased strategy outlines a deliberate path from foundational development and careful monetization to sustainable global expansion, balancing initial investment with long-term value creation based on engaged users.
 
-## **The Ask: Fueling Jiboni's Vision for Meaningful Connection**
+## **The Ask: Fueling Jeebon's Vision for Meaningful Connection**
 
-To complete core product development, execute the initial go-to-market strategy, cover essential operational costs, and provide founder runway for the critical first 6-12 months, Jiboni is seeking **\[$250,000 \- $500,000\]** in Pre-Seed funding. This amount reflects the lean operational model and focuses investment on achieving key launch milestones.
+To complete core product development, execute the initial go-to-market strategy, cover essential operational costs, and provide founder runway for the critical first 6-12 months, Jeebon is seeking **\[$250,000 \- $500,000\]** in Pre-Seed funding. This amount reflects the lean operational model and focuses investment on achieving key launch milestones.
 
 **Use of Funds (12-18 months):**
 
@@ -206,13 +206,13 @@ To complete core product development, execute the initial go-to-market strategy,
 * Hire \[Number\] essential core team members.  
 * Prepare for global rollout & Premium tier introduction (Year 2).
 
-**The Opportunity:** Jiboni addresses the universal need for integrated digital connection management, offering a unique antidote to digital fragmentation. With a highly experienced technical founder, unique market access, a strong product vision (Circles, AI for real connection, Memory), inherent network effects, a lean operational model, and a clear path to global monetization, Jiboni is poised to become an essential tool for enriching users' lives – online and offline. This funding catalyzes critical early development and launch phases.
+**The Opportunity:** Jeebon addresses the universal need for integrated digital connection management, offering a unique antidote to digital fragmentation. With a highly experienced technical founder, unique market access, a strong product vision (Circles, AI for real connection, Memory), inherent network effects, a lean operational model, and a clear path to global monetization, Jeebon is poised to become an essential tool for enriching users' lives – online and offline. This funding catalyzes critical early development and launch phases.
 
 ## **Contact & Closing: Let's Build the Future of Meaningful Connection, Together**
 
-Jiboni – "life story" – is a mission to simplify digital life, foster genuine connections of all types, preserve invaluable memories, and empower individuals globally to live more connected lives, both online and off.
+Jeebon – "life story" – is a mission to simplify digital life, foster genuine connections of all types, preserve invaluable memories, and empower individuals globally to live more connected lives, both online and off.
 
-**\[Jiboni Logo Placeholder\]**
+**\[Jeebon Logo Placeholder\]**
 
 We are seeking **\[$250,000 \- $500,000\]** to bring this vision to life.
 

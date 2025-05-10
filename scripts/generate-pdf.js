@@ -478,7 +478,7 @@ async function handleFinancialsSlide(browser, slidesPdfDir) {
           visibility: visible !important;
         }
         
-        .pdf-mode [style*="backgroundColor: var(--jiboni-primary)"] {
+        .pdf-mode [style*="backgroundColor: var(--jeebon-primary)"] {
           background-color: #4568dc !important;
         }
         

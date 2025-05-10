@@ -167,7 +167,7 @@ function GoToMarketSlide({ registerSlideSteps, currentStep, totalSlides, showSli
           marginTop: '1rem', // Reduced from 2rem to 1rem
           width: '80%',
           height: '4px',
-          background: 'var(--jiboni-gradient)',
+          background: 'var(--jeebon-gradient)',
           borderRadius: '2px',
           transformOrigin: 'left'
         }}

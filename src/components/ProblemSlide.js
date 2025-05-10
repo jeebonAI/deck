@@ -62,7 +62,7 @@ function ProblemSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
                 maxWidth: '1000px',
                 margin: '1rem auto 2rem',
                 textAlign: 'center',
-                color: 'var(--jiboni-light)',
+                color: 'var(--jeebon-light)',
                 letterSpacing: '0.02em',
                 padding: '0 1.5rem'
               }}

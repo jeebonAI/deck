@@ -43,7 +43,7 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNam
             margin: '1.5rem 0 1rem',
             padding: '0.8rem 2rem',
             fontFamily: "'Poppins', sans-serif",
-            color: 'var(--jiboni-light)',
+            color: 'var(--jeebon-light)',
             alignSelf: 'center'
           }}
         >
@@ -65,7 +65,7 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNam
             margin: '0 0 2rem',
             padding: '0.5rem 2rem',
             fontFamily: "'Poppins', sans-serif",
-            color: 'var(--jiboni-light)',
+            color: 'var(--jeebon-light)',
             opacity: 0.9,
             alignSelf: 'center'
           }}

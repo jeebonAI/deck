@@ -80,7 +80,7 @@ function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNu
           maxWidth: '900px',
           margin: '0.5rem auto 2rem',
           textAlign: 'center',
-          color: 'var(--jiboni-light)',
+          color: 'var(--jeebon-light)',
           letterSpacing: '0.02em',
           padding: '0 1.5rem'
         }}
@@ -130,13 +130,13 @@ function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNu
               <div style={{
                 fontSize: '2.2rem',
                 fontWeight: 'bold',
-                color: 'var(--jiboni-light)'
+                color: 'var(--jeebon-light)'
               }}>
                 {segment.title}
               </div>
               <div style={{
                 fontSize: '0.8rem',
-                color: 'var(--jiboni-light)',
+                color: 'var(--jeebon-light)',
                 opacity: 0.8,
                 marginTop: '-5px'
               }}>
@@ -149,7 +149,7 @@ function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNu
                 fontSize: '2.2rem',
                 fontWeight: 'bold',
                 margin: '0 1rem',
-                color: 'var(--jiboni-light)',
+                color: 'var(--jeebon-light)',
                 opacity: 0.8
               }}
             >
@@ -160,7 +160,7 @@ function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNu
               style={{
                 fontSize: '2.2rem',
                 fontWeight: 'bold',
-                color: 'var(--jiboni-secondary)',
+                color: 'var(--jeebon-secondary)',
                 marginRight: '1.5rem',
                 flexShrink: 0
               }}
@@ -171,7 +171,7 @@ function MarketSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNu
             <motion.div
               style={{
                 fontSize: '1.1rem',
-                color: 'var(--jiboni-light)',
+                color: 'var(--jeebon-light)',
                 opacity: 0.8,
                 lineHeight: '1.4'
               }}

@@ -400,7 +400,7 @@ function App() {
       >
         <div
           style={{
-            background: 'var(--jiboni-gradient)',
+            background: 'var(--jeebon-gradient)',
             borderRadius: '20px',
             padding: '4px 8px',
             boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
@@ -420,7 +420,7 @@ function App() {
         {/* Auto-play toggle button */}
         <div
           style={{
-            background: 'var(--jiboni-gradient)',
+            background: 'var(--jeebon-gradient)',
             borderRadius: '20px',
             padding: '4px 8px',
             boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'
@@ -451,7 +451,7 @@ function App() {
           right: '20px',
           fontSize: '12px', 
           color: 'rgba(255,255,255,0.5)',
-          background: 'var(--jiboni-dark)',
+          background: 'var(--jeebon-dark)',
           padding: '4px 8px',
           borderRadius: '4px',
           boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)'

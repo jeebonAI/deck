@@ -29,7 +29,7 @@ function BusinessModelSlide({ registerSlideSteps, currentStep, businessNameCapit
         "Premium Support"
       ],
       footer: "Target ARPPU ~$60/yr",
-      footerColor: "var(--jiboni-secondary)",
+      footerColor: "var(--jeebon-secondary)",
       background: "rgba(69, 104, 220, 0.1)",
       delay: 0.6
     }

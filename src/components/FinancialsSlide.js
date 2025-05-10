@@ -375,7 +375,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                           transition={{ duration: 1, delay: 1.0 + index * 0.2 }}
                           style={{ 
                             width: '100%', 
-                            backgroundColor: 'var(--jiboni-primary)',
+                            backgroundColor: 'var(--jeebon-primary)',
                             borderRadius: '4px 4px 0 0'
                           }}
                         />
@@ -559,7 +559,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                 <div style={{ 
                   width: '10px', 
                   height: '10px', 
-                  backgroundColor: 'var(--jiboni-primary)', // Purple for revenue
+                  backgroundColor: 'var(--jeebon-primary)', // Purple for revenue
                   marginRight: '5px',
                   borderRadius: '2px'
                 }}></div>
@@ -733,7 +733,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                 <div style={{ 
                   minWidth: '6px', 
                   height: '6px', 
-                  backgroundColor: 'var(--jiboni-primary)', 
+                  backgroundColor: 'var(--jeebon-primary)', 
                   borderRadius: '50%', 
                   marginTop: '5px',
                   marginRight: '8px' 
@@ -751,7 +751,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                 <div style={{ 
                   minWidth: '6px', 
                   height: '6px', 
-                  backgroundColor: 'var(--jiboni-primary)', 
+                  backgroundColor: 'var(--jeebon-primary)', 
                   borderRadius: '50%', 
                   marginTop: '5px',
                   marginRight: '8px' 
@@ -768,7 +768,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                 <div style={{ 
                   minWidth: '6px', 
                   height: '6px', 
-                  backgroundColor: 'var(--jiboni-primary)', 
+                  backgroundColor: 'var(--jeebon-primary)', 
                   borderRadius: '50%', 
                   marginTop: '5px',
                   marginRight: '8px' 
@@ -785,7 +785,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                 <div style={{ 
                   minWidth: '6px', 
                   height: '6px', 
-                  backgroundColor: 'var(--jiboni-primary)', 
+                  backgroundColor: 'var(--jeebon-primary)', 
                   borderRadius: '50%', 
                   marginTop: '5px',
                   marginRight: '8px' 
@@ -802,7 +802,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                 <div style={{ 
                   minWidth: '6px', 
                   height: '6px', 
-                  backgroundColor: 'var(--jiboni-primary)', 
+                  backgroundColor: 'var(--jeebon-primary)', 
                   borderRadius: '50%', 
                   marginTop: '5px',
                   marginRight: '8px' 
@@ -819,7 +819,7 @@ function FinancialsSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                 <div style={{ 
                   minWidth: '6px', 
                   height: '6px', 
-                  backgroundColor: 'var(--jiboni-primary)', 
+                  backgroundColor: 'var(--jeebon-primary)', 
                   borderRadius: '50%', 
                   marginTop: '5px',
                   marginRight: '8px' 

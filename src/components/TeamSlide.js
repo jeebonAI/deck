@@ -126,7 +126,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.3 }}
             style={{
-              background: 'var(--jiboni-primary)',
+              background: 'var(--jeebon-primary)',
               color: 'white',
               padding: '0.7rem 1.5rem',
               borderRadius: '30px',
@@ -153,7 +153,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
                 height: '110px',
                 borderRadius: '50%',
                 overflow: 'hidden',
-                border: '3px solid var(--jiboni-primary)',
+                border: '3px solid var(--jeebon-primary)',
                 boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)'
               }}
             >
@@ -174,7 +174,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
               <h3 style={{ 
                 fontSize: '1.7rem',
                 marginBottom: '0.3rem',
-                color: 'var(--jiboni-primary)'
+                color: 'var(--jeebon-primary)'
               }}>
                 Nayeem Syed - Founder & CEO
               </h3>
@@ -237,7 +237,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
                 height: '70px',
                 borderRadius: '50%',
                 overflow: 'hidden',
-                border: '2px solid var(--jiboni-secondary)',
+                border: '2px solid var(--jeebon-secondary)',
                 flexShrink: 0
               }}
             >
@@ -258,7 +258,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
               <h3 style={{ 
                 fontSize: '1.3rem',
                 marginBottom: '0.2rem',
-                color: 'var(--jiboni-secondary)'
+                color: 'var(--jeebon-secondary)'
               }}>
                 {team[1].name}
               </h3>
@@ -292,7 +292,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
                   >
                     <span style={{ 
                       marginRight: '0.4rem',
-                      color: 'var(--jiboni-accent)',
+                      color: 'var(--jeebon-accent)',
                       fontSize: '0.7rem'
                     }}>•</span>
                     {point}
@@ -350,7 +350,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
                 height: '70px',
                 borderRadius: '50%',
                 overflow: 'hidden',
-                border: '2px solid var(--jiboni-secondary)',
+                border: '2px solid var(--jeebon-secondary)',
                 flexShrink: 0
               }}
             >
@@ -371,7 +371,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
               <h3 style={{ 
                 fontSize: '1.3rem',
                 marginBottom: '0.2rem',
-                color: 'var(--jiboni-secondary)'
+                color: 'var(--jeebon-secondary)'
               }}>
                 {team[2].name}
               </h3>
@@ -405,7 +405,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
                   >
                     <span style={{ 
                       marginRight: '0.4rem',
-                      color: 'var(--jiboni-accent)',
+                      color: 'var(--jeebon-accent)',
                       fontSize: '0.7rem'
                     }}>•</span>
                     {point}
@@ -449,7 +449,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
                 height: '70px',
                 borderRadius: '50%',
                 overflow: 'hidden',
-                border: '2px solid var(--jiboni-secondary)',
+                border: '2px solid var(--jeebon-secondary)',
                 flexShrink: 0
               }}
             >
@@ -470,7 +470,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
               <h3 style={{ 
                 fontSize: '1.3rem',
                 marginBottom: '0.2rem',
-                color: 'var(--jiboni-secondary)'
+                color: 'var(--jeebon-secondary)'
               }}>
                 {team[3].name}
               </h3>
@@ -504,7 +504,7 @@ function TeamSlide({ registerSlideSteps, currentStep, totalSlides, showSlideNumb
                   >
                     <span style={{ 
                       marginRight: '0.4rem',
-                      color: 'var(--jiboni-accent)',
+                      color: 'var(--jeebon-accent)',
                       fontSize: '0.7rem'
                     }}>•</span>
                     {point}

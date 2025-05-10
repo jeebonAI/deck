@@ -111,7 +111,7 @@ function CompetitorsSlide({ registerSlideSteps, currentStep, businessName, total
               marginTop: '1rem',
               marginBottom: '1.5rem',
               padding: '1rem 2rem',
-              background: 'var(--jiboni-primary)',
+              background: 'var(--jeebon-primary)',
               borderRadius: '30px',
               fontSize: '1.2rem',
               maxWidth: '90%',

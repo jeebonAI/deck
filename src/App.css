@@ -1,10 +1,10 @@
 :root {
-  --jiboni-primary: #4568dc;
-  --jiboni-secondary: #b06ab3;
-  --jiboni-dark: #2a3950;
-  --jiboni-light: #f5f7fa;
-  --jiboni-accent: #ff7e5f;
-  --jiboni-gradient: linear-gradient(135deg, var(--jiboni-primary), var(--jiboni-secondary));
+  --jeebon-primary: #4568dc;
+  --jeebon-secondary: #b06ab3;
+  --jeebon-dark: #2a3950;
+  --jeebon-light: #f5f7fa;
+  --jeebon-accent: #ff7e5f;
+  --jeebon-gradient: linear-gradient(135deg, var(--jeebon-primary), var(--jeebon-secondary));
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -19,8 +19,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: var(--jiboni-dark);
-  color: var(--jiboni-light);
+  background-color: var(--jeebon-dark);
+  color: var(--jeebon-light);
   overflow: hidden;
 }
 
@@ -86,7 +86,7 @@ body {
 }
 
 .navigation button:hover {
-  background-color: var(--jiboni-secondary);
+  background-color: var(--jeebon-secondary);
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
@@ -97,14 +97,14 @@ body {
 
 h1, h2, h3, h4 {
   margin: 0;
-  color: var(--jiboni-light);
+  color: var(--jeebon-light);
 }
 
 h1 {
   font-size: 4rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  background: var(--jiboni-gradient);
+  background: var(--jeebon-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
@@ -118,7 +118,7 @@ h2 {
 
 h3 {
   font-size: 1.8rem;
-  color: var(--jiboni-secondary);
+  color: var(--jeebon-secondary);
   margin-bottom: 1rem;
 }
 
@@ -133,7 +133,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--jiboni-gradient);
+  background: var(--jeebon-gradient);
   opacity: 0.1;
   border-radius: 16px;
   z-index: -1;
@@ -176,14 +176,14 @@ p {
 }
 
 .highlight {
-  color: var(--jiboni-accent);
+  color: var(--jeebon-accent);
   font-weight: 600;
 }
 
 .badge {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: var(--jiboni-gradient);
+  background: var(--jeebon-gradient);
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 500;
@@ -229,7 +229,7 @@ p {
 }
 
 .problem-title {
-  color: var(--jiboni-accent);
+  color: var(--jeebon-accent);
   font-size: 1.4rem;
   margin: 0;
 }

@@ -28,9 +28,9 @@ function AskSlide({ registerSlideSteps, currentStep, businessNameCapitalized, to
   }, []);
 
   const fundUse = [
-    { category: "Core Product & AI Resources", percentage: 25, color: "var(--jiboni-primary)" },
-    { category: "Team & Development", percentage: 40, color: "var(--jiboni-secondary)" },
-    { category: "User Acquisition / Marketing", percentage: 25, color: "var(--jiboni-accent)" },
+    { category: "Core Product & AI Resources", percentage: 25, color: "var(--jeebon-primary)" },
+    { category: "Team & Development", percentage: 40, color: "var(--jeebon-secondary)" },
+    { category: "User Acquisition / Marketing", percentage: 25, color: "var(--jeebon-accent)" },
     { category: "Operations / Setup", percentage: 10, color: "#64B5F6" }
   ];
 

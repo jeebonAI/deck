@@ -91,7 +91,7 @@ function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
             damping: 20,
             delay: 1.0
           }}
-          style={{ color: 'var(--jiboni-light)', marginBottom: '2rem' }}
+          style={{ color: 'var(--jeebon-light)', marginBottom: '2rem' }}
         >
           Build the future of meaningful connection, together.
         </motion.h3>
@@ -107,7 +107,7 @@ function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
           }}
           style={{ marginTop: '2rem' }}
         >
-          <h3 style={{ color: 'var(--jiboni-light)', marginBottom: '1rem' }}>Nayeem Syed</h3>
+          <h3 style={{ color: 'var(--jeebon-light)', marginBottom: '1rem' }}>Nayeem Syed</h3>
 
           {contactInfo.map((info, index) => (
             <motion.div
@@ -125,7 +125,7 @@ function ContactSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
               <span style={{
                 display: 'inline-block',
                 marginRight: '10px',
-                color: 'var(--jiboni-secondary)'
+                color: 'var(--jeebon-secondary)'
               }}>{info.icon}</span>
               {info.value}
             </motion.div>

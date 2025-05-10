@@ -120,7 +120,7 @@ function HowItWorksSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                   width: '36px', // Reduced size
                   height: '36px', // Reduced size
                   borderRadius: '50%', 
-                  backgroundColor: 'var(--jiboni-primary)',
+                  backgroundColor: 'var(--jeebon-primary)',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -242,7 +242,7 @@ function HowItWorksSlide({ registerSlideSteps, currentStep, totalSlides, showSli
                     backgroundColor: '#000',
                   }}></div>
                 </div>
-                {/* Text "Jiboni" */}
+                {/* Text "Jeebon" */}
                 <div style={{ 
                   fontWeight: 'bold', 
                   fontSize: '16px',

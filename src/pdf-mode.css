@@ -250,7 +250,7 @@ body.pdf-mode div[style*="position:fixed"] {
 }
 
 /* Ensure chart bars are colored properly */
-.pdf-mode .financials-slide [style*="backgroundColor: var(--jiboni-primary)"] {
+.pdf-mode .financials-slide [style*="backgroundColor: var(--jeebon-primary)"] {
   background-color: #4568dc !important;
 }
 

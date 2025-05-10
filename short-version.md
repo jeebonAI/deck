@@ -1,8 +1,8 @@
-# **Jiboni: Connect, Communicate, Cherish, Curate**
+# **Jeebon: Connect, Communicate, Cherish, Curate**
 
 **(Slide 1: Title Slide)**
 
-* **Jiboni:** Connection, Communication, Curation & Legacy  
+* **Jeebon:** Connection, Communication, Curation & Legacy  
 * \[Your Logo\]  
 * *Simplifying digital life, deepening real-world connections.*
 
@@ -12,9 +12,9 @@
 * **Result:** Fragmented communication, lost context, superficial connections, scattered memories.  
 * **Need:** A unified platform for meaningful connection, privacy, and organization.
 
-**(Slide 3: Our Solution: Jiboni)**
+**(Slide 3: Our Solution: Jeebon)**
 
-* **Unified Mobile App:** One hub for your digital life story ("Jiboni").  
+* **Unified Mobile App:** One hub for your digital life story ("Jeebon").  
 * **Four Pillars:**  
   * **Communicate:** Secure, contextual chat/calls within groups.  
   * **Connect (Circles):** *Key Innovation.* Manage diverse groups (family, work, friends) with granular privacy.  
@@ -85,7 +85,7 @@
 
 **(Slide 11: Contact)**
 
-* **Jiboni:** Build the future of meaningful connection, together.  
+* **Jeebon:** Build the future of meaningful connection, together.  
 * \[Your Logo\]  
 * **Nayeem Syed**  
 * \[Email Address\]  

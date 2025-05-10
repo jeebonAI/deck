@@ -38,7 +38,7 @@ function NavigationInstructions({ currentSlide, animationInProgress, onPrev, onN
             display: 'flex',
             gap: '15px',
             padding: '8px 15px',
-            background: 'var(--jiboni-gradient)',
+            background: 'var(--jeebon-gradient)',
             borderRadius: '30px',
             fontSize: '0.9rem',
             color: 'white',

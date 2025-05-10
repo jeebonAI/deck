@@ -40,7 +40,7 @@ function StylizedBusinessName({ businessName, size = 'large', delay = 0.3, anima
         <motion.span
           style={{ 
             fontSize,
-            background: 'var(--jiboni-gradient)',
+            background: 'var(--jeebon-gradient)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             display: 'inline-block',

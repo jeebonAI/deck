@@ -1,9 +1,9 @@
-/* Custom styles for Jiboni pitch deck */
+/* Custom styles for Jeebon pitch deck */
 :root {
-  --jiboni-primary: #4568dc;
-  --jiboni-secondary: #b06ab3;
-  --jiboni-dark: #2a3950;
-  --jiboni-light: #f5f7fa;
+  --jeebon-primary: #4568dc;
+  --jeebon-secondary: #b06ab3;
+  --jeebon-dark: #2a3950;
+  --jeebon-light: #f5f7fa;
 }
 
 .reveal {
