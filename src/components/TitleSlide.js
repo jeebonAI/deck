@@ -112,7 +112,7 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNam
             alignSelf: 'center'
           }}
         >
-          Achieve at least a 40% improvement<br/> in enriching and preserving<br/> your connections, legacy, moments and connections.
+          Achieve at least a 40% improvement<br/> in enriching and preserving<br/> your connections, memories and legacy.
         </motion.div>
       </motion.div>
     </div>
