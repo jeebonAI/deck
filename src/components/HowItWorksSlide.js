@@ -97,9 +97,9 @@ function HowItWorksSlide({ registerSlideSteps, currentStep, totalSlides, showSli
               lineHeight: '1.4' // Reduced line height
             }}
           >
-            We are developing <strong>a proprietary productivity AI Agent for users</strong> to prompt the most needed information of their connections, memories and legacies through an intuitive interface.
+            We are developing <strong>a proprietary Personal AI Agent for users</strong> to integrate the most needed information of their connections, memories and legacies through an intuitive interface.
           </motion.div>
-          
+
           {/* Workflow steps */}
           <div style={{ 
             display: 'flex', 

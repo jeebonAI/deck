@@ -7,7 +7,7 @@ function ProblemSlide({ registerSlideSteps, currentStep, totalSlides, showSlideN
   // Add the overall problem statement with bold elements
   const problemStatement = (
     <>
-      Over <strong>5 billion internet users</strong> worldwide spend an average of <strong>7 hours per day</strong> on digital applications, leading to widespread <strong>digital disconnect</strong> from real-world experiences, <strong>passive consumption</strong> of content, <strong>fragmentation of personal histories</strong>, and <strong>difficulties in managing social connections</strong>. This excessive screen time results in significant <strong>productivity losses</strong>, with the US alone experiencing an annual <strong>cost of $86.3 billion</strong>, highlighting the global economic and social impact of these issues.*
+      Over <strong>5 billion internet users</strong> worldwide spend an average of <strong>7 hours daily</strong> on digital applications, leading to a <strong>growing disconnect</strong> from meaningful real-world relationships, <strong>fragmented</strong> personal and family histories, and challenges in maintaining <strong>cohesive social connections</strong>. This <strong>excessive screen time</strong> fosters passive content consumption, <strong>dilutes the preservation of life moments</strong> and <strong>complicates managing interactions</strong> across life spheres, contributing to a <strong>sense of isolation</strong> and an estimated <strong>annual productivity loss of $86.3 billion</strong> in the US alone.*
       <br/>
       <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>
         * "The Impact of Unmanaged excessive screen time in the United States", American Optometric Association 2024

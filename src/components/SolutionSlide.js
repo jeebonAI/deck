@@ -60,7 +60,7 @@ function SolutionSlide({ registerSlideSteps, currentStep, businessNameCapitalize
                 padding: '0 1.5rem'
               }}
             >
-              Jeebon is a Personal AI Agent enabling <strong>AI memory management</strong>, <strong>AI connection management</strong> and <strong>AI family tree management</strong>, reducing the need for screentime by leveraging AI indexing and interfaces, <strong>freeing upto 40% of time lost</strong> to regain real world engagement.
+              Jeebon offers a Personal AI Agent that empowers <strong>seamless communication</strong>, <strong>improved Circles</strong>, <strong>Cherish family legacies using Trees</strong>, and <strong>Capture key moments</strong> achieving at least a <strong>40% improvement in enhancing and preserving connections</strong>, and fostering <strong>meaningful real-world engagement and roots</strong>.
             </motion.div>
           </>
         )}

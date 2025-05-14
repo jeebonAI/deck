@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComments, faCircleNodes, faTree, faCamera } from '@fortawesome/free-solid-svg-icons';
 import StylizedBusinessName from './StylizedBusinessName';
 
 function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNameCapitalized, totalSlides }) {
@@ -8,6 +10,16 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNam
     // Register 1 step with a shorter animation duration of 4000ms (down from 7000ms)
     registerSlideSteps(1, 4000);
   }, [registerSlideSteps]);
+
+  const firstTaglineWords = [
+    { word: 'Communicate', icon: faComments },
+    { word: 'Connect', icon: faCircleNodes },
+    { word: 'Cherish', icon: faTree },
+    { word: 'Capture', icon: faCamera },
+  ];
+  const firstTaglineInitialDelay = 1.5; // Base delay for the first word
+  const firstTaglineDelayIncrement = 1.3; // Additional delay for each subsequent word/icon
+  const firstTaglineWordDuration = 1.8; // Animation duration for each word/icon
 
   return (
     <div className="slide title-slide">
@@ -29,14 +41,8 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNam
         </div>
 
         {/* First tagline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.6, 
-            delay: 1.5
-          }}
-          style={{ 
+        <div
+          style={{
             textAlign: 'center',
             fontSize: '2.5rem',
             fontWeight: 400,
@@ -44,11 +50,47 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNam
             padding: '0.8rem 2rem',
             fontFamily: "'Poppins', sans-serif",
             color: 'var(--jeebon-light)',
-            alignSelf: 'center'
+            alignSelf: 'center',
           }}
         >
-          The Personal AI Agent for productivity
-        </motion.div>
+          {firstTaglineWords.map(({ word, icon }, index) => {
+            console.log(`Rendering word: ${word}, icon: ${icon.iconName}`);
+            return (
+              <React.Fragment key={index}>
+                <motion.span
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: firstTaglineWordDuration,
+                    delay: firstTaglineInitialDelay + index * firstTaglineDelayIncrement,
+                  }}
+                  style={{
+                    margin: '0 0.3rem',
+                    display: 'inline-block',
+                  }}
+                >
+                  {word}
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: firstTaglineWordDuration,
+                    delay: firstTaglineInitialDelay + (index + 0.5) * firstTaglineDelayIncrement,
+                  }}
+                  style={{
+                    color: index % 2 === 0 ? 'var(--jeebon-primary)' : 'var(--jeebon-secondary)', // Alternate between blue and purple
+                    margin: '0 0.3rem',
+                    display: 'inline-block',
+                    fontSize: '2rem', // Slightly smaller than text
+                  }}
+                >
+                  <FontAwesomeIcon icon={icon} />
+                </motion.span>
+              </React.Fragment>
+            );
+          })}
+        </div>
 
         {/* Second tagline */}
         <motion.div
@@ -56,7 +98,7 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNam
           animate={{ opacity: 1, y: 0 }}
           transition={{ 
             duration: 0.6, 
-            delay: 2.1
+            delay: 6.7 // Matches your updated timing
           }}
           style={{ 
             textAlign: 'center',
@@ -70,7 +112,7 @@ function TitleSlide({ registerSlideSteps, currentStep, businessName, businessNam
             alignSelf: 'center'
           }}
         >
-          Helping individuals unlock <strong>40%</strong> of their time for real-world engagement.
+          Achieve at least a 40% improvement<br/> in enriching and preserving<br/> your connections, legacy, moments and connections.
         </motion.div>
       </motion.div>
     </div>
